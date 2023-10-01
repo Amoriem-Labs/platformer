@@ -5,6 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public GameObject textBox; // This is a reference to the text box that will be triggered when the opp runs into the player.
+    public Rigidbody2D rb;
+
 
     void Start(){
         textBox.SetActive(false);
@@ -14,21 +16,11 @@ public class Player : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision){
         int layer = LayerMask.NameToLayer("Opp");
         if (collision.gameObject.layer == layer){
-            string[] texts = new string[]{"filler text 1", "filler text 2", "filler text 3", "filler text 4"};
-            activateConversation(texts);
+            // TODO: make better voice dialogues
+            string[] texts = new string[]{"Heyyy, you're looking fine today!", "Thanks, I appreciate it.", "Ooh, what's that accent from?", "Brooklyn.", "I have to say, I really like your fit.", "Thanks.", "We should grab coffee sometime, I would love to learn what else you got in your wardrobe. What's your number?", "Oh, I'm sorry, I gotta go to class right now, I can't talk. Bye!", "What?"};
+            TextWriter.activateConversation(texts);
 
             // TODO: WRITE CODE TO PAUSE PLAYER MOVEMENT
         }
-    }
-    
-    // The below method is a general method to activate conversations. The "texts" parameter takes on an unlimited amount of texts.
-    // Pass in the strings that you want to be triggered one after the other (like a real conversation) into the "texts" parameter.
-    // The player will only be able to move from one text to another after pressing the Enter key on keyboard.
-    void activateConversation(params string[] texts)
-    {
-        textBox.SetActive(true);
-        // TODO: add in text writing effect to code
-        // TODO: add in a sprite to the text box so that player knows who is talking which text
-        textBox.SetActive(false);
     }
 }
