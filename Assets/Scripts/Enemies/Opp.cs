@@ -8,7 +8,7 @@ public class Opp : MonoBehaviour
     public Transform target; // This is the target that the opp chases down. We set it to Player in the inspector, since the opp is meant to chase down the player.
     public float secWaitAfterConvoEnds; // This is the number of seconds to wait after the conversation with the player ends before the Opp starts chasing the player again.
     NavMeshAgent agent; // This is the NavMeshAgent component. It is needed for the SetDestination() method.
-    public bool isOppTriggerOn = true; // This boolean determines whether opp triggers are turned on. If off, the player won't trigger a conversation upon colliding with opp. If on, the player will trigger a conversation upon colliding with opp. Upon RunTime, this boolean is set to true.
+    public bool isThisOppTriggerOn = true; // This boolean determines whether opp triggers are turned on for this specific opp. If off, the player won't trigger a conversation upon colliding with this opp. If on, the player will trigger a conversation upon colliding with this opp. Upon RunTime, this boolean is set to true.
 
     void Start()
     {
@@ -32,13 +32,13 @@ public class Opp : MonoBehaviour
     {
         if (collision.gameObject.tag == "OppDetector")
         {
-            isOppTriggerOn = false;
+            isThisOppTriggerOn = false;
             GetComponent<NavMeshAgent>().isStopped = true;
         }
     }
 
     private void ResumePathfinding(){
-        isOppTriggerOn = true;
+        isThisOppTriggerOn = true;
         GetComponent<NavMeshAgent>().isStopped = false; // This method immediately resumes the NavMeshAgent's pathfinding, and thus activates the "agent.SetDestination()" method.
     }
 }
