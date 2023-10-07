@@ -20,11 +20,14 @@ public class Player : MonoBehaviour
         int layer = LayerMask.NameToLayer("Opp");
         if (collision.gameObject.layer == layer)
         {
-            // TODO: make better voice dialogues
-            string[] texts = new string[]{"Heyyy, you're looking fine today!", "Thanks, I appreciate it.", "Ooh, what's that accent from?", "Brooklyn.", "I have to say, I really like your fit.", "Thanks.", "We should grab coffee sometime, I would love to learn what else you got in your wardrobe. What's your number?", "Oh, I'm sorry, I gotta go to class right now, I can't talk. Bye!", "What?"};
-            TextWriter.activateConversation(texts);
+            Opp opp = collision.gameObject.GetComponent<Opp>();
+            if (opp.isOppTriggerOn){
+                // TODO: make better voice dialogues
+                string[] texts = new string[]{"Heyyy, you're looking fine today!", "Thanks, I appreciate it.", "Ooh, what's that accent from?", "Brooklyn.", "I have to say, I really like your fit.", "Thanks.", "We should grab coffee sometime, I would love to learn what else you got in your wardrobe. What's your number?", "Oh, I'm sorry, I gotta go to class right now, I can't talk. Bye!", "What?"};
+                TextWriter.activateConversation(texts);
 
-            // TODO: WRITE CODE TO PAUSE PLAYER MOVEMENT
+                // TODO: WRITE CODE TO PAUSE PLAYER MOVEMENT
+            }
         }
     }
 
