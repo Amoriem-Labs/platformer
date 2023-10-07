@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Opp : MonoBehaviour
 {
     public Transform target; // This is the target that the opp chases down. We set it to Player in the inspector, since the opp is meant to chase down the player.
+    public float secWaitAfterConvoEnds; // This is the number of seconds to wait after the conversation with the player ends before the Opp starts chasing the player again.
     NavMeshAgent agent; // This is the NavMeshAgent component. It is needed for the SetDestination() method.
 
     void Start()
@@ -18,7 +19,23 @@ public class Opp : MonoBehaviour
     }
 
     void Update()
+    { 
+        if (!TextWriter.isWritingText){ // This if statement basically says that if the TextWriter is not currently writing, then run the below code.
+            Invoke("ResumePathfinding", secWaitAfterConvoEnds);
+            agent.SetDestination(target.position); // This method finds the shortest path to the target's position and makes the agent follow that path to move towards that position.
+        }
+    }
+
+    // This if method basically says that if the Opp runs into the Opp Detector, then immediately halt the NavMeshAgent's pathfinding, thus deactivating the "agent.SetDestination()" method.
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        agent.SetDestination(target.position); // This method finds the shortest path to the target's position and makes the agent follow that path to move towards that position.
+        if (collision.gameObject.tag == "OppDetector")
+        {
+            GetComponent<NavMeshAgent>().isStopped = true;
+        }
+    }
+
+    private void ResumePathfinding(){
+        GetComponent<NavMeshAgent>().isStopped = false; // This method immediately resumes the NavMeshAgent's pathfinding, and thus activates the "agent.SetDestination()" method.
     }
 }

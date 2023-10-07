@@ -11,7 +11,7 @@ public class TextWriter : MonoBehaviour
     public static GameObject textBoxStatic;
     public static bool isWritingText = false;
     public static string[] textsToWrite;
-    private int textsToWriteIndex;
+    private static int textsToWriteIndex;
     private int characterIndex = 0;
     public float timePerCharacter;
     private float timer = 0;
@@ -35,6 +35,7 @@ public class TextWriter : MonoBehaviour
         textBoxStatic.SetActive(false);
         isWritingText = false;
         textsToWrite = null;
+        textsToWriteIndex = 0;
     }
 
     void Update()

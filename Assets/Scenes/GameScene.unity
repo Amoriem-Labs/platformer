@@ -1814,6 +1814,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 267404047}
+  secWaitAfterConvoEnds: 2
 --- !u!61 &1601384196
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2443,10 +2444,6 @@ PrefabInstance:
     - target: {fileID: 2973431183388846323, guid: fa3522f3ff2b6864e8f0b0b65f95cdc1, type: 3}
       propertyPath: m_Name
       value: OppTriggerResponse
-      objectReference: {fileID: 0}
-    - target: {fileID: 2973431183388846323, guid: fa3522f3ff2b6864e8f0b0b65f95cdc1, type: 3}
-      propertyPath: m_Layer
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5334507189041780444, guid: fa3522f3ff2b6864e8f0b0b65f95cdc1, type: 3}
       propertyPath: m_LocalPosition.x
