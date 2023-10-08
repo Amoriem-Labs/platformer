@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 893400200141623842}
   m_Layer: 8
   m_Name: Car
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -205,5 +205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af77cd21560a534186fdf7269ffa789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFrozen: 0
   force: {x: 20, y: 0}
   secWaitAfterCollision: 2

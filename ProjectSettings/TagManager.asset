@@ -6,6 +6,7 @@ TagManager:
   tags:
   - OppDetector
   - Enemy
+  - PlayerDetector
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Opp
   - Detector
   - Car
-  - 
+  - Ground
   - 
   - 
   - 

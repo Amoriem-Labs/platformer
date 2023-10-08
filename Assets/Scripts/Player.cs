@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
         FreezeEnemies(numSecondsFreeze);
     }
 
-    // Freezes all enemies on screen for X seconds. Re
+    // Freezes all enemies on screen for X seconds.
     public void FreezeEnemies(float seconds){
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (var enemy in enemies){
@@ -41,12 +41,12 @@ public class Player : MonoBehaviour
 
     #region Collider methods.
     // When an opp runs into the player, trigger a conversation that prevents the player from moving until the conversation is over.
-    private void OnOppDetectorTriggerEnter2D(Collider2D collision)
+    private void OnOppDetectorTriggerEnter2D(Collider2D collider)
     {
         int layer = LayerMask.NameToLayer("Opp");
-        if (collision.gameObject.layer == layer)
+        if (collider.gameObject.layer == layer)
         {
-            Opp opp = collision.gameObject.GetComponent<Opp>();
+            Opp opp = collider.gameObject.GetComponent<Opp>();
             if (opp.isThisOppTriggerOn){
                 TextWriter.ActivateConversation(opp.conversation);
 
