@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Car : MonoBehaviour
+public class Car : Enemy
 {
     public Vector2 force;
     private Rigidbody2D rb;
@@ -18,7 +18,12 @@ public class Car : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.AddForce(force);
+        if (isFrozen){
+            float y_vel = rb.velocity.y;
+            rb.velocity = new Vector2(0,y_vel);
+        } else {
+            rb.AddForce(force);
+        }
     }
 
     // When car first collides with player, disables player collisions for secWaitAfterCollision seconds between player and THIS CAR only and then re-enables player collisions

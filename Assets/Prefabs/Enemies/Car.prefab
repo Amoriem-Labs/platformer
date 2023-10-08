@@ -205,5 +205,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af77cd21560a534186fdf7269ffa789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: {x: 10, y: 0}
+  force: {x: 20, y: 0}
   secWaitAfterCollision: 2
