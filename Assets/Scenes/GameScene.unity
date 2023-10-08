@@ -2398,11 +2398,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7986697212518484686, guid: 45e516612618a1647bab5d0c525503e3, type: 3}
       propertyPath: x_range
-      value: 45
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7986697212518484686, guid: 45e516612618a1647bab5d0c525503e3, type: 3}
       propertyPath: y_range
-      value: 25
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7986697212518484686, guid: 45e516612618a1647bab5d0c525503e3, type: 3}
       propertyPath: conversation
@@ -2552,11 +2552,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7986697212518484686, guid: 45e516612618a1647bab5d0c525503e3, type: 3}
       propertyPath: x_range
-      value: 45
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7986697212518484686, guid: 45e516612618a1647bab5d0c525503e3, type: 3}
       propertyPath: y_range
-      value: 25
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7986697212518484686, guid: 45e516612618a1647bab5d0c525503e3, type: 3}
       propertyPath: isFrozen

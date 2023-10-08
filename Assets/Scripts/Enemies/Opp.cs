@@ -18,6 +18,8 @@ public class Opp : Enemy
     [SerializeField] private Vector3 destPoint;
     public float x_range;
     public float y_range;
+    public float x_out_left;
+    public float x_out_right;
 
     void Start()
     {
@@ -71,6 +73,7 @@ public class Opp : Enemy
     private void Patrol(){
         if (isWalkPointSet){
             agent.SetDestination(destPoint);
+            if (Vector3.Distance(transform.position, destPoint) < 2) isWalkPointSet = false;
         } else {
             SearchForDest();
         }
@@ -82,7 +85,7 @@ public class Opp : Enemy
 
         destPoint = new Vector3(transform.position.x + x, transform.position.y + y, transform.position.z);
 
-        if (Physics.Raycast(destPoint, Vector3.down, groundLayer)){
+        if (Physics2D.Raycast(destPoint, Vector3.down, groundLayer) && destPoint.x < x_out_right && destPoint.x > x_out_left){
             isWalkPointSet = true;
         }
     }
