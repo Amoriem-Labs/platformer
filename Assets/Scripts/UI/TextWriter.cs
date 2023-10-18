@@ -64,7 +64,7 @@ public class TextWriter : MonoBehaviour
     {
         if (isWritingText){
             dialogueSprite.sprite = spritesWithText[textsToWriteIndex];
-
+        
             if (characterIndex < textsToWrite[textsToWriteIndex].Length){
                 timer -= Time.deltaTime;
                 if (timer <= 0f){

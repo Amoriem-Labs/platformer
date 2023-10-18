@@ -16,27 +16,19 @@ MonoBehaviour:
   - Hey there, struggling with your assignments, huh? I've got a surefire way...
   - ... to help you ace your exams, but it'll cost you.
   - What's your scheme?
-  - I've got some 'exclusive' study materials that guarantee top grades. Only 50
-    coins, and you'll be a straight-A student in no time!
+  - I've got some 'exclusive' study materials that guarantee top grades.
+  - ' Only 50 coins, and you''ll be a straight-A student in no time!'
   - No thanks.
-  - 'Wait! We are a team of experienced academic writers who are dedicated to helping
-    students achieve academic success with the following:'
-  - High-Quality Content.
-  - Custom Written Essays.
-  - Plagiarism Proof Essays.
-  - Unlimited Revisi...
-  - Okay, definitely no. Sounds like a scam.
+  - Wait! We are a team of experienced academic writers!
+  - Sorry! Sounds like a scam.
   - Filler
   sprites:
   - {fileID: 21300000, guid: c775c57cb1291594eba70306f15bb22c, type: 3}
   - {fileID: 21300000, guid: c775c57cb1291594eba70306f15bb22c, type: 3}
   - {fileID: 21300000, guid: c8b24918da91c294cb5e68026777fa96, type: 3}
   - {fileID: 21300000, guid: c775c57cb1291594eba70306f15bb22c, type: 3}
+  - {fileID: 21300000, guid: c775c57cb1291594eba70306f15bb22c, type: 3}
   - {fileID: 21300000, guid: c8b24918da91c294cb5e68026777fa96, type: 3}
-  - {fileID: 21300000, guid: c775c57cb1291594eba70306f15bb22c, type: 3}
-  - {fileID: 21300000, guid: c775c57cb1291594eba70306f15bb22c, type: 3}
-  - {fileID: 21300000, guid: c775c57cb1291594eba70306f15bb22c, type: 3}
-  - {fileID: 21300000, guid: c775c57cb1291594eba70306f15bb22c, type: 3}
   - {fileID: 21300000, guid: c775c57cb1291594eba70306f15bb22c, type: 3}
   - {fileID: 21300000, guid: c8b24918da91c294cb5e68026777fa96, type: 3}
   - {fileID: 21300000, guid: c8b24918da91c294cb5e68026777fa96, type: 3}

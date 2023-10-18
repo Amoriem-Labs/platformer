@@ -14,12 +14,12 @@ public class Opp : Enemy
     public ConversationSO conversation; // This is a ScriptableObject that contains the conversation elements that the opp will trigger upon collision with player.
     public TriggerResponse playerTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the opp and player. Once the player walks into this detection radius, the opp will start chasing player down.
     private LayerMask groundLayer;
+    private LayerMask wallLayer;
+    private float boxColliderHeight;
     [SerializeField] private bool isWalkPointSet = false;
     [SerializeField] private Vector3 destPoint;
     public float x_range;
     public float y_range;
-    public float x_out_left;
-    public float x_out_right;
 
     void Start()
     {
@@ -33,6 +33,8 @@ public class Opp : Enemy
         playerTriggerResponse.onTriggerEnter2D = OnPlayerTriggerEnter2D;
         playerTriggerResponse.onTriggerExit2D = OnPlayerTriggerExit2D;
         groundLayer = LayerMask.GetMask("Ground");
+        wallLayer = LayerMask.GetMask("Wall");
+        boxColliderHeight = GetComponent<BoxCollider2D>().size.y * transform.localScale.y; // Need to multiply by y-scale to get correct scaling relationship
     }
 
     void Update()
@@ -59,6 +61,7 @@ public class Opp : Enemy
         int layer = LayerMask.NameToLayer("Player");
         if (collider.gameObject.layer == layer){
             target = collider.gameObject.transform;
+            destPoint = collider.gameObject.transform.position;
         }
     }
 
@@ -85,7 +88,12 @@ public class Opp : Enemy
 
         destPoint = new Vector3(transform.position.x + x, transform.position.y + y, transform.position.z);
 
-        if (Physics2D.Raycast(destPoint, Vector3.down, groundLayer) && destPoint.x < x_out_right && destPoint.x > x_out_left){
+        //if (Physics2D.Raycast(destPoint, Vector3.down, groundLayer) && destPoint.x < x_out_right && destPoint.x > x_out_left){
+        //    isWalkPointSet = true;
+        //}
+
+        // If the destination point is above the ground layer and if the destination point is not outside the walls and the player can still fit in the location set by the destination point without hitting a ceiling, then set the destination point.
+        if (Physics2D.Raycast(destPoint, Vector3.down, groundLayer) && !Physics2D.Raycast(destPoint, Vector3.right, x_range, wallLayer) && !Physics2D.Raycast(destPoint, Vector3.left, x_range, wallLayer) && !Physics2D.Raycast(destPoint, Vector3.up, boxColliderHeight / 2 + 0.25f, groundLayer)){
             isWalkPointSet = true;
         }
     }

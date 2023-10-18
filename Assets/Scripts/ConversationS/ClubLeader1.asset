@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: ClubLeader1
   m_EditorClassIdentifier: 
   texts:
-  - Hey, you there! We reviewed your application, but I'm sorry to say you didn't
-    make the cut for our exclusive club.
+  - Hey, you there! We reviewed your club application.
+  - I'm sorry to say you didn't make the cut for our exclusive club.
   - What? Why not?
-  - Our club seeks individuals with very specific qualities, and it seems you didn't
-    quite meet our criteria.
-  - We're looking for those who can solve intricate puzzles and riddles, and your
-    application didn't demonstrate that ability.
+  - Our club seeks individuals with very specific qualities, and you didn't quite
+    meet our criteria.
+  - We're looking for those who can solve intricate puzzles.
   - I thought I had what it takes.
   - You were close, but not close enough. Sorry.
-  - I'll prove myself and come back even stronger.
+  - I'll prove myself and come back even stronger!
   - Filler
   sprites:
+  - {fileID: 21300000, guid: 9ea918aa00dfa21428640bdac9cdfaa0, type: 3}
   - {fileID: 21300000, guid: 9ea918aa00dfa21428640bdac9cdfaa0, type: 3}
   - {fileID: 21300000, guid: c8b24918da91c294cb5e68026777fa96, type: 3}
   - {fileID: 21300000, guid: 9ea918aa00dfa21428640bdac9cdfaa0, type: 3}

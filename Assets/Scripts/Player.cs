@@ -14,6 +14,16 @@ public class Player : MonoBehaviour
         oppTriggerResponse.onTriggerExit2D = OnOppDetectorTriggerExit2D;
     }
 
+    void Update(){
+        if (Input.GetKeyDown(KeyCode.Space)){
+            ActivateShield();
+        }
+    }
+
+    void ActivateShield(){
+        
+    }
+
     #region Freezing enemies.
     // Freezes all enemies on screen for numSecondsFreeze seconds. Remove this function in final production later. This function is purely for testing purposes.
     [ContextMenu("Freeze Enemies")]
