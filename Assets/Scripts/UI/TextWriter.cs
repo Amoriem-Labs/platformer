@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Cinemachine;
 
 public class TextWriter : MonoBehaviour
 {
@@ -18,9 +19,17 @@ public class TextWriter : MonoBehaviour
     private int characterIndex = 0;
     public float timePerCharacter;
     private float timer = 0;
+    public CinemachineVirtualCamera vcam;
+    public static CinemachineVirtualCamera vcamStatic;
+    public float convoCamSize; // This is the size of the camera when player is trapped in a conversation
+    private static float convoCamSizeStatic;
+    private static float originalCamSizeStatic; // This is the original size of the camera.
 
     void Awake(){
         textBoxStatic = textBox;
+        vcamStatic = vcam;
+        originalCamSizeStatic = vcam.m_Lens.OrthographicSize;
+        convoCamSizeStatic = convoCamSize;
     }
 
     // The below method is a general method to activate conversations. The "texts" parameter takes on an unlimited amount of texts.
@@ -32,8 +41,8 @@ public class TextWriter : MonoBehaviour
         isWritingText = true;
         textsToWrite = conversation.texts;
         spritesWithText = conversation.sprites;
+        vcamStatic.m_Lens.OrthographicSize = convoCamSizeStatic;
         FreezeEnemies();
-        // TODO: add in a sprite to the text box so that player knows who is talking which text
     }
 
     public static void DeactivateConversation(){
@@ -41,6 +50,7 @@ public class TextWriter : MonoBehaviour
         isWritingText = false;
         textsToWrite = null;
         textsToWriteIndex = 0;
+        vcamStatic.m_Lens.OrthographicSize = originalCamSizeStatic;
         UnfreezeEnemies();
     }
 

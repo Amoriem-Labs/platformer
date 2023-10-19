@@ -5,13 +5,9 @@ using UnityEngine;
 public class Car : Enemy
 {
     public Vector2 force;
-    private Rigidbody2D rb;
-    private Collider2D thisCollider;
     public float secWaitAfterCollision;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         rb = GetComponent<Rigidbody2D>();
         thisCollider = GetComponent<Collider2D>();
     }
@@ -32,26 +28,6 @@ public class Car : Enemy
         if (collision.gameObject.layer == layer){
             DisablePlayerCollisions();
             Invoke("EnablePlayerCollisions", secWaitAfterCollision);
-        }
-    }
-
-    // Disables THIS car's collisions with player
-    void DisablePlayerCollisions(){
-        int currentlyExcludedLayersMask = thisCollider.excludeLayers.value; // This is the layer mask int for this car collider's currently excluded layers.
-        int playerMask = LayerMask.GetMask("Player"); // This is the layer mask int for the "Player" layer.
-        LayerMask newLayerMask = playerMask + currentlyExcludedLayersMask; // This is the layer mask (not an int) for the "Player" layer + all previously excluded layers.
-        thisCollider.excludeLayers = newLayerMask; // Sets this collider's excludeLayers to the new layer mask.
-    }
-
-    // Enables THIS car's collisions with player only if this car's currently excluded layers contains the "Player" layer
-    void EnablePlayerCollisions(){
-        int playerLayer = LayerMask.NameToLayer("Player");
-
-        if (LayerMaskExtensions.Includes(thisCollider.excludeLayers, playerLayer)){
-            int currentlyExcludedLayersMask = thisCollider.excludeLayers.value; // This is the layer mask int for this car collider's currently excluded layers.
-            int playerMask = LayerMask.GetMask("Player"); // This is the layer mask int for the "Player" layer.
-            LayerMask newLayerMask = playerMask - currentlyExcludedLayersMask; // This is the layer mask (not an int) for all previously excluded layers - "Player" layer.
-            thisCollider.excludeLayers = newLayerMask; // Sets this collider's excludeLayers to the new layer mask.
         }
     }
 }

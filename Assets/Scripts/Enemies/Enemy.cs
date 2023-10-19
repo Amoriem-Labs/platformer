@@ -5,4 +5,26 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public bool isFrozen = false;
+    public Rigidbody2D rb;
+    public Collider2D thisCollider;
+
+    // Disables THIS enemy's collisions with player
+    public void DisablePlayerCollisions(){
+        int currentlyExcludedLayersMask = thisCollider.excludeLayers.value; // This is the layer mask int for this enemy collider's currently excluded layers.
+        int playerMask = LayerMask.GetMask("Player"); // This is the layer mask int for the "Player" layer.
+        LayerMask newLayerMask = playerMask + currentlyExcludedLayersMask; // This is the layer mask (not an int) for the "Player" layer + all previously excluded layers.
+        thisCollider.excludeLayers = newLayerMask; // Sets this collider's excludeLayers to the new layer mask.
+    }
+
+    // Enables THIS enemy's collisions with player only if this enemy's currently excluded layers contains the "Player" layer
+    public void EnablePlayerCollisions(){
+        int playerLayer = LayerMask.NameToLayer("Player");
+
+        if (LayerMaskExtensions.Includes(thisCollider.excludeLayers, playerLayer)){
+            int currentlyExcludedLayersMask = thisCollider.excludeLayers.value; // This is the layer mask int for this enemy collider's currently excluded layers.
+            int playerMask = LayerMask.GetMask("Player"); // This is the layer mask int for the "Player" layer.
+            LayerMask newLayerMask = playerMask - currentlyExcludedLayersMask; // This is the layer mask (not an int) for all previously excluded layers - "Player" layer.
+            thisCollider.excludeLayers = newLayerMask; // Sets this collider's excludeLayers to the new layer mask.
+        }
+    }
 }

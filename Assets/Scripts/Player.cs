@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     public GameObject textBox; // This is a reference to the text box that will be triggered when the opp runs into the player.
     public TriggerResponse oppTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the player and opps.
     public float numSecondsFreeze; // This is the number of seconds to freeze an enemy.
+    public float numSecondsShield; // This is how long the player's shield is activated in seconds.
+    public SpriteRenderer shield; // This is the shield sprite.
 
     // Make sure that movement system has multiplying moveSpeed by Time.deltaTime to account for frame rates or using FixedUpdate
 
@@ -14,23 +16,41 @@ public class Player : MonoBehaviour
         textBox.SetActive(false);
         oppTriggerResponse.onTriggerEnter2D = OnOppDetectorTriggerEnter2D;
         oppTriggerResponse.onTriggerExit2D = OnOppDetectorTriggerExit2D;
+        shield.enabled = false;
     }
 
+    #region Shield functions.
     void Update(){
-        if (Input.GetKeyDown(KeyCode.Space)){
-            ActivateShield();
+        if (Input.GetKeyDown(KeyCode.E) && !TextWriter.isWritingText){
+            ActivateShield(numSecondsShield);
         }
     }
 
-    void ActivateShield(){
-        
+    void ActivateShield(float seconds){
+        shield.enabled = true;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var enemy in enemies){
+            enemy.GetComponent<Enemy>().DisablePlayerCollisions();
+        }
+        Invoke("DeactivateShield", seconds);
     }
+
+    void DeactivateShield(){
+        shield.enabled = false;
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var enemy in enemies){
+            enemy.GetComponent<Enemy>().EnablePlayerCollisions();
+        }
+    }
+    #endregion
 
     #region Freezing enemies.
     // Freezes all enemies on screen for numSecondsFreeze seconds. Remove this function in final production later. This function is purely for testing purposes.
     [ContextMenu("Freeze Enemies")]
     public void TestFreezeEnemies(){
-        FreezeEnemies(numSecondsFreeze);
+        if (!TextWriter.isWritingText){
+            FreezeEnemies(numSecondsFreeze);
+        }
     }
 
     // Freezes all enemies on screen for X seconds.

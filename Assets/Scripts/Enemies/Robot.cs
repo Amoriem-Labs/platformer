@@ -8,9 +8,6 @@ public class Robot : Enemy
     public Transform target; // This is the target that the robot chases down. We set it to Player in the inspector, since the opp is meant to chase down the player.
     private NavMeshAgent agent; // This is the NavMeshAgent component. It is needed for the SetDestination() method.
     public Vector2 force;
-    private Rigidbody2D rb;
-    private Collider2D thisCollider;
-    public float secWaitAfterCollision;
     public TriggerResponse playerTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the robot and player. Once the player walks into this detection radius, the opp will start chasing player down.
     private LayerMask groundLayer;
     private LayerMask wallLayer;
@@ -88,10 +85,6 @@ public class Robot : Enemy
 
         destPoint = new Vector3(transform.position.x + x, transform.position.y + y, transform.position.z);
 
-        //if (Physics2D.Raycast(destPoint, Vector3.down, groundLayer) && destPoint.x < x_out_right && destPoint.x > x_out_left){
-        //    isWalkPointSet = true;
-        //}
-
         // If the destination point is above the ground layer and if the destination point is not outside the walls and the player can still fit in the location set by the destination point without hitting a ceiling, then set the destination point.
         if (Physics2D.Raycast(destPoint, Vector3.down, groundLayer) && !Physics2D.Raycast(destPoint, Vector3.right, x_range, wallLayer) && !Physics2D.Raycast(destPoint, Vector3.left, x_range, wallLayer) && !Physics2D.Raycast(destPoint, Vector3.up, boxColliderHeight / 2 + 0.25f, groundLayer)){
             isWalkPointSet = true;
@@ -99,33 +92,11 @@ public class Robot : Enemy
     }
     #endregion
 
-    // When car first collides with player, disables player collisions for secWaitAfterCollision seconds between player and THIS CAR only and then re-enables player collisions
+    // When robot collides with player, throw player in the air.
     void OnCollisionEnter2D(Collision2D collision){
         int layer = LayerMask.NameToLayer("Player");
         if (collision.gameObject.layer == layer){
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
-            DisablePlayerCollisions();
-            Invoke("EnablePlayerCollisions", secWaitAfterCollision);
-        }
-    }
-
-    // Disables THIS car's collisions with player
-    void DisablePlayerCollisions(){
-        int currentlyExcludedLayersMask = thisCollider.excludeLayers.value; // This is the layer mask int for this car collider's currently excluded layers.
-        int playerMask = LayerMask.GetMask("Player"); // This is the layer mask int for the "Player" layer.
-        LayerMask newLayerMask = playerMask + currentlyExcludedLayersMask; // This is the layer mask (not an int) for the "Player" layer + all previously excluded layers.
-        thisCollider.excludeLayers = newLayerMask; // Sets this collider's excludeLayers to the new layer mask.
-    }
-
-    // Enables THIS car's collisions with player only if this car's currently excluded layers contains the "Player" layer
-    void EnablePlayerCollisions(){
-        int playerLayer = LayerMask.NameToLayer("Player");
-
-        if (LayerMaskExtensions.Includes(thisCollider.excludeLayers, playerLayer)){
-            int currentlyExcludedLayersMask = thisCollider.excludeLayers.value; // This is the layer mask int for this car collider's currently excluded layers.
-            int playerMask = LayerMask.GetMask("Player"); // This is the layer mask int for the "Player" layer.
-            LayerMask newLayerMask = playerMask - currentlyExcludedLayersMask; // This is the layer mask (not an int) for all previously excluded layers - "Player" layer.
-            thisCollider.excludeLayers = newLayerMask; // Sets this collider's excludeLayers to the new layer mask.
         }
     }
 }
