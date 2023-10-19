@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     public TriggerResponse oppTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the player and opps.
     public float numSecondsFreeze; // This is the number of seconds to freeze an enemy.
 
+    // Make sure that movement system has multiplying moveSpeed by Time.deltaTime to account for frame rates or using FixedUpdate
+
     void Start(){
         textBox.SetActive(false);
         oppTriggerResponse.onTriggerEnter2D = OnOppDetectorTriggerEnter2D;

@@ -27,7 +27,7 @@ public class Opp : Enemy
         agent.enabled = false;
         target = null;
         rb = GetComponent<Rigidbody2D>();
-        // These two lines of code are recommended to prevent innate agent rotation and up-axis updates, as this can be handled by future animations.
+        // These two lines of code are recommended to prevent innate agent rotation and up-axis updatesWithout these lines of code, the agent can rotate the agent outside the 2D screen into 3D coordinates.
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         playerTriggerResponse.onTriggerEnter2D = OnPlayerTriggerEnter2D;
