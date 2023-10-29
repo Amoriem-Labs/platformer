@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class Robot : Enemy
+public class Drone : Enemy
 {
-    public Transform target; // This is the target that the robot chases down. We set it to Player in the inspector, since the opp is meant to chase down the player.
-    private NavMeshAgent agent; // This is the NavMeshAgent component. It is needed for the SetDestination() method.
-    public Vector2 force;
-    public TriggerResponse playerTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the robot and player. Once the player walks into this detection radius, the robot will start chasing player down.
+    public bool isAttacking = false;
+    public Transform target; // This is the target that the drone chases down. We set it to Player in the inspector, since the opp is meant to chase down the player.
+    private UnityEngine.AI.NavMeshAgent agent; // This is the NavMeshAgent component. It is needed for the SetDestination() method.
+    public TriggerResponse playerTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the drone and player. Once the player walks into this detection radius, the drone will start chasing player down.
+    public TriggerResponse attackRangeTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the drone and player. Once the player walks into this detection radius, the drone will start throwing books at the player.
+    public GameObject bookPrefab; // This is the book GameObject that the drone will throw.
+    public float bookThrowSpeed; // This is the speed at which the drone will throw the book.
+    public float timeBetweenBookThrows; // This is the time between each book throw.
     private LayerMask groundLayer;
     private LayerMask wallLayer;
     private float boxColliderHeight;
@@ -30,6 +33,8 @@ public class Robot : Enemy
         agent.updateUpAxis = false;
         playerTriggerResponse.onTriggerEnter2D = OnPlayerTriggerEnter2D;
         playerTriggerResponse.onTriggerExit2D = OnPlayerTriggerExit2D;
+        attackRangeTriggerResponse.onTriggerEnter2D = OnAttackRangeEnter2D;
+        attackRangeTriggerResponse.onTriggerExit2D = OnAttackRangeExit2D;
         groundLayer = LayerMask.GetMask("Ground");
         wallLayer = LayerMask.GetMask("Wall");
         boxColliderHeight = GetComponent<BoxCollider2D>().size.y * transform.localScale.y; // Need to multiply by y-scale to get correct scaling relationship
@@ -37,10 +42,20 @@ public class Robot : Enemy
 
     void Update()
     {
-        if (isFrozen){
+        if (isFrozen || isAttacking){
             agent.enabled = false;
         } else {
             ResumePathfinding();
+        }
+    }
+
+    IEnumerator AttackPlayer(){
+        while (isAttacking){
+            GameObject bookObj = Instantiate(bookPrefab, transform.position, Quaternion.identity);
+            Vector3 directionToPlayer = (target.position - transform.position);
+            directionToPlayer.Normalize();
+            bookObj.GetComponent<Rigidbody2D>().velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * bookThrowSpeed;
+            yield return new WaitForSeconds(timeBetweenBookThrows);
         }
     }
 
@@ -92,11 +107,20 @@ public class Robot : Enemy
     }
     #endregion
 
-    // When robot collides with player, throw player in the air.
-    void OnCollisionEnter2D(Collision2D collision){
+    // When player enters drone's attack radius, throw a book at the player.
+    void OnAttackRangeEnter2D(Collider2D collider){
         int layer = LayerMask.NameToLayer("Player");
-        if (collision.gameObject.layer == layer){
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
+        if (collider.gameObject.layer == layer){
+            isAttacking = true; // Turn off pathfinding while player is in attack range of drone to pause drone movement.
+            StartCoroutine(AttackPlayer());
+        }
+    }
+
+    void OnAttackRangeExit2D(Collider2D collider){
+        int layer = LayerMask.NameToLayer("Player");
+        if (collider.gameObject.layer == layer){
+            isAttacking = false; // Turn back on pathfinding when player exits attack range of drone.
+            StopCoroutine(AttackPlayer());
         }
     }
 }

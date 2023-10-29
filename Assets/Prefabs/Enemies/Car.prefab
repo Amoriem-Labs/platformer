@@ -129,7 +129,7 @@ PolygonCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 6464
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -206,5 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFrozen: 0
+  rb: {fileID: 0}
+  thisCollider: {fileID: 0}
   force: {x: 20, y: 0}
   secWaitAfterCollision: 2
