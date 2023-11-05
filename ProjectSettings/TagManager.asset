@@ -3,21 +3,27 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - OppDetector
+  - Enemy
+  - PlayerDetector
+  - AttackRangeDetector
+  - Book
+  - BookRangeDetector
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Opp
+  - Detector
+  - Car
+  - Ground
+  - Wall
+  - Robot
+  - Drone
   - 
   - 
   - 
@@ -38,6 +44,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2331141259
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
