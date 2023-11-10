@@ -32,7 +32,6 @@ public class TimeManager : MonoBehaviour
             Minute++; 
             // if OnMinuteChanged does not = null, invoke it
             OnMinuteChanged?.Invoke();
-            Debug.Log("Minute changed!"); 
             
             if(Minute >= 60)
             {
@@ -40,7 +39,6 @@ public class TimeManager : MonoBehaviour
                 // if OnHourChanged does not = null, invoke it
                 Minute = 0; 
                 OnHourChanged?.Invoke();
-                Debug.Log("Hour changed!");
             }
 
             timer = minuteToRealTime; 

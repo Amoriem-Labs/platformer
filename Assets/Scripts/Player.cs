@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float numSecondsFreeze; // This is the number of seconds to freeze an enemy.
     public float numSecondsShield; // This is how long the player's shield is activated in seconds.
     public SpriteRenderer shield; // This is the shield sprite.
+    public static WASDMovement movement; // Script for player movement
 
     // Make sure that movement system has multiplying moveSpeed by Time.deltaTime to account for frame rates or using FixedUpdate
 
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
         bookTriggerResponse.onTriggerEnter2D = OnBookDetectorTriggerEnter2D;
         bookTriggerResponse.onTriggerExit2D = OnBookDetectorTriggerExit2D;
         shield.enabled = false;
+        movement = GetComponent<WASDMovement>();
     }
 
     #region Shield functions.
@@ -88,7 +90,9 @@ public class Player : MonoBehaviour
             if (opp.isThisOppTriggerOn){
                 TextWriter.ActivateConversation(opp.conversation);
 
-                // TODO: WRITE CODE TO PAUSE PLAYER MOVEMENT
+                // Disable player movement.
+                movement.enabled = false; 
+                rb.velocity = Vector2.zero;
             }
         }
     }

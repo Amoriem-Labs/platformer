@@ -52,6 +52,7 @@ public class TextWriter : MonoBehaviour
         textsToWriteIndex = 0;
         vcamStatic.m_Lens.OrthographicSize = originalCamSizeStatic;
         UnfreezeEnemies();
+        Player.movement.enabled = true; // Enable player movement.
     }
 
     // Freezes all enemies on screen
