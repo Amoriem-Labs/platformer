@@ -49,7 +49,6 @@ public class WASDMovement : MonoBehaviour
         horizontalMove.y = 0;
 
         float distance =  horizontalMove.magnitude * 10 * Time.fixedDeltaTime;
-        Debug.Log("Distance: " + distance);
         // Normalize horizontalMove since it should be used to indicate direction
         horizontalMove.Normalize();
     
@@ -62,8 +61,6 @@ public class WASDMovement : MonoBehaviour
         {
             // If so, stop the movement
             Playerbody.velocity = new Vector2(0, Playerbody.velocity.y);
-            Debug.Log("Hit obstacle or wall");
-            Debug.Log("Velocity: " + Playerbody.velocity);
         } else {
             // Handle horizontal movement
             Playerbody.velocity = new Vector2(Input.GetAxis("Horizontal") * walkspeed, Playerbody.velocity.y);
@@ -89,19 +86,11 @@ public class WASDMovement : MonoBehaviour
         // Handle dashing
         if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && canDash)
         {
-            float timeSinceLastDash = Time.time - lastDashTime;
-            if (timeSinceLastDash <= dashPressTime) {
-                StartCoroutine(Dash(-1)); // Dash left
-            }
-            lastDashTime = Time.time;
+            StartCoroutine(Dash(-1)); // Dash left
         }
         else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && canDash)
         {
-            float timeSinceLastDash = Time.time - lastDashTime;
-            if (timeSinceLastDash <= dashPressTime) {
-                StartCoroutine(Dash(1)); // Dash right
-            }
-            lastDashTime = Time.time;
+            StartCoroutine(Dash(1)); // Dash right
         }
     }
 
