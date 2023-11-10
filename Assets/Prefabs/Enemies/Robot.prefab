@@ -14,13 +14,13 @@ GameObject:
   - component: {fileID: 5822260307365261730}
   - component: {fileID: 2097370912695057003}
   - component: {fileID: 2522387162768700897}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: Robot
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2163592183038920569
 Transform:
   m_ObjectHideFlags: 0

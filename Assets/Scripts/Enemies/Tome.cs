@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class Robot : Enemy
+public class Tome : Enemy
 {
-    public Transform target; // This is the target that the robot chases down. We set it to Player in the inspector, since the robot is meant to chase down the player.
-    private NavMeshAgent agent; // This is the NavMeshAgent component. It is needed for the SetDestination() method.
-    public Vector2 force;
-    public TriggerResponse playerTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the robot and player. Once the player walks into this detection radius, the robot will start chasing player down.
+    public Transform target; // This is the target that the enemy chases down. We set it to Player in the inspector, since the enemy is meant to chase down the player.
+    private UnityEngine.AI.NavMeshAgent agent; // This is the NavMeshAgent component. It is needed for the SetDestination() method.
+    public Vector2 hitForce;
+    public Vector2 dashForce;
+    public float timeBetweenDashes;
+    public TriggerResponse playerTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the enemy and player. Once the player walks into this detection radius, the enemy will start chasing player down.
     private LayerMask groundLayer;
     private LayerMask wallLayer;
     private float boxColliderHeight;
     [SerializeField] private bool isWalkPointSet = false;
+    [SerializeField] private bool isDashing = false;
     [SerializeField] private Vector3 destPoint;
     public float x_range;
     public float y_range;
@@ -51,6 +53,8 @@ public class Robot : Enemy
             Patrol();
         } else {
             agent.SetDestination(target.position); // This method finds the shortest path to the target's position and makes the agent follow that path to move towards that position.
+            // TODO: Write code to periodically dash towards player when within another boxcollider.
+            StartCoroutine(Dash());
         }
     }
 
@@ -92,11 +96,27 @@ public class Robot : Enemy
     }
     #endregion
 
-    // When robot collides with player, throw player in the air.
-    void OnCollisionEnter2D(Collision2D collision){
+    IEnumerator Dash(){
+        while (isDashing){
+            rb.AddForce(dashForce); // force to dash towards player. Alternative method: change velocity
+            yield return new WaitForSeconds(timeBetweenDashes);
+        }
+    }
+
+    // When player enters drone's attack radius, throw a book at the player.
+    void OnAttackRangeEnter2D(Collider2D collider){
         int layer = LayerMask.NameToLayer("Player");
-        if (collision.gameObject.layer == layer){
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
+        if (collider.gameObject.layer == layer){
+            isDashing = true; // Turn off pathfinding while player is in attack range of drone to pause drone movement.
+            StartCoroutine(Dash());
+        }
+    }
+
+    void OnAttackRangeExit2D(Collider2D collider){
+        int layer = LayerMask.NameToLayer("Player");
+        if (collider.gameObject.layer == layer){
+            isDashing = false; // Turn back on pathfinding when player exits attack range of drone.
+            StopCoroutine(Dash());
         }
     }
 }

@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2132699411313566405
 Transform:
   m_ObjectHideFlags: 0
@@ -208,5 +208,5 @@ MonoBehaviour:
   isFrozen: 0
   rb: {fileID: 0}
   thisCollider: {fileID: 0}
-  force: {x: 20, y: 0}
+  force: {x: 10, y: 0}
   secWaitAfterCollision: 2

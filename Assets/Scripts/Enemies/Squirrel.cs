@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class Robot : Enemy
+public class Squirrel : Enemy
 {
-    public Transform target; // This is the target that the robot chases down. We set it to Player in the inspector, since the robot is meant to chase down the player.
-    private NavMeshAgent agent; // This is the NavMeshAgent component. It is needed for the SetDestination() method.
+    public Transform target; // This is the target that the robot chases down. We set it to Player in the inspector, since the opp is meant to chase down the player.
+    private UnityEngine.AI.NavMeshAgent agent; // This is the NavMeshAgent component. It is needed for the SetDestination() method.
     public Vector2 force;
     public TriggerResponse playerTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the robot and player. Once the player walks into this detection radius, the robot will start chasing player down.
     private LayerMask groundLayer;
