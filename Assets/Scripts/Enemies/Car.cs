@@ -6,6 +6,7 @@ public class Car : Enemy
 {
     public Vector2 force;
     public float secWaitAfterCollision;
+    public float damageAmount;
 
     void Start(){
         rb = GetComponent<Rigidbody2D>();
@@ -26,6 +27,7 @@ public class Car : Enemy
     void OnCollisionEnter2D(Collision2D collision){
         int layer = LayerMask.NameToLayer("Player");
         if (collision.gameObject.layer == layer){
+            Player.TakeDamage(damageAmount);
             DisablePlayerCollisions();
             Invoke("EnablePlayerCollisions", secWaitAfterCollision);
         }

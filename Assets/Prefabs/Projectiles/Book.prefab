@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4424632863133202371}
   - component: {fileID: 4479526240334326458}
   - component: {fileID: 5470652428596835127}
+  - component: {fileID: 6311555714569536747}
   m_Layer: 0
   m_Name: Book
   m_TagString: Book
@@ -225,3 +226,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6311555714569536747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7594061674869401714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70fdd809078475744bd3410d22150538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBeforeDisappearing: 5

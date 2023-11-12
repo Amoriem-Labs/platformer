@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Robot : Enemy
 {
-    public Transform target; // This is the target that the robot chases down. We set it to Player in the inspector, since the opp is meant to chase down the player.
+    public Transform target; // This is the target that the robot chases down. We set it to Player in the inspector, since the robot is meant to chase down the player.
     private NavMeshAgent agent; // This is the NavMeshAgent component. It is needed for the SetDestination() method.
     public Vector2 force;
     public TriggerResponse playerTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the robot and player. Once the player walks into this detection radius, the robot will start chasing player down.
@@ -16,6 +16,7 @@ public class Robot : Enemy
     [SerializeField] private Vector3 destPoint;
     public float x_range;
     public float y_range;
+    public float damageAmount;
 
     // Start is called before the first frame update
     void Start()
@@ -97,6 +98,7 @@ public class Robot : Enemy
         int layer = LayerMask.NameToLayer("Player");
         if (collision.gameObject.layer == layer){
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
+            Player.TakeDamage(damageAmount);
         }
     }
 }

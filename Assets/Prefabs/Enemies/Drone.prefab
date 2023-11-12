@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 172124558673572481}
   - component: {fileID: 959743718640363330}
   - component: {fileID: 6780086192748563137}
-  m_Layer: 12
+  m_Layer: 8
   m_Name: Drone
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6858752707258543569}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -231,7 +231,7 @@ MonoBehaviour:
   isWalkPointSet: 0
   destPoint: {x: 0, y: 0, z: 0}
   x_range: 10
-  y_range: 8
+  y_range: 3
 --- !u!1001 &5952237334665775735
 PrefabInstance:
   m_ObjectHideFlags: 0

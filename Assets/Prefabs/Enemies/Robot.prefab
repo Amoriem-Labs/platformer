@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5822260307365261730}
   - component: {fileID: 2097370912695057003}
   - component: {fileID: 2522387162768700897}
-  m_Layer: 11
+  m_Layer: 8
   m_Name: Robot
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -111,6 +111,7 @@ MonoBehaviour:
   destPoint: {x: 0, y: 0, z: 0}
   x_range: 8
   y_range: 0
+  damageAmount: 0
 --- !u!50 &5822260307365261730
 Rigidbody2D:
   serializedVersion: 4
@@ -153,7 +154,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 6464
+    m_Bits: 4416
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
