@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public static WASDMovement movement; // Script for player movement
     private static SpriteRenderer playerSprite; // This is the player's sprite renderer.
     private static float bookDamageAmount = 1; // This is the amount of damage the player takes when hit by a book.
+    public static float secWaitAfterCollision = 2.5f; // This is the number of seconds to wait after a collision before re-enabling player collisions.
 
     // Make sure that movement system has multiplying moveSpeed by Time.deltaTime to account for frame rates or using FixedUpdate
 
@@ -150,6 +151,11 @@ public class Player : MonoBehaviour
         StaticCoroutine.Start(FlashRed(numFlashes, timeBetweenFlashes));
 
         // TODO: if player gets hit, they're immune to further HP damage for 1 second
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var enemy in enemies){
+            enemy.GetComponent<Enemy>().DisablePlayerCollisions();
+            enemy.GetComponent<Enemy>().Invoke("EnablePlayerCollisions", secWaitAfterCollision);
+        }
     }
 
     public static IEnumerator FlashRed(int numFlashes, float timeBetweenFlashes){
