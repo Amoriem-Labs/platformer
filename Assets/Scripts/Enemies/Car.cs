@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Car : Enemy
 {
-    public Vector2 force;
+    public Vector2 moveForce;
+    public Vector2 hitForce;
     public float secWaitAfterCollision;
     public float damageAmount;
 
@@ -19,7 +20,7 @@ public class Car : Enemy
             float y_vel = rb.velocity.y;
             rb.velocity = new Vector2(0,y_vel);
         } else {
-            rb.AddForce(force);
+            rb.AddForce(moveForce);
         }
     }
 
@@ -30,6 +31,7 @@ public class Car : Enemy
             Player.TakeDamage(damageAmount);
             DisablePlayerCollisions();
             Invoke("EnablePlayerCollisions", secWaitAfterCollision);
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(hitForce);
         }
     }
 }

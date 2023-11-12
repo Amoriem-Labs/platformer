@@ -208,6 +208,7 @@ MonoBehaviour:
   isFrozen: 0
   rb: {fileID: 0}
   thisCollider: {fileID: 0}
-  force: {x: 10, y: 20}
+  moveForce: {x: 10, y: 0}
+  hitForce: {x: 500, y: 300}
   secWaitAfterCollision: 2
   damageAmount: 0

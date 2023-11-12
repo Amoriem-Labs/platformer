@@ -223,6 +223,7 @@ MonoBehaviour:
   thisCollider: {fileID: 0}
   isAttacking: 0
   target: {fileID: 0}
+  hitForce: {x: 25, y: 25}
   playerTriggerResponse: {fileID: 3870240377851212211}
   attackRangeTriggerResponse: {fileID: 7236350993881680433}
   bookPrefab: {fileID: 7594061674869401714, guid: c951d3ab48974f148a78d8101f3abfaf, type: 3}
@@ -232,6 +233,7 @@ MonoBehaviour:
   destPoint: {x: 0, y: 0, z: 0}
   x_range: 10
   y_range: 3
+  damageAmount: 1
 --- !u!1001 &5952237334665775735
 PrefabInstance:
   m_ObjectHideFlags: 0

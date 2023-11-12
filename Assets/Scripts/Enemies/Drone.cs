@@ -7,6 +7,7 @@ public class Drone : Enemy
     public bool isAttacking = false;
     public Transform target; // This is the target that the drone chases down. We set it to Player in the inspector, since the opp is meant to chase down the player.
     private UnityEngine.AI.NavMeshAgent agent; // This is the NavMeshAgent component. It is needed for the SetDestination() method.
+    public Vector2 hitForce;
     public TriggerResponse playerTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the drone and player. Once the player walks into this detection radius, the drone will start chasing player down.
     public TriggerResponse attackRangeTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the drone and player. Once the player walks into this detection radius, the drone will start throwing books at the player.
     public GameObject bookPrefab; // This is the book GameObject that the drone will throw.
@@ -19,6 +20,7 @@ public class Drone : Enemy
     [SerializeField] private Vector3 destPoint;
     public float x_range;
     public float y_range;
+    public float damageAmount;
 
     // Start is called before the first frame update
     void Start()
@@ -121,6 +123,14 @@ public class Drone : Enemy
         if (collider.gameObject.layer == layer){
             isAttacking = false; // Turn back on pathfinding when player exits attack range of drone.
             StopCoroutine(AttackPlayer());
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision){
+        int layer = LayerMask.NameToLayer("Player");
+        if (collision.gameObject.layer == layer){
+            Player.TakeDamage(damageAmount);
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(hitForce);
         }
     }
 }

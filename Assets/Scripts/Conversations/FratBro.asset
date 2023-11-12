@@ -21,10 +21,10 @@ MonoBehaviour:
   - Whatever.
   - Filler
   sprites:
-  - {fileID: 0}
+  - {fileID: 917790135, guid: efbeb83e2421c9c48b0dc6429a5162f4, type: 3}
   - {fileID: 21300000, guid: c8b24918da91c294cb5e68026777fa96, type: 3}
-  - {fileID: 0}
+  - {fileID: 917790135, guid: efbeb83e2421c9c48b0dc6429a5162f4, type: 3}
   - {fileID: 21300000, guid: c8b24918da91c294cb5e68026777fa96, type: 3}
-  - {fileID: 0}
+  - {fileID: 917790135, guid: efbeb83e2421c9c48b0dc6429a5162f4, type: 3}
   - {fileID: 21300000, guid: c8b24918da91c294cb5e68026777fa96, type: 3}
   - {fileID: 21300000, guid: c8b24918da91c294cb5e68026777fa96, type: 3}
