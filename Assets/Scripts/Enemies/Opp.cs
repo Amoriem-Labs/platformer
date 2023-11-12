@@ -19,7 +19,7 @@ public class Opp : Enemy
     [SerializeField] private Vector3 destPoint;
     public float x_range;
     public float y_range;
-
+    public bool haveTalkedToAlready = false;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();

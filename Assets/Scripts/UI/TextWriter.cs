@@ -17,7 +17,8 @@ public class TextWriter : MonoBehaviour
     public static Sprite[] spritesWithText;
     private static int textsToWriteIndex;
     private int characterIndex = 0;
-    public float timePerCharacter;
+    [SerializeField] public static float timePerCharacter = 0.025f;
+    [SerializeField] public static float originalTimePerCharacter = 0.025f;
     private float timer = 0;
     public CinemachineVirtualCamera vcam;
     public static CinemachineVirtualCamera vcamStatic;
@@ -53,6 +54,8 @@ public class TextWriter : MonoBehaviour
         vcamStatic.m_Lens.OrthographicSize = originalCamSizeStatic;
         UnfreezeEnemies();
         Player.EnablePlayerMovement();
+        TextWriter.timePerCharacter = TextWriter.originalTimePerCharacter;
+        TimeManager.minuteToRealTime = TimeManager.originalMinuteToRealTime;
     }
 
     // Freezes all enemies on screen

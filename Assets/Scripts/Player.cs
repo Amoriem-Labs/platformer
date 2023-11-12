@@ -91,7 +91,12 @@ public class Player : MonoBehaviour
         {
             Opp opp = collider.gameObject.GetComponent<Opp>();
             if (opp.isThisOppTriggerOn){
+                if (opp.haveTalkedToAlready){
+                    TextWriter.timePerCharacter = TextWriter.originalTimePerCharacter / 2;
+                    TimeManager.minuteToRealTime = TimeManager.originalMinuteToRealTime / 2;
+                }
                 TextWriter.ActivateConversation(opp.conversation);
+                opp.haveTalkedToAlready = true;
                 DisablePlayerMovement();
                 rb.velocity = Vector2.zero;
             }
