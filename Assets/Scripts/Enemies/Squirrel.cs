@@ -15,8 +15,10 @@ public class Squirrel : Enemy
     [SerializeField] private Vector3 destPoint;
     public float x_range;
     public float y_range;
+    private Animator animator;
+    public float stunDuration; // This is the number of seconds to stun the player for when the squirrel collides with the player.
+    public float damageAmount; // This is the amount of damage the squirrel does to the player when the squirrel collides with the player.
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,6 +34,7 @@ public class Squirrel : Enemy
         groundLayer = LayerMask.GetMask("Ground");
         wallLayer = LayerMask.GetMask("Wall");
         boxColliderHeight = GetComponent<BoxCollider2D>().size.y * transform.localScale.y; // Need to multiply by y-scale to get correct scaling relationship
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -91,11 +94,22 @@ public class Squirrel : Enemy
     }
     #endregion
 
-    // When robot collides with player, throw player in the air.
+    // When squirrel collides with player, pause player movement.
     void OnCollisionEnter2D(Collision2D collision){
         int layer = LayerMask.NameToLayer("Player");
         if (collision.gameObject.layer == layer){
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
+            Player.DisablePlayerMovement();
+            Player.TakeDamage(damageAmount);
+            isFrozen = true;
+            animator.enabled = false;
+            Invoke("EnablePlayerAndSquirrelMovement", stunDuration);
         }
+    }
+
+    void EnablePlayerAndSquirrelMovement(){
+        Player.EnablePlayerMovement();
+        isFrozen = false;
+        animator.enabled = true;
     }
 }

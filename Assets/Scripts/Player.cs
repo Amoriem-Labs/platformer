@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     public float numSecondsShield; // This is how long the player's shield is activated in seconds.
     public SpriteRenderer shield; // This is the shield sprite.
     public static WASDMovement movement; // Script for player movement
+    private static SpriteRenderer playerSprite; // This is the player's sprite renderer.
+    private static float bookDamageAmount = 1; // This is the amount of damage the player takes when hit by a book.
 
     // Make sure that movement system has multiplying moveSpeed by Time.deltaTime to account for frame rates or using FixedUpdate
 
@@ -25,6 +27,7 @@ public class Player : MonoBehaviour
         bookTriggerResponse.onTriggerExit2D = OnBookDetectorTriggerExit2D;
         shield.enabled = false;
         movement = GetComponent<WASDMovement>();
+        playerSprite = GetComponent<SpriteRenderer>();
     }
 
     #region Shield functions.
@@ -89,9 +92,7 @@ public class Player : MonoBehaviour
             Opp opp = collider.gameObject.GetComponent<Opp>();
             if (opp.isThisOppTriggerOn){
                 TextWriter.ActivateConversation(opp.conversation);
-
-                // Disable player movement.
-                movement.enabled = false; 
+                DisablePlayerMovement();
                 rb.velocity = Vector2.zero;
             }
         }
@@ -116,6 +117,7 @@ public class Player : MonoBehaviour
             } else {
                 rb.AddForce(new Vector2(10, 5) * bookKnockback);
             }
+            TakeDamage(bookDamageAmount);
             // TODO: Decrease player HP by 1 whenever health system is implemented.
         }
     }
@@ -126,4 +128,33 @@ public class Player : MonoBehaviour
         }
     }
     #endregion
+
+    public static void DisablePlayerMovement(){
+        // Disable player movement.
+        movement.enabled = false; 
+    }
+
+    public static void EnablePlayerMovement(){
+        // Enable player movement.
+        movement.enabled = true;
+    }
+
+    public static void TakeDamage(float damageAmount){
+        int numFlashes = 6;
+        float timeBetweenFlashes = 0.25f;
+        StaticCoroutine.Start(FlashRed(numFlashes, timeBetweenFlashes));
+
+        // TODO: if player gets hit, they're immune to further HP damage for 1 second
+    }
+
+    public static IEnumerator FlashRed(int numFlashes, float timeBetweenFlashes){
+        //int numFlashes = 3;
+        for (int i = 0; i < numFlashes; i++){
+            playerSprite.color = Color.red;
+            yield return new WaitForSeconds(timeBetweenFlashes);
+            playerSprite.color = Color.white;
+            yield return new WaitForSeconds(timeBetweenFlashes);
+        }
+    }
 }
+

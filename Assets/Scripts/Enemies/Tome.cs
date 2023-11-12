@@ -10,6 +10,7 @@ public class Tome : Enemy
     public Vector2 dashForce;
     public float timeBetweenDashes;
     public TriggerResponse playerTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the enemy and player. Once the player walks into this detection radius, the enemy will start chasing player down.
+    public TriggerResponse attackRangeTriggerResponse; // Once the player walks into this attack range radius, the enemy will start dashing towards player.
     private LayerMask groundLayer;
     private LayerMask wallLayer;
     private float boxColliderHeight;
@@ -18,6 +19,7 @@ public class Tome : Enemy
     [SerializeField] private Vector3 destPoint;
     public float x_range;
     public float y_range;
+    public float damageAmount;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +34,8 @@ public class Tome : Enemy
         agent.updateUpAxis = false;
         playerTriggerResponse.onTriggerEnter2D = OnPlayerTriggerEnter2D;
         playerTriggerResponse.onTriggerExit2D = OnPlayerTriggerExit2D;
+        attackRangeTriggerResponse.onTriggerEnter2D = OnAttackRangeEnter2D;
+        attackRangeTriggerResponse.onTriggerExit2D = OnAttackRangeExit2D;
         groundLayer = LayerMask.GetMask("Ground");
         wallLayer = LayerMask.GetMask("Wall");
         boxColliderHeight = GetComponent<BoxCollider2D>().size.y * transform.localScale.y; // Need to multiply by y-scale to get correct scaling relationship
@@ -53,8 +57,6 @@ public class Tome : Enemy
             Patrol();
         } else {
             agent.SetDestination(target.position); // This method finds the shortest path to the target's position and makes the agent follow that path to move towards that position.
-            // TODO: Write code to periodically dash towards player when within another boxcollider.
-            StartCoroutine(Dash());
         }
     }
 
@@ -103,7 +105,7 @@ public class Tome : Enemy
         }
     }
 
-    // When player enters drone's attack radius, throw a book at the player.
+    // When player enters tome's attack radius, tome starts dashing towards player.
     void OnAttackRangeEnter2D(Collider2D collider){
         int layer = LayerMask.NameToLayer("Player");
         if (collider.gameObject.layer == layer){
@@ -117,6 +119,15 @@ public class Tome : Enemy
         if (collider.gameObject.layer == layer){
             isDashing = false; // Turn back on pathfinding when player exits attack range of drone.
             StopCoroutine(Dash());
+        }
+    }
+
+    // When tome collides with player, deal damage to player.
+    void OnCollisionEnter2D(Collision2D collision){
+        int layer = LayerMask.NameToLayer("Player");
+        if (collision.gameObject.layer == layer){
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(hitForce);
+            Player.TakeDamage(damageAmount);
         }
     }
 }

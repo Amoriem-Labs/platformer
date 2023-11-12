@@ -20,7 +20,6 @@ public class CameraController : MonoBehaviour
     void FixedUpdate()
     {
         float vcamOrthoSize = vcam.m_Lens.OrthographicSize;
-        Debug.Log(vcamOrthoSize);
 
         // Use raycasting to check for obstacles
         if (Physics2D.Raycast(player.position, Vector2.left, vcamOrthoSize, wallMask) || Physics2D.Raycast(player.position, Vector2.right, vcamOrthoSize, wallMask))

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2231285644663975139}
   - component: {fileID: 828734296478999622}
   - component: {fileID: 2929011829386396603}
-  - component: {fileID: 5763452678982639370}
+  - component: {fileID: 2444401863009872316}
   m_Layer: 8
   m_Name: Squirrel
   m_TagString: Enemy
@@ -32,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.53, y: -0.72, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2407077575434064456}
   m_Father: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 1344294378, guid: 115b9af39efa6124b94f2b7c163dfcc6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -127,7 +127,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 1479372276
   m_Radius: 2.12
-  m_Speed: 150
+  m_Speed: 15
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -182,7 +182,9 @@ MonoBehaviour:
   destPoint: {x: 0, y: 0, z: 0}
   x_range: 12
   y_range: 0
---- !u!61 &5763452678982639370
+  stunDuration: 2.5
+  damageAmount: 0
+--- !u!61 &2444401863009872316
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -218,14 +220,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.15, y: 0.13}
+    oldSize: {x: 1.5, y: 1.3}
     newSize: {x: 0.15, y: 0.13}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.13}
+  m_Size: {x: 1.5, y: 1.3}
   m_EdgeRadius: 0
 --- !u!1001 &4043342829211852966
 PrefabInstance:
@@ -237,11 +239,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1517682917422063907, guid: 97e3d3fbfadd2f94b9575739eec87e90, type: 3}
       propertyPath: m_Size.x
-      value: 2.5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1517682917422063907, guid: 97e3d3fbfadd2f94b9575739eec87e90, type: 3}
       propertyPath: m_Size.y
-      value: 0.75
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1517682917422063907, guid: 97e3d3fbfadd2f94b9575739eec87e90, type: 3}
       propertyPath: m_Offset.x

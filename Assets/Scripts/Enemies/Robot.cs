@@ -16,6 +16,7 @@ public class Robot : Enemy
     [SerializeField] private Vector3 destPoint;
     public float x_range;
     public float y_range;
+    public float damageAmount;
 
     // Start is called before the first frame update
     void Start()
@@ -97,6 +98,7 @@ public class Robot : Enemy
         int layer = LayerMask.NameToLayer("Player");
         if (collision.gameObject.layer == layer){
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
+            Player.TakeDamage(damageAmount);
         }
     }
 }
