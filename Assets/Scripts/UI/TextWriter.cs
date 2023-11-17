@@ -16,8 +16,6 @@ public class TextWriter : MonoBehaviour
     public static GameObject textBoxStatic;
     public static bool isWritingText = false;
     public static ConversationSO conversation;
-    //public static string[] textsToWrite;
-    //public static Sprite[] spritesWithText;
     private static int textsToWriteIndex;
     private int characterIndex = 0;
     [SerializeField] public static float timePerCharacter = 0.025f;
@@ -44,8 +42,6 @@ public class TextWriter : MonoBehaviour
         textBoxStatic.SetActive(true);
         isWritingText = true;
         conversation = newConversation;
-        //textsToWrite = conversation.texts;
-        //spritesWithText = conversation.sprites;
         vcamStatic.m_Lens.OrthographicSize = convoCamSizeStatic;
         FreezeEnemies();
     }
@@ -53,7 +49,6 @@ public class TextWriter : MonoBehaviour
     public static void DeactivateConversation(){
         textBoxStatic.SetActive(false);
         isWritingText = false;
-        //textsToWrite = null;
         conversation = null;
         textsToWriteIndex = 0;
         vcamStatic.m_Lens.OrthographicSize = originalCamSizeStatic;
@@ -82,20 +77,17 @@ public class TextWriter : MonoBehaviour
     void Update()
     {
         if (isWritingText){
-            //dialogueSprite.sprite = spritesWithText[textsToWriteIndex];
             dialogueSprite.sprite = conversation.sprites[textsToWriteIndex];
             if (dialogueSprite.sprite == playerSprite){
                 nameText.text = "Player";
             } else {
                 nameText.text = conversation.npcName;
             }
-            //if (characterIndex < textsToWrite[textsToWriteIndex].Length){
             if (characterIndex < conversation.texts[textsToWriteIndex].Length){
                 timer -= Time.deltaTime;
                 if (timer <= 0f){
                     timer += timePerCharacter;
                     characterIndex++;
-                    //dialogueText.text = textsToWrite[textsToWriteIndex].Substring(0, characterIndex);
                     dialogueText.text = conversation.texts[textsToWriteIndex].Substring(0, characterIndex);
                 }
             } else {
@@ -105,7 +97,6 @@ public class TextWriter : MonoBehaviour
                     characterIndex = 0;
                     timer = 0;
                     downArrow.SetActive(false);
-                    //if (textsToWriteIndex == textsToWrite.Length - 1){
                     if (textsToWriteIndex == conversation.texts.Length - 1){
                         DeactivateConversation();
                     }

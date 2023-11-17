@@ -5,8 +5,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public bool isFrozen = false;
-    public Rigidbody2D rb;
-    public Collider2D thisCollider;
+    [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public Collider2D thisCollider;
 
     // Disables THIS enemy's collisions with player
     [ContextMenu("Disable Player Collisions")]
