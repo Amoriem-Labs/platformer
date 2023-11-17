@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b158aeeb0b1c1b946b75c3bfc17106c5, type: 3}
   m_Name: Advisor
   m_EditorClassIdentifier: 
+  npcName: Advisor
   texts:
   - I wanted to meet with you to discuss your distributional requirements.
   - "Of, course. I think I\u2019m right on track!"

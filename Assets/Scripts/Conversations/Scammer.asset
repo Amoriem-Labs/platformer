@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b158aeeb0b1c1b946b75c3bfc17106c5, type: 3}
   m_Name: Scammer
   m_EditorClassIdentifier: 
+  npcName: Scammer
   texts:
   - Hey there, struggling with your assignments, huh? I've got a surefire way...
   - ... to help you ace your exams, but it'll cost you.
