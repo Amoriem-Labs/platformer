@@ -98,7 +98,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 5546972210799066625}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -207,6 +207,7 @@ MonoBehaviour:
   destPoint: {x: 0, y: 0, z: 0}
   x_range: 10
   y_range: 0
+  haveTalkedToAlready: 0
 --- !u!1001 &5127598794464990672
 PrefabInstance:
   m_ObjectHideFlags: 0

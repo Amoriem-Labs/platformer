@@ -86,10 +86,10 @@ public class Opp : Enemy
         float x = Random.Range(-x_range, x_range);
         float y = Random.Range(-y_range, y_range);
 
-        destPoint = new Vector3(transform.position.x + x, transform.position.y + y, transform.position.z);
+        destPoint = new Vector3(transform.position.x + x, transform.position.y + y, 0);
 
-        // If the destination point is above the ground layer and if the destination point is not outside the walls and the player can still fit in the location set by the destination point without hitting a ceiling, then set the destination point.
-        if (Physics2D.Raycast(destPoint, Vector3.down, groundLayer) && !Physics2D.Raycast(destPoint, Vector3.right, x_range, wallLayer) && !Physics2D.Raycast(destPoint, Vector3.left, x_range, wallLayer) && !Physics2D.Raycast(destPoint, Vector3.up, boxColliderHeight / 2 + 0.25f, groundLayer)){
+        // If the destination point is 1) above the ground layer and 2) won't hit an obstacle and 3) if the destination point is not outside the walls and 4) the player can still fit in the location set by the destination point without hitting a ceiling, then set the destination point.
+        if ((Physics2D.Raycast(destPoint, Vector3.down, groundLayer).collider != null) && (Physics2D.Linecast(transform.position, destPoint, groundLayer).collider == null) && (Physics2D.Linecast(transform.position, destPoint, wallLayer).collider == null) && (Physics2D.Raycast(destPoint, Vector3.up, boxColliderHeight / 2 + 0.25f, groundLayer).collider == null)){
             isWalkPointSet = true;
         }
     }

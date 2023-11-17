@@ -16,11 +16,11 @@ GameObject:
   - component: {fileID: 6380356062757558512}
   m_Layer: 6
   m_Name: Scammer
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5261957239854942572
 Transform:
   m_ObjectHideFlags: 0
@@ -98,7 +98,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 5739297817762263313}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.1
   m_Speed: 4
   m_Acceleration: 9
   avoidancePriority: 50
@@ -207,6 +207,7 @@ MonoBehaviour:
   destPoint: {x: 0, y: 0, z: 0}
   x_range: 10
   y_range: 0
+  haveTalkedToAlready: 0
 --- !u!1001 &6446645554550744587
 PrefabInstance:
   m_ObjectHideFlags: 0

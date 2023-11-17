@@ -175,14 +175,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scammer
       objectReference: {fileID: 0}
-    - target: {fileID: 5739297817762263313, guid: df37c59c070639446a8288b299762815, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5739297817762263313, guid: df37c59c070639446a8288b299762815, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -860,10 +852,6 @@ PrefabInstance:
     - target: {fileID: 6966525357693020943, guid: 56eacae4bf7ae41459d66145c4f353ec, type: 3}
       propertyPath: m_Name
       value: Squirrel
-      objectReference: {fileID: 0}
-    - target: {fileID: 6966525357693020943, guid: 56eacae4bf7ae41459d66145c4f353ec, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8169426480881983236, guid: 56eacae4bf7ae41459d66145c4f353ec, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2688,10 +2676,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Robot
       objectReference: {fileID: 0}
-    - target: {fileID: 7582536965601032696, guid: d0f54e89496e26b4394b0ff8d2f976a9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3733,21 +3717,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Professor
       objectReference: {fileID: 0}
-    - target: {fileID: 1177959503639470515, guid: 7a9337d67541c1c4dbb8de58f9cc43fa, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1177959503639470515, guid: 7a9337d67541c1c4dbb8de58f9cc43fa, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 1736647938197316983, guid: 7a9337d67541c1c4dbb8de58f9cc43fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 96.9
       objectReference: {fileID: 0}
     - target: {fileID: 1736647938197316983, guid: 7a9337d67541c1c4dbb8de58f9cc43fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.8
+      value: 3.13
       objectReference: {fileID: 0}
     - target: {fileID: 1736647938197316983, guid: 7a9337d67541c1c4dbb8de58f9cc43fa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3839,14 +3815,6 @@ PrefabInstance:
     - target: {fileID: 5190681522334163847, guid: 9a45de3ff736a2344a46bc601d57772b, type: 3}
       propertyPath: m_Name
       value: ClubLeader
-      objectReference: {fileID: 0}
-    - target: {fileID: 5190681522334163847, guid: 9a45de3ff736a2344a46bc601d57772b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5190681522334163847, guid: 9a45de3ff736a2344a46bc601d57772b, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 7048960503825308824, guid: 9a45de3ff736a2344a46bc601d57772b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7099,10 +7067,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Charmer
       objectReference: {fileID: 0}
-    - target: {fileID: 5546972210799066625, guid: 45e516612618a1647bab5d0c525503e3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7578,10 +7542,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SterlingNakedRunner
       objectReference: {fileID: 0}
-    - target: {fileID: 8766262730701260343, guid: 9b1ae7991b88c4e438ea8448b025924f, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7639,14 +7599,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FratBro
       objectReference: {fileID: 0}
-    - target: {fileID: 9082780606294592884, guid: dc8e9abb53291044ead6ffe5167d6a4b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082780606294592884, guid: dc8e9abb53291044ead6ffe5167d6a4b, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7663,14 +7615,6 @@ PrefabInstance:
     - target: {fileID: 4472844488019127709, guid: 1f20ff7919e306e4d80c30a334fc0ea1, type: 3}
       propertyPath: m_Name
       value: Advisor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4472844488019127709, guid: 1f20ff7919e306e4d80c30a334fc0ea1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4472844488019127709, guid: 1f20ff7919e306e4d80c30a334fc0ea1, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5672761944845632309, guid: 1f20ff7919e306e4d80c30a334fc0ea1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7729,14 +7673,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cop
       objectReference: {fileID: 0}
-    - target: {fileID: 1506161645463666723, guid: 8e72dcee919d2fb4d8482396c4bd68c0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1506161645463666723, guid: 8e72dcee919d2fb4d8482396c4bd68c0, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 6977809054491869220, guid: 8e72dcee919d2fb4d8482396c4bd68c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.72
@@ -7794,13 +7730,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tome
       objectReference: {fileID: 0}
-    - target: {fileID: 2651305267943175715, guid: 23291b4abd173e047b8ee8678a976684, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3673740841309013889, guid: 23291b4abd173e047b8ee8678a976684, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 44.7
+      value: 89.1
       objectReference: {fileID: 0}
     - target: {fileID: 3673740841309013889, guid: 23291b4abd173e047b8ee8678a976684, type: 3}
       propertyPath: m_LocalPosition.y

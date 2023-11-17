@@ -16,11 +16,11 @@ GameObject:
   - component: {fileID: 736339685180353166}
   m_Layer: 6
   m_Name: FratBro
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7622469680250925023
 Transform:
   m_ObjectHideFlags: 0
@@ -98,7 +98,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 9082780606294592884}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50

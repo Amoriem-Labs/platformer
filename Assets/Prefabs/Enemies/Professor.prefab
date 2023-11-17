@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8657534371495114157}
   m_Layer: 6
   m_Name: Professor
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1177959503639470515}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.1
   m_Speed: 2.5
   m_Acceleration: 7
   avoidancePriority: 50
@@ -207,6 +207,7 @@ MonoBehaviour:
   destPoint: {x: 0, y: 0, z: 0}
   x_range: 10
   y_range: 0
+  haveTalkedToAlready: 0
 --- !u!1001 &4618610211850015060
 PrefabInstance:
   m_ObjectHideFlags: 0
