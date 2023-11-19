@@ -156,6 +156,7 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    #region Health system methods.
     public static void TakeDamage(float damageAmount){
         int numFlashes = 6;
         float timeBetweenFlashes = 0.25f;
@@ -178,5 +179,10 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(timeBetweenFlashes);
         }
     }
+
+    public static void Faint(){
+
+    }
+    #endregion
 }
 
