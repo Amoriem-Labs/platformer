@@ -75,7 +75,11 @@ public class Drone : EnemyWithPathfinding
         int layer = LayerMask.NameToLayer("Player");
         if (collision.gameObject.layer == layer){
             Player.TakeDamage(damageAmount);
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(hitForce);
+            if (rb.velocity.x > 0){
+                Player.rb.AddForce(new Vector2(1, 1) * hitForce); // push player to the right if squirrel is moving right
+            } else {
+                Player.rb.AddForce(new Vector2(-1, 1) * hitForce); // push player to the left if squirrel is moving left
+            }
         }
     }
 }

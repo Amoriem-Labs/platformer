@@ -11,10 +11,14 @@ public class Enemy : MonoBehaviour
     // Disables THIS enemy's collisions with player
     [ContextMenu("Disable Player Collisions")]
     public void DisablePlayerCollisions(){
-        int currentlyExcludedLayersMask = thisCollider.excludeLayers.value; // This is the layer mask int for this enemy collider's currently excluded layers.
-        int playerMask = LayerMask.GetMask("Player"); // This is the layer mask int for the "Player" layer.
-        LayerMask newLayerMask = currentlyExcludedLayersMask + playerMask; // This is the layer mask (not an int) for the "Player" layer + all previously excluded layers.
-        thisCollider.excludeLayers = newLayerMask; // Sets this collider's excludeLayers to the new layer mask.
+        int playerLayer = LayerMask.NameToLayer("Player");
+
+        if (!LayerMaskExtensions.Includes(thisCollider.excludeLayers, playerLayer)){
+            int currentlyExcludedLayersMask = thisCollider.excludeLayers.value; // This is the layer mask int for this enemy collider's currently excluded layers.
+            int playerMask = LayerMask.GetMask("Player"); // This is the layer mask int for the "Player" layer.
+            LayerMask newLayerMask = currentlyExcludedLayersMask + playerMask; // This is the layer mask (not an int) for the "Player" layer + all previously excluded layers.
+            thisCollider.excludeLayers = newLayerMask; // Sets this collider's excludeLayers to the new layer mask.
+        }
     }
 
     // Enables THIS enemy's collisions with player only if this enemy's currently excluded layers contains the "Player" layer

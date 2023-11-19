@@ -30,7 +30,11 @@ public class Robot : EnemyWithPathfinding
     void OnCollisionEnter2D(Collision2D collision){
         int layer = LayerMask.NameToLayer("Player");
         if (collision.gameObject.layer == layer){
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
+            if (rb.velocity.x > 0){
+                Player.rb.AddForce(new Vector2(1, 1) * force); // push player to the right if squirrel is moving right
+            } else {
+                Player.rb.AddForce(new Vector2(-1, 1) * force); // push player to the left if squirrel is moving left
+            }
             Player.TakeDamage(damageAmount);
         }
     }

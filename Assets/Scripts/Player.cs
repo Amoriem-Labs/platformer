@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public GameObject textBox; // This is a reference to the text box that will be triggered when the opp runs into the player.
-    public Rigidbody2D rb;
+    public static Rigidbody2D rb;
     public TriggerResponse oppTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the player and opps.
     public TriggerResponse bookTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the player and books.
     public float bookKnockback; // This determines how much the player will be knocked back by when hit by a book.
@@ -135,15 +135,26 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    #region Enable/disable player movement methods.
     public static void DisablePlayerMovement(){
-        // Disable player movement.
         movement.enabled = false; 
+        StaticCoroutine.Start(SlowDownPlayer());
+    }
+
+    public static IEnumerator SlowDownPlayer(){
+        yield return new WaitForSeconds(0.5f);
+        // Freeze rb x position.
+        rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        yield return new WaitForSeconds(0.5f);
+        // Unfreeze rb x position.
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     public static void EnablePlayerMovement(){
         // Enable player movement.
         movement.enabled = true;
     }
+    #endregion
 
     public static void TakeDamage(float damageAmount){
         int numFlashes = 6;

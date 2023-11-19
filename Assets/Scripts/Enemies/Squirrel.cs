@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Squirrel : EnemyWithPathfinding
 {
-    public Vector2 force;
+    public Vector2 hitForce;
     private Animator animator;
     public float stunDuration; // This is the number of seconds to stun the player for when the squirrel collides with the player.
     public float damageAmount; // This is the amount of damage the squirrel does to the player when the squirrel collides with the player.
@@ -31,8 +31,12 @@ public class Squirrel : EnemyWithPathfinding
     void OnCollisionEnter2D(Collision2D collision){
         int layer = LayerMask.NameToLayer("Player");
         if (collision.gameObject.layer == layer){
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
             Player.DisablePlayerMovement();
+            if (rb.velocity.x > 0){
+                Player.rb.AddForce(new Vector2(1, 1) * hitForce); // push player to the right if squirrel is moving right
+            } else {
+                Player.rb.AddForce(new Vector2(-1, 1) * hitForce); // push player to the left if squirrel is moving left
+            }
             Player.TakeDamage(damageAmount);
             isFrozen = true;
             animator.enabled = false;

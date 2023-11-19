@@ -221,19 +221,28 @@ MonoBehaviour:
   isFrozen: 0
   rb: {fileID: 0}
   thisCollider: {fileID: 0}
-  isAttacking: 0
   target: {fileID: 0}
-  hitForce: {x: 25, y: 25}
+  agent: {fileID: 0}
   playerTriggerResponse: {fileID: 3870240377851212211}
-  attackRangeTriggerResponse: {fileID: 7236350993881680433}
-  bookPrefab: {fileID: 7594061674869401714, guid: c951d3ab48974f148a78d8101f3abfaf, type: 3}
-  bookThrowSpeed: 10
-  timeBetweenBookThrows: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  boxColliderHeight: 0
   isWalkPointSet: 0
   destPoint: {x: 0, y: 0, z: 0}
   x_range: 10
   y_range: 3
+  isAttacking: 0
+  hitForce: {x: 25, y: 25}
+  attackRangeTriggerResponse: {fileID: 7236350993881680433}
+  bookPrefab: {fileID: 7594061674869401714, guid: c951d3ab48974f148a78d8101f3abfaf, type: 3}
+  bookThrowSpeed: 10
+  timeBetweenBookThrows: 1
   damageAmount: 1
+  coroutineActive: 0
 --- !u!1001 &5952237334665775735
 PrefabInstance:
   m_ObjectHideFlags: 0

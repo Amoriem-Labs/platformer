@@ -105,12 +105,20 @@ MonoBehaviour:
   rb: {fileID: 0}
   thisCollider: {fileID: 0}
   target: {fileID: 0}
-  force: {x: 0, y: 500}
+  agent: {fileID: 0}
   playerTriggerResponse: {fileID: 318136841855849083}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  boxColliderHeight: 0
   isWalkPointSet: 0
   destPoint: {x: 0, y: 0, z: 0}
   x_range: 8
   y_range: 0
+  force: {x: 0, y: 500}
   damageAmount: 0
 --- !u!50 &5822260307365261730
 Rigidbody2D:
@@ -124,7 +132,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
