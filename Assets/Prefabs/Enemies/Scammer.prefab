@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5261957239854942572
 Transform:
   m_ObjectHideFlags: 0
@@ -153,7 +153,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 4416
+    m_Bits: 320
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -199,14 +199,22 @@ MonoBehaviour:
   rb: {fileID: 0}
   thisCollider: {fileID: 0}
   target: {fileID: 0}
-  secWaitAfterConvoEnds: 2
-  isThisOppTriggerOn: 1
-  conversation: {fileID: 11400000, guid: 84643934664155d48858191ff14859c6, type: 2}
+  agent: {fileID: 0}
   playerTriggerResponse: {fileID: 2136241948828147647}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  boxColliderHeight: 0
   isWalkPointSet: 0
   destPoint: {x: 0, y: 0, z: 0}
   x_range: 10
   y_range: 0
+  secWaitAfterConvoEnds: 2
+  conversation: {fileID: 11400000, guid: 84643934664155d48858191ff14859c6, type: 2}
+  isThisOppTriggerOn: 1
   haveTalkedToAlready: 0
 --- !u!1001 &6446645554550744587
 PrefabInstance:

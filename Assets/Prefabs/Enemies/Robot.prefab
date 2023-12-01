@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2163592183038920569}
-  - component: {fileID: 3023678783086287402}
   - component: {fileID: 2939423786683215150}
+  - component: {fileID: 3023678783086287402}
   - component: {fileID: 5822260307365261730}
   - component: {fileID: 2097370912695057003}
   - component: {fileID: 2522387162768700897}
@@ -37,6 +37,37 @@ Transform:
   - {fileID: 6468048862176352545}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2939423786683215150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7582536965601032696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f6bc5733ce3ca49b1e5c88f277dedb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFrozen: 0
+  rb: {fileID: 0}
+  thisCollider: {fileID: 0}
+  target: {fileID: 0}
+  agent: {fileID: 0}
+  playerTriggerResponse: {fileID: 318136841855849083}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  boxColliderHeight: 0
+  isWalkPointSet: 0
+  destPoint: {x: 0, y: 0, z: 0}
+  x_range: 8
+  y_range: 0
+  force: {x: 0, y: 500}
+  damageAmount: 1.5
 --- !u!212 &3023678783086287402
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -89,37 +120,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2939423786683215150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7582536965601032696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32f6bc5733ce3ca49b1e5c88f277dedb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isFrozen: 0
-  rb: {fileID: 0}
-  thisCollider: {fileID: 0}
-  target: {fileID: 0}
-  agent: {fileID: 0}
-  playerTriggerResponse: {fileID: 318136841855849083}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  boxColliderHeight: 0
-  isWalkPointSet: 0
-  destPoint: {x: 0, y: 0, z: 0}
-  x_range: 8
-  y_range: 0
-  force: {x: 0, y: 500}
-  damageAmount: 0
 --- !u!50 &5822260307365261730
 Rigidbody2D:
   serializedVersion: 4
@@ -162,7 +162,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 4416
+    m_Bits: 320
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8169426480881983236}
+  - component: {fileID: 2929011829386396603}
   - component: {fileID: 4833151566217790848}
   - component: {fileID: 489733140384667024}
   - component: {fileID: 2231285644663975139}
   - component: {fileID: 828734296478999622}
-  - component: {fileID: 2929011829386396603}
   - component: {fileID: 2444401863009872316}
   m_Layer: 8
   m_Name: Squirrel
@@ -38,6 +38,38 @@ Transform:
   - {fileID: 2407077575434064456}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2929011829386396603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6966525357693020943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd59be81a8c98f458594f2cd64e2c25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFrozen: 0
+  rb: {fileID: 0}
+  thisCollider: {fileID: 0}
+  target: {fileID: 0}
+  agent: {fileID: 0}
+  playerTriggerResponse: {fileID: 8993327418183915794}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  boxColliderHeight: 0
+  isWalkPointSet: 0
+  destPoint: {x: 0, y: 0, z: 0}
+  x_range: 12
+  y_range: 0
+  hitForce: {x: 100, y: 50}
+  stunDuration: 2.5
+  damageAmount: 1
 --- !u!212 &4833151566217790848
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -147,7 +179,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6966525357693020943}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d960a6ff631650743ba3734ac2333783, type: 2}
   m_CullingMode: 0
@@ -160,38 +192,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2929011829386396603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6966525357693020943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efd59be81a8c98f458594f2cd64e2c25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isFrozen: 0
-  rb: {fileID: 0}
-  thisCollider: {fileID: 0}
-  target: {fileID: 0}
-  agent: {fileID: 0}
-  playerTriggerResponse: {fileID: 8993327418183915794}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  boxColliderHeight: 0
-  isWalkPointSet: 0
-  destPoint: {x: 0, y: 0, z: 0}
-  x_range: 12
-  y_range: 0
-  hitForce: {x: 100, y: 50}
-  stunDuration: 2.5
-  damageAmount: 0
 --- !u!61 &2444401863009872316
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -4,14 +4,25 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float timeBeforeDisappearing = 5f; // 5 seconds is default value for projectile to last in game before disappearing
+    public float damageAmount;
+    public float knockBack;
 
-    void Start()
-    {
-        Invoke("DestroyProjectile", timeBeforeDisappearing);
-    }
-
-    void DestroyProjectile(){
-        Destroy(gameObject);
+    void OnTriggerEnter2D (Collider2D collider){
+        int playerLayer = LayerMask.NameToLayer("Player");
+        int groundLayer = LayerMask.NameToLayer("Ground");
+        if (collider.gameObject.layer == playerLayer){
+            Rigidbody2D playerRb = collider.GetComponent<Rigidbody2D>();
+            Player.TakeDamage(damageAmount);
+            // Knock back player based on which side of the player the projectile is on.
+            if (collider.transform.position.x < transform.position.x){
+                playerRb.AddForce(new Vector2(-10, 5) * knockBack);
+            } else {
+                playerRb.AddForce(new Vector2(10, 5) * knockBack);
+            }
+            Destroy(gameObject);
+        }
+        else if (collider.gameObject.layer == groundLayer){
+            Destroy(gameObject);
+        }
     }
 }

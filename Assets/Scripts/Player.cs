@@ -7,14 +7,11 @@ public class Player : MonoBehaviour
     public GameObject textBox; // This is a reference to the text box that will be triggered when the opp runs into the player.
     public static Rigidbody2D rb;
     public TriggerResponse oppTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the player and opps.
-    public TriggerResponse bookTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the player and books.
-    public float bookKnockback; // This determines how much the player will be knocked back by when hit by a book.
     public float numSecondsFreeze; // This is the number of seconds to freeze an enemy.
     public float numSecondsShield; // This is how long the player's shield is activated in seconds.
     public SpriteRenderer shield; // This is the shield sprite.
     public static WASDMovement movement; // Script for player movement
     private static SpriteRenderer playerSprite; // This is the player's sprite renderer.
-    private static float bookDamageAmount = 1; // This is the amount of damage the player takes when hit by a book.
     public static float secWaitAfterCollision = 2.5f; // This is the number of seconds to wait after a collision before re-enabling player collisions.
 
     // Make sure that movement system has multiplying moveSpeed by Time.deltaTime to account for frame rates or using FixedUpdate
@@ -24,8 +21,6 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         oppTriggerResponse.onTriggerEnter2D = OnOppDetectorTriggerEnter2D;
         oppTriggerResponse.onTriggerExit2D = OnOppDetectorTriggerExit2D;
-        bookTriggerResponse.onTriggerEnter2D = OnBookDetectorTriggerEnter2D;
-        bookTriggerResponse.onTriggerExit2D = OnBookDetectorTriggerExit2D;
         shield.enabled = false;
         movement = GetComponent<WASDMovement>();
         playerSprite = GetComponent<SpriteRenderer>();
@@ -113,21 +108,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    // When book collides with player, decrease player HP by 1 and destroy book.
-    public void OnBookDetectorTriggerEnter2D(Collider2D collider){
-        if (collider.gameObject.tag == "Book"){
-            Destroy(collider.gameObject);
-            // If book is heading left, then have player be knocked back to the left. If book is heading right, then have player be knocked back to the right.
-            if (collider.gameObject.GetComponent<Rigidbody2D>().velocity.x <= 0){
-                rb.AddForce(new Vector2(-10, 5) * bookKnockback);
-            } else {
-                rb.AddForce(new Vector2(10, 5) * bookKnockback);
-            }
-            TakeDamage(bookDamageAmount);
-            // TODO: Decrease player HP by 1 whenever health system is implemented.
-        }
-    }
-
     public void OnBookDetectorTriggerExit2D(Collider2D collider){
         if (collider.gameObject.tag == "Book"){
             // Empty method for now. Fill in code later if you want code to be run when an book leaves a player's hitbox.
@@ -161,8 +141,8 @@ public class Player : MonoBehaviour
         int numFlashes = 6;
         float timeBetweenFlashes = 0.25f;
         StaticCoroutine.Start(FlashRed(numFlashes, timeBetweenFlashes));
+        HealthManager.Instance.ChangeHealth(damageAmount, false);
 
-        // TODO: if player gets hit, they're immune to further HP damage for 1 second
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (var enemy in enemies){
             enemy.GetComponent<Enemy>().DisablePlayerCollisions();

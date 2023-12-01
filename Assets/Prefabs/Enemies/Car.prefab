@@ -9,17 +9,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2132699411313566405}
+  - component: {fileID: 893400200141623842}
   - component: {fileID: 3044337849090536309}
   - component: {fileID: 4387736466426479554}
   - component: {fileID: 9133626887332378421}
-  - component: {fileID: 893400200141623842}
   m_Layer: 8
   m_Name: Car
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2132699411313566405
 Transform:
   m_ObjectHideFlags: 0
@@ -35,6 +35,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &893400200141623842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5104984409040235626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af77cd21560a534186fdf7269ffa789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFrozen: 0
+  rb: {fileID: 0}
+  thisCollider: {fileID: 0}
+  moveForce: {x: 10, y: 0}
+  hitForce: {x: 500, y: 300}
+  secWaitAfterCollision: 2
+  damageAmount: 2
 --- !u!212 &3044337849090536309
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -129,7 +148,7 @@ PolygonCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 5440
+    m_Bits: 1344
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -193,22 +212,3 @@ PolygonCollider2D:
       - {x: -2.8, y: 0.865}
       - {x: -2.81, y: 0.875}
   m_UseDelaunayMesh: 0
---- !u!114 &893400200141623842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5104984409040235626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6af77cd21560a534186fdf7269ffa789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isFrozen: 0
-  rb: {fileID: 0}
-  thisCollider: {fileID: 0}
-  moveForce: {x: 10, y: 0}
-  hitForce: {x: 500, y: 300}
-  secWaitAfterCollision: 2
-  damageAmount: 0

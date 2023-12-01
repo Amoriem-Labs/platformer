@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HealthManager : MonoBehaviour
 {
     private static HealthManager _instance;
-    public static HealthManager Instance { get; private set; }
+    public static HealthManager Instance { get { return _instance;} }
     public GameObject heartPrefab;
     public Transform heartBarParent;
     public int totalNumHearts;
