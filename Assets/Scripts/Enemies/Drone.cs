@@ -11,7 +11,7 @@ public class Drone : EnemyWithPathfinding
     public float bookThrowSpeed; // This is the speed at which the drone will throw the book.
     public float timeBetweenBookThrows; // This is the time between each book throw.
     public float damageAmount;
-    public bool coroutineActive = false;
+    private float timeUntilNextBookThrow; // This is the time until the next book throw.
 
     // Start is called before the first frame update
     void Start()
@@ -37,19 +37,21 @@ public class Drone : EnemyWithPathfinding
     {
         if (isFrozen || isAttacking){
             agent.enabled = false;
+            timeUntilNextBookThrow += Time.deltaTime;
+            if (timeUntilNextBookThrow >= timeBetweenBookThrows){
+                AttackPlayer();
+                timeUntilNextBookThrow = 0;
+            }
         } else {
             ResumePathfinding();
         }
     }
 
-    IEnumerator AttackPlayer(){
-        while (isAttacking){
-            GameObject bookObj = Instantiate(bookPrefab, transform.position, Quaternion.identity);
-            Vector3 directionToPlayer = (target.position - transform.position);
-            directionToPlayer.Normalize();
-            bookObj.GetComponent<Rigidbody2D>().velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * bookThrowSpeed;
-            yield return new WaitForSeconds(timeBetweenBookThrows);
-        }
+    public void AttackPlayer(){
+        GameObject bookObj = Instantiate(bookPrefab, transform.position, Quaternion.identity);
+        Vector3 directionToPlayer = (target.position - transform.position);
+        directionToPlayer.Normalize();
+        bookObj.GetComponent<Rigidbody2D>().velocity = new Vector2(directionToPlayer.x, directionToPlayer.y) * bookThrowSpeed;
     }
 
     // When player enters drone's attack radius, throw a book at the player.
@@ -57,8 +59,6 @@ public class Drone : EnemyWithPathfinding
         int layer = LayerMask.NameToLayer("Player");
         if (collider.gameObject.layer == layer){
             isAttacking = true; // Turn off pathfinding while player is in attack range of drone to pause drone movement.
-            if (!coroutineActive) StartCoroutine(AttackPlayer()); // Don't start a new attack player coroutine if one is already active.
-            coroutineActive = true;
         }
     }
 
@@ -66,8 +66,6 @@ public class Drone : EnemyWithPathfinding
         int layer = LayerMask.NameToLayer("Player");
         if (collider.gameObject.layer == layer){
             isAttacking = false; // Turn back on pathfinding when player exits attack range of drone.
-            StopCoroutine(AttackPlayer());
-            coroutineActive = false;
         }
     }
 
