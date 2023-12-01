@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public static WASDMovement movement; // Script for player movement
     private static SpriteRenderer playerSprite; // This is the player's sprite renderer.
     public static float secWaitAfterCollision = 2.5f; // This is the number of seconds to wait after a collision before re-enabling player collisions.
+    public static Vector3 lastGroundedPosition; // This is the last position the player was grounded at.
 
     // Make sure that movement system has multiplying moveSpeed by Time.deltaTime to account for frame rates or using FixedUpdate
 
@@ -30,6 +31,9 @@ public class Player : MonoBehaviour
     void Update(){
         if (Input.GetKeyDown(KeyCode.E) && !TextWriter.isWritingText){
             ActivateShield(numSecondsShield);
+        }
+        if (movement.isGrounded){
+            lastGroundedPosition = transform.position;
         }
     }
 
