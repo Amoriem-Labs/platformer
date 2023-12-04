@@ -11,6 +11,7 @@ TagManager:
   - Book
   - BookRangeDetector
   - VirtualCamera
+  - Fire
   layers:
   - Default
   - TransparentFX

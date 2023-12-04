@@ -14,8 +14,10 @@ public class Player : MonoBehaviour
     private static SpriteRenderer playerSprite; // This is the player's sprite renderer.
     public static float secWaitAfterCollision = 2.5f; // This is the number of seconds to wait after a collision before re-enabling player collisions.
     public static Vector3 lastGroundedPosition; // This is the last position the player was grounded at.
-
-    // Make sure that movement system has multiplying moveSpeed by Time.deltaTime to account for frame rates or using FixedUpdate
+    public static bool isOnFire = false; // This is whether or not the player is on fire.
+    private float timeUntilNextFireDamage; // This is the time until the player takes fire damage again.
+    public float timeBetweenFireDamage; // This is the time between fire damage.
+    public SpriteRenderer onFireSprite;
 
     void Start(){
         textBox.SetActive(false);
@@ -23,11 +25,11 @@ public class Player : MonoBehaviour
         oppTriggerResponse.onTriggerEnter2D = OnOppDetectorTriggerEnter2D;
         oppTriggerResponse.onTriggerExit2D = OnOppDetectorTriggerExit2D;
         shield.enabled = false;
+        onFireSprite.enabled = false;
         movement = GetComponent<WASDMovement>();
         playerSprite = GetComponent<SpriteRenderer>();
     }
 
-    #region Shield functions.
     void Update(){
         if (Input.GetKeyDown(KeyCode.E) && !TextWriter.isWritingText){
             ActivateShield(numSecondsShield);
@@ -35,8 +37,18 @@ public class Player : MonoBehaviour
         if (movement.isGrounded){
             lastGroundedPosition = transform.position;
         }
+        if (isOnFire){
+            timeUntilNextFireDamage += Time.deltaTime;
+            if (timeUntilNextFireDamage >= timeBetweenFireDamage){
+                TakeDamage(0.5f);
+                timeUntilNextFireDamage = 0;
+            }
+        } else {
+            timeUntilNextFireDamage = 0;
+        }
     }
 
+    #region Shield functions.
     void ActivateShield(float seconds){
         shield.enabled = true;
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -82,6 +94,18 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+    #region Set Player on Fire
+    public void SetPlayerOnFire(){
+        onFireSprite.enabled = true;
+        isOnFire = true;
+    }
+    
+    public void ExtinguishPlayerFire(){
+        onFireSprite.enabled = false;
+        isOnFire = false;
+    }
+    #endregion
+
     #region Collider methods.
     // When an opp runs into the player, trigger a conversation that prevents the player from moving until the conversation is over.
     private void OnOppDetectorTriggerEnter2D(Collider2D collider)
@@ -109,12 +133,6 @@ public class Player : MonoBehaviour
         if (collider.gameObject.layer == layer)
         {
             // Empty method for now. Fill in code later if you want code to be run when an opp leaves a player's hitbox.
-        }
-    }
-
-    public void OnBookDetectorTriggerExit2D(Collider2D collider){
-        if (collider.gameObject.tag == "Book"){
-            // Empty method for now. Fill in code later if you want code to be run when an book leaves a player's hitbox.
         }
     }
     #endregion
