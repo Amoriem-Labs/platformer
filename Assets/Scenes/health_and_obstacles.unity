@@ -2873,7 +2873,6 @@ GameObject:
   - component: {fileID: 746445866}
   - component: {fileID: 746445865}
   - component: {fileID: 746445867}
-  - component: {fileID: 746445869}
   - component: {fileID: 746445870}
   m_Layer: 0
   m_Name: Virtual Camera
@@ -2901,7 +2900,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 651935643}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5.826169
@@ -2951,40 +2950,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 651935643}
   vcam: {fileID: 746445865}
-  smoothTime: 0.3
+  smoothSpeed: 10
   wallMask:
     serializedVersion: 2
     m_Bits: 1024
   ceilingMask:
     serializedVersion: 2
     m_Bits: 2048
---- !u!50 &746445869
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746445864}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  y_offset: 3
 --- !u!61 &746445870
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9338,8 +9311,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 651935643}
   - {fileID: 746445866}
+  - {fileID: 651935643}
   - {fileID: 565494979}
   - {fileID: 838641090}
   - {fileID: 2137830373}

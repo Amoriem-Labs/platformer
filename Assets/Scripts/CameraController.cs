@@ -6,15 +6,15 @@ using Cinemachine;
 public class CameraController : MonoBehaviour
 {
     public Transform player;
-    public CinemachineVirtualCamera vcam; // The vcam component
-    public float smoothTime = 0.3f;
+    [HideInInspector] public CinemachineVirtualCamera vcam; // The vcam component
+    public float smoothSpeed = 10f; // The speed at which the camera follows the player
     public LayerMask wallMask;  // Layers considered as obstacles
     public LayerMask ceilingMask; // Layers considered as ceiling
+    public float y_offset = 0.5f; // The y offset from the player
 
     void Start(){
         vcam = GetComponent<CinemachineVirtualCamera>();
-        vcam.LookAt = player;
-        vcam.Follow = player;
+        vcam.transform.LookAt(player);
     }
 
     void FixedUpdate()
@@ -24,22 +24,25 @@ public class CameraController : MonoBehaviour
         // Use raycasting to check for obstacles
         if (Physics2D.Raycast(player.position, Vector2.left, vcamOrthoSize, wallMask) || Physics2D.Raycast(player.position, Vector2.right, vcamOrthoSize, wallMask))
         {
-            // Adjust the camera position to be just before the obstacle
-            vcam.LookAt = null;
-            vcam.Follow = null;
+            Vector3 smoothedPosition;
             // Continue following y position of player, unless player hits ceiling
             if (Physics2D.Raycast(player.position, Vector2.up, vcamOrthoSize, ceilingMask)){
-                vcam.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                Vector3 desiredPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
             }
             else {
-                vcam.transform.position = new Vector3(transform.position.x, player.transform.position.y, transform.position.z);
+                Vector3 desiredPosition = new Vector3(transform.position.x, player.transform.position.y + y_offset, transform.position.z);
+                smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
             }
+            vcam.transform.position = smoothedPosition;
         }
         else
         {
             // Smoothly follow the target if no obstacles are in the way
-            vcam.LookAt = player;
-            vcam.Follow = player;
+            Vector3 desiredPosition = player.position + new Vector3(0, y_offset, -10);
+            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
+            vcam.transform.position = smoothedPosition;
+            
         }
     }
 }
