@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public float numSecondsShield; // This is how long the player's shield is activated in seconds.
     public SpriteRenderer shield; // This is the shield sprite.
     public static WASDMovement movement; // Script for player movement
+    public float respawnOffset; // The offset from last grounded position when respawning player.
     private static SpriteRenderer playerSprite; // This is the player's sprite renderer.
     public static float secWaitAfterCollision = 2.5f; // This is the number of seconds to wait after a collision before re-enabling player collisions.
     public static Vector3 lastGroundedPosition; // This is the last position the player was grounded at.
@@ -35,7 +36,8 @@ public class Player : MonoBehaviour
             ActivateShield(numSecondsShield);
         }
         if (movement.isGrounded){
-            lastGroundedPosition = transform.position;
+            if (rb.velocity.x > 0) {lastGroundedPosition = transform.position - new Vector3(respawnOffset, 0, 0); }
+            if (rb.velocity.x < 0) {lastGroundedPosition = transform.position + new Vector3(respawnOffset, 0, 0); }
         }
         if (isOnFire){
             timeUntilNextFireDamage += Time.deltaTime;

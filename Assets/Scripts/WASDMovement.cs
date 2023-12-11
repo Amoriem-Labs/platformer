@@ -25,15 +25,16 @@ public class WASDMovement : MonoBehaviour
     private bool isDashing;
 
     // Double jump variables
-    private bool canDoubleJump = true;
+    public bool canDoubleJump = true;
 
     // Sprite variables
-    private SpriteRenderer Sprite;
+    public SpriteRenderer bodySprite;
+    public SpriteRenderer sweaterSprite;
+    public SpriteRenderer hairSprite;
 
     private void Awake()
     {
         Playerbody = GetComponent<Rigidbody2D>();
-        Sprite = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -44,10 +45,14 @@ public class WASDMovement : MonoBehaviour
         Playerbody.velocity = new Vector2(Input.GetAxis("Horizontal") * walkspeed, Playerbody.velocity.y);
         
         // Flip sprite according to movement
-        if (Playerbody.velocity.x != 0) { Sprite.flipX = Playerbody.velocity.x < 0; }
+        if (Playerbody.velocity.x != 0) { 
+            bodySprite.flipX = Playerbody.velocity.x < 0;
+            sweaterSprite.flipX = Playerbody.velocity.x < 0;
+            hairSprite.flipX = Playerbody.velocity.x < 0;
+        }
 
         // Handle jumping
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isGrounded)
             {
@@ -60,6 +65,7 @@ public class WASDMovement : MonoBehaviour
         }
 
         // Handle dashing
+        /* Kinda buggy for now so fix later
         if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && canDash)
         {
             StartCoroutine(Dash(-1)); // Dash left
@@ -67,7 +73,7 @@ public class WASDMovement : MonoBehaviour
         else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && canDash)
         {
             StartCoroutine(Dash(1)); // Dash right
-        }
+        }*/
     }
 
     private void Jump()
