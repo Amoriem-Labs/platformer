@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 549b987517a81e744bdffe3ef87d7f28
+guid: 0c894df2db58dbe469d97d28a68e1163
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 12
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,22 +123,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hs_acquaintance_temp_0
+      name: hs_acq_0
       rect:
         serializedVersion: 2
-        x: 122
-        y: 49
-        width: 173
-        height: 341
+        x: 48
+        y: 121
+        width: 41
+        height: 81
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00e9d679f7805424693522bb6d862f34
-      internalID: 1467570551
+      spriteID: c8cca70ab30e97140ae2e93f70828a08
+      internalID: -2870632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hs_acq_1
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 121
+        width: 38
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27b0f394cdbe07f4db951c16bdc4bcc2
+      internalID: -707337444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hs_acq_2
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 15
+        width: 42
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3cdba88de9c1e64e88af10739173a69
+      internalID: 258812510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hs_acq_3
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 15
+        width: 38
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 112147fdc2136bf49ab8c13d78f4afca
+      internalID: 439917315
       vertices: []
       indices: 
       edges: []
@@ -154,7 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      hs_acquaintance_temp_0: 1467570551
+      hs_acq_0: -2870632
+      hs_acq_1: -707337444
+      hs_acq_2: 258812510
+      hs_acq_3: 439917315
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
