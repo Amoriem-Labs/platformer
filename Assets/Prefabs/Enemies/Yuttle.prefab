@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 893400200141623842}
   - component: {fileID: 3044337849090536309}
   - component: {fileID: 4387736466426479554}
-  - component: {fileID: 9133626887332378421}
+  - component: {fileID: 8052942613954326772}
   m_Layer: 8
-  m_Name: Car
+  m_Name: Yuttle
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3338aede733a9c84a998231a79dee79b, type: 3}
+  m_Sprite: {fileID: -1944744737, guid: 86cee02381c584f4db17e0496161c5a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -133,7 +133,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!60 &9133626887332378421
+--- !u!60 &8052942613954326772
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,7 +148,7 @@ PolygonCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1344
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -169,7 +169,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8.68, y: 2.87}
+    oldSize: {x: 12.9, y: 6.4}
     newSize: {x: 8.68, y: 2.87}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -177,38 +177,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 4.3199997, y: -0.545}
-      - {x: 3.9499998, y: -0.16499999}
-      - {x: 3.76, y: -0.095}
-      - {x: 3.58, y: -0.175}
-      - {x: 3.56, y: 0.055}
-      - {x: 3.52, y: 0.095}
-      - {x: 2.9399998, y: 0.285}
-      - {x: 2.37, y: 0.475}
-      - {x: 1.4499999, y: 0.475}
-      - {x: 1.4699999, y: 0.655}
-      - {x: 1.23, y: 0.885}
-      - {x: 0.85999995, y: 1.255}
-      - {x: 0.65, y: 1.435}
-      - {x: -2.3999999, y: 1.435}
-      - {x: -2.4199998, y: 1.415}
-      - {x: -2.47, y: 1.245}
-      - {x: -4.11, y: 1.245}
-      - {x: -4.15, y: 1.2049999}
-      - {x: -4.31, y: 1.055}
-      - {x: -4.3399997, y: 1.025}
-      - {x: -4.3399997, y: -0.865}
-      - {x: -4.31, y: -0.895}
-      - {x: -4.1, y: -1.115}
-      - {x: -3.74, y: -1.435}
-      - {x: 4.3199997, y: -1.435}
-    - - {x: -3.72, y: 0.875}
-      - {x: -3.72, y: 1.015}
-      - {x: -2.81, y: 1.015}
-      - {x: -2.81, y: 0.945}
-      - {x: -2.82, y: 0.935}
-      - {x: -2.82, y: 0.91499996}
-      - {x: -2.81, y: 0.905}
-      - {x: -2.8, y: 0.865}
-      - {x: -2.81, y: 0.875}
+    - - {x: 6.4500003, y: 0.8}
+      - {x: 5.65, y: 3.2}
+      - {x: -5.85, y: 3.2}
+      - {x: -6.4500003, y: 2.9}
+      - {x: -6.4500003, y: -2.3}
+      - {x: -5.25, y: -3.2}
+      - {x: 6.4500003, y: -3.2}
   m_UseDelaunayMesh: 0

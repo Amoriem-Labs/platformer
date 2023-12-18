@@ -22,6 +22,7 @@ public class Opp : EnemyWithPathfinding
 
     void Start()
     {
+        base.Start();
         rb = GetComponent<Rigidbody2D>();
         thisCollider = GetComponent<Collider2D>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();

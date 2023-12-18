@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 320028281d1c91e4da6c1e7de925d70c
+guid: 86cee02381c584f4db17e0496161c5a3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MC_Hair1_0
+      name: yuttle_face_right_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 47
-        width: 17
-        height: 14
+        x: 5
+        y: 6
+        width: 129
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,8 +137,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a440429ece81324499cde3cebb37052
-      internalID: 756576654
+      spriteID: 21a1d73d1030db34a91fcd4ae2edb116
+      internalID: -1944744737
       vertices: []
       indices: 
       edges: []
@@ -154,7 +154,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MC_Hair1_0: 756576654
+      yuttle_face_right_0: -1944744737
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

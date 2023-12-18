@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 320028281d1c91e4da6c1e7de925d70c
+guid: 5675960311df62947984171b829dec4e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 10
+  spritePixelsToUnits: 400
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,22 +123,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MC_Hair1_0
+      name: acorn_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 47
-        width: 17
-        height: 14
+        x: 120
+        y: 61
+        width: 261
+        height: 379
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a440429ece81324499cde3cebb37052
-      internalID: 756576654
+      spriteID: c51b6bd3108e5f64d981dfa99d0ac174
+      internalID: -509151459
       vertices: []
       indices: 
       edges: []
@@ -154,7 +154,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MC_Hair1_0: 756576654
+      acorn_0: -509151459
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

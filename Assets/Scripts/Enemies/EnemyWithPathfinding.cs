@@ -16,7 +16,11 @@ public class EnemyWithPathfinding : Enemy
     [SerializeField] private Vector3 destPoint;
     public float x_range;
     public float y_range;
+    public SpriteRenderer foundPlayerSprite;
     
+    public virtual void Start(){
+        foundPlayerSprite.enabled = false;
+    }
 
     public virtual void Update()
     { 
@@ -41,6 +45,7 @@ public class EnemyWithPathfinding : Enemy
         if (collider.gameObject.layer == layer){
             target = collider.gameObject.transform;
             destPoint = collider.gameObject.transform.position;
+            foundPlayerSprite.enabled = true;
         }
     }
 
@@ -49,18 +54,34 @@ public class EnemyWithPathfinding : Enemy
         if (collider.gameObject.layer == layer){
             target = null;
             agent.SetDestination(transform.position);
+            foundPlayerSprite.enabled = false;
         }
     }
 
     public void Patrol(){
         if (isWalkPointSet){
             agent.SetDestination(destPoint);
-            if (Vector3.Distance(transform.position, destPoint) < 2) isWalkPointSet = false;
+            if (Vector3.Distance(transform.position, destPoint) < 2 || agent.velocity == Vector3.zero) {isWalkPointSet = false;} 
         } else {
-            SearchForDest();
+            RandomNavSphere(0.1f);
         }
     }
 
+    public void RandomNavSphere (float distance) {
+        float x = Random.Range(-x_range, x_range);
+        float y = Random.Range(-y_range, y_range);
+
+        destPoint = new Vector3(transform.position.x + x, transform.position.y + y, 0);
+
+        NavMeshHit navHit;
+        NavMesh.SamplePosition (destPoint, out navHit, distance, NavMesh.AllAreas);
+        if (navHit.hit){
+            isWalkPointSet = true;
+        }
+    }
+
+    // Obsolete method
+    /*
     public void SearchForDest(){
         float x = Random.Range(-x_range, x_range);
         float y = Random.Range(-y_range, y_range);
@@ -71,5 +92,5 @@ public class EnemyWithPathfinding : Enemy
         if ((Physics2D.Raycast(destPoint, Vector3.down, groundLayer).collider != null) && (Physics2D.Linecast(transform.position, destPoint, groundLayer).collider == null) && (Physics2D.Linecast(transform.position, destPoint, wallLayer).collider == null) && (Physics2D.Raycast(destPoint, Vector3.up, boxColliderHeight / 2 + 0.25f, groundLayer).collider == null)){
             isWalkPointSet = true;
         }
-    }
+    }*/
 }

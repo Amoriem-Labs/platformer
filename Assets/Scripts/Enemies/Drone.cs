@@ -16,6 +16,7 @@ public class Drone : EnemyWithPathfinding
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         rb = GetComponent<Rigidbody2D>();
         thisCollider = GetComponent<Collider2D>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
