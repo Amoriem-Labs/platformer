@@ -6,17 +6,17 @@ using TMPro;
 public class InventoryUI : MonoBehaviour
 {
 
-    private TextMeshProUGUI diamondText;
+    private TextMeshProUGUI assignmentText;
 
     // Start is called before the first frame update
     void Start()
     {
-        diamondText = GetComponent<TextMeshProUGUI>();
+        assignmentText = GetComponent<TextMeshProUGUI>();
     }
 
-    public void UpdateDiamondText(PlayerInventory playerInventory)
+    public void UpdateAssignmentText(PlayerInventory playerInventory)
     {
-        diamondText.text = playerInventory.NumberOfDiamonds.ToString();
+        assignmentText.text = playerInventory.numItems.ToString();
     }
 
 

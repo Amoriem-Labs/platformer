@@ -7,20 +7,20 @@ using UnityEngine.Events;
 public class PlayerInventory : MonoBehaviour
 {
     // This will store the number of collected diamonds.
-    public int NumberOfDiamonds
+    public int numItems
     {
         get;
         private set;
     }
 
-    public UnityEvent<PlayerInventory> OnDiamondCollected;
+    public UnityEvent<PlayerInventory> OnItemCollected;
 
    
 
-    public void DiamondCollected()
+    public void ItemCollected()
     {
-        NumberOfDiamonds++;
-        OnDiamondCollected.Invoke(this);
+        numItems++;
+        OnItemCollected.Invoke(this);
     }
 
 

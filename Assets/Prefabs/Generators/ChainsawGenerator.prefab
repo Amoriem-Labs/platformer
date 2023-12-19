@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnRegionWidth: 20
   timeBetweenSpawns: 1
-  isSpawning: 0
+  isSpawning: 1
   objectPrefab: {fileID: 2283404387633327394, guid: 45f8a183f1181154e98e1a2bda9bf739, type: 3}
 --- !u!61 &6345333276754363882
 BoxCollider2D:

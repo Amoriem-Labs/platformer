@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && !TextWriter.isWritingText){
             ActivateShield(numSecondsShield);
         }
-        if (movement.isGrounded){
+        if (movement.isGrounded && rb.velocity.y == 0){
             if (rb.velocity.x > 0) {lastGroundedPosition = transform.position - new Vector3(respawnOffset, 0, 0); }
             if (rb.velocity.x < 0) {lastGroundedPosition = transform.position + new Vector3(respawnOffset, 0, 0); }
         }
@@ -175,11 +175,11 @@ public class Player : MonoBehaviour
     }
 
     public static IEnumerator FlashRed(int numFlashes, float timeBetweenFlashes){
-        //int numFlashes = 3;
+        // will reactivate function once I figure out how to combine multiple sprites into one
         for (int i = 0; i < numFlashes; i++){
-            playerSprite.color = Color.red;
+            //playerSprite.color = Color.red;
             yield return new WaitForSeconds(timeBetweenFlashes);
-            playerSprite.color = Color.white;
+            //playerSprite.color = Color.white;
             yield return new WaitForSeconds(timeBetweenFlashes);
         }
     }
