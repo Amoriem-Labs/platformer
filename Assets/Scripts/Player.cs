@@ -137,6 +137,15 @@ public class Player : MonoBehaviour
             // Empty method for now. Fill in code later if you want code to be run when an opp leaves a player's hitbox.
         }
     }
+
+    // If player enters next level trigger, load next level.
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.name == "NextLevelTrigger")
+        {
+            GameManager.Instance.LoadNextLevel();
+        }
+    }
     #endregion
 
     #region Enable/disable player movement methods.
