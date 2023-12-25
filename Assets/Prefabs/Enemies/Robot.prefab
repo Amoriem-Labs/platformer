@@ -152,7 +152,7 @@ MonoBehaviour:
   x_range: 6
   y_range: 0
   foundPlayerSprite: {fileID: 3459272752894070260}
-  force: {x: 0, y: 500}
+  force: {x: 0, y: 1000}
   damageAmount: 1.5
 --- !u!212 &3023678783086287402
 SpriteRenderer:

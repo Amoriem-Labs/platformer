@@ -6,7 +6,6 @@ using TMPro;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public TextMeshProUGUI assignmentText; // This is the text that displays the number of assignments collected.
     public int numItems { get; private set; } // This will store the number of collected assignments.
     public static Action OnItemCollected; // This is the event that will be invoked when an item is collected.
     public GameObject levelCompleteMessage; // This is the message that will be displayed when the level is complete.
@@ -29,13 +28,14 @@ public class PlayerInventory : MonoBehaviour
         OnItemCollected?.Invoke();
         if (numItems == GameManager.Instance.currentLevel.numAssignmentsToComplete)
         {
+            GameManager.Instance.levelCompleted = true;
             StartCoroutine(DisplayLevelCompleteMessage());
         }
     }
 
     public void UpdateAssignmentText()
     {
-        assignmentText.text = numItems.ToString();
+        GameManager.Instance.assignmentText.text = $"{numItems}/{GameManager.Instance.currentLevel.numAssignmentsToComplete}";
     }
 
     IEnumerator DisplayLevelCompleteMessage()

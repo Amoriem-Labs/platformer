@@ -36,7 +36,9 @@ public class Drone : EnemyWithPathfinding
 
     public override void Update()
     {
-        if (isFrozen || isAttacking){
+        if (isFrozen){
+            agent.enabled = false;
+        } else if (isAttacking) {
             agent.enabled = false;
             timeUntilNextBookThrow += Time.deltaTime;
             if (timeUntilNextBookThrow >= timeBetweenBookThrows){

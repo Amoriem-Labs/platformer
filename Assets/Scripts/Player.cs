@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
     // If player enters next level trigger, load next level.
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.name == "NextLevelTrigger")
+        if (collider.name == "NextLevelTrigger" && GameManager.Instance.levelCompleted)
         {
             GameManager.Instance.LoadNextLevel();
         }

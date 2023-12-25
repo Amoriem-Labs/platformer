@@ -151,11 +151,11 @@ MonoBehaviour:
   boxColliderHeight: 0
   isWalkPointSet: 0
   destPoint: {x: 0, y: 0, z: 0}
-  x_range: 10
+  x_range: 3
   y_range: 3
   foundPlayerSprite: {fileID: 1965615639855947810}
   isAttacking: 0
-  hitForce: {x: 25, y: 25}
+  hitForce: {x: 300, y: 300}
   attackRangeTriggerResponse: {fileID: 7236350993881680433}
   bookPrefab: {fileID: 7594061674869401714, guid: c951d3ab48974f148a78d8101f3abfaf, type: 3}
   bookThrowSpeed: 10
