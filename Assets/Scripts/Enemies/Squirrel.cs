@@ -2,25 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Squirrel : Enemy
+public class Squirrel : EnemyWithPathfinding
 {
-    public Transform target; // This is the target that the robot chases down. We set it to Player in the inspector, since the opp is meant to chase down the player.
-    private UnityEngine.AI.NavMeshAgent agent; // This is the NavMeshAgent component. It is needed for the SetDestination() method.
-    public Vector2 force;
-    public TriggerResponse playerTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the robot and player. Once the player walks into this detection radius, the robot will start chasing player down.
-    private LayerMask groundLayer;
-    private LayerMask wallLayer;
-    private float boxColliderHeight;
-    [SerializeField] private bool isWalkPointSet = false;
-    [SerializeField] private Vector3 destPoint;
-    public float x_range;
-    public float y_range;
+    public Vector2 hitForce;
     private Animator animator;
     public float stunDuration; // This is the number of seconds to stun the player for when the squirrel collides with the player.
     public float damageAmount; // This is the amount of damage the squirrel does to the player when the squirrel collides with the player.
 
     void Start()
     {
+        base.Start();
         rb = GetComponent<Rigidbody2D>();
         thisCollider = GetComponent<Collider2D>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -37,69 +28,16 @@ public class Squirrel : Enemy
         animator = GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        if (isFrozen){
-            agent.enabled = false;
-        } else {
-            ResumePathfinding();
-        }
-    }
-
-    #region Pathfinding and random walk functions
-    private void ResumePathfinding(){
-        agent.enabled = true;
-        if (target == null){
-            Patrol();
-        } else {
-            agent.SetDestination(target.position); // This method finds the shortest path to the target's position and makes the agent follow that path to move towards that position.
-        }
-    }
-
-    private void OnPlayerTriggerEnter2D(Collider2D collider){
-        int layer = LayerMask.NameToLayer("Player");
-        if (collider.gameObject.layer == layer){
-            target = collider.gameObject.transform;
-            destPoint = collider.gameObject.transform.position;
-        }
-    }
-
-    private void OnPlayerTriggerExit2D(Collider2D collider){
-        int layer = LayerMask.NameToLayer("Player");
-        if (collider.gameObject.layer == layer){
-            target = null;
-            agent.SetDestination(transform.position);
-        }
-    }
-
-    private void Patrol(){
-        if (isWalkPointSet){
-            agent.SetDestination(destPoint);
-            if (Vector3.Distance(transform.position, destPoint) < 2) isWalkPointSet = false;
-        } else {
-            SearchForDest();
-        }
-    }
-
-    private void SearchForDest(){
-        float x = Random.Range(-x_range, x_range);
-        float y = Random.Range(-y_range, y_range);
-
-        destPoint = new Vector3(transform.position.x + x, transform.position.y + y, transform.position.z);
-
-        // If the destination point is above the ground layer and if the destination point is not outside the walls and the player can still fit in the location set by the destination point without hitting a ceiling, then set the destination point.
-        if (Physics2D.Raycast(destPoint, Vector3.down, groundLayer) && !Physics2D.Raycast(destPoint, Vector3.right, x_range, wallLayer) && !Physics2D.Raycast(destPoint, Vector3.left, x_range, wallLayer) && !Physics2D.Raycast(destPoint, Vector3.up, boxColliderHeight / 2 + 0.25f, groundLayer)){
-            isWalkPointSet = true;
-        }
-    }
-    #endregion
-
     // When squirrel collides with player, pause player movement.
     void OnCollisionEnter2D(Collision2D collision){
         int layer = LayerMask.NameToLayer("Player");
         if (collision.gameObject.layer == layer){
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(force);
             Player.DisablePlayerMovement();
+            if (rb.velocity.x > 0){
+                Player.rb.AddForce(new Vector2(1, 1) * hitForce); // push player to the right if squirrel is moving right
+            } else {
+                Player.rb.AddForce(new Vector2(-1, 1) * hitForce); // push player to the left if squirrel is moving left
+            }
             Player.TakeDamage(damageAmount);
             isFrozen = true;
             animator.enabled = false;

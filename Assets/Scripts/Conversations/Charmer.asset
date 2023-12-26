@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b158aeeb0b1c1b946b75c3bfc17106c5, type: 3}
   m_Name: Charmer
   m_EditorClassIdentifier: 
+  npcName: Charmer
   texts:
   - Heyyy, you're looking fine today!
   - Thanks, I appreciate it.

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b158aeeb0b1c1b946b75c3bfc17106c5, type: 3}
   m_Name: FratBro
   m_EditorClassIdentifier: 
+  npcName: Frat Bro
   texts:
   - "Sorry, we\u2019re at max capacity. It\u2019s not gonna happen tonight."
   - "But I\u2019m meeting my friends who are inside!"
@@ -21,10 +22,10 @@ MonoBehaviour:
   - Whatever.
   - Filler
   sprites:
-  - {fileID: 0}
+  - {fileID: 917790135, guid: efbeb83e2421c9c48b0dc6429a5162f4, type: 3}
   - {fileID: 21300000, guid: c8b24918da91c294cb5e68026777fa96, type: 3}
-  - {fileID: 0}
+  - {fileID: 917790135, guid: efbeb83e2421c9c48b0dc6429a5162f4, type: 3}
   - {fileID: 21300000, guid: c8b24918da91c294cb5e68026777fa96, type: 3}
-  - {fileID: 0}
+  - {fileID: 917790135, guid: efbeb83e2421c9c48b0dc6429a5162f4, type: 3}
   - {fileID: 21300000, guid: c8b24918da91c294cb5e68026777fa96, type: 3}
   - {fileID: 21300000, guid: c8b24918da91c294cb5e68026777fa96, type: 3}
