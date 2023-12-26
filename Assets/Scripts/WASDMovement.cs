@@ -11,6 +11,7 @@ public class WASDMovement : MonoBehaviour
 
     public bool isGrounded;
     public LayerMask groundLayer; 
+    public LayerMask platformLayer;
     public Transform groundCheck; 
     public float groundCheckRadius = 0.2f;
 
@@ -24,54 +25,34 @@ public class WASDMovement : MonoBehaviour
     private bool isDashing;
 
     // Double jump variables
-    private bool canDoubleJump = true;
+    public bool canDoubleJump = true;
 
     // Sprite variables
-    private SpriteRenderer Sprite;
+    public SpriteRenderer bodySprite;
+    public SpriteRenderer sweaterSprite;
+    public SpriteRenderer hairSprite;
 
     private void Awake()
     {
         Playerbody = GetComponent<Rigidbody2D>();
-        Sprite = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, platformLayer);
 
-        // IMPORTANT: Don't delete the part below bracketed in "===" symbols. There's a bug that if player runs into a wall, the rb.velocity gets reset to zero.
-        // The below code fixes this bug. If you delete the below code, the player will be able to get stuck on walls, which is not good.
-        // ====================================================================================================
+        // Handle horizontal movement
+        Playerbody.velocity = new Vector2(Input.GetAxis("Horizontal") * walkspeed, Playerbody.velocity.y);
         
-        // Get the velocity
-        Vector2 horizontalMove = Playerbody.velocity;
-        // Don't use the vertical velocity
-        horizontalMove.y = 0;
-
-        float distance =  horizontalMove.magnitude * 10 * Time.fixedDeltaTime;
-        // Normalize horizontalMove since it should be used to indicate direction
-        horizontalMove.Normalize();
-    
-        // The layers for obstacles and walls
-        LayerMask obstacleLayerMask = LayerMask.GetMask("Ground");
-        LayerMask wallLayerMask = LayerMask.GetMask("Wall");
-
-        // Check if the body's current velocity will result in a collision with obstacle or wall
-        if(Physics2D.Raycast(transform.position, horizontalMove, distance, obstacleLayerMask) || Physics2D.Raycast(transform.position, horizontalMove, distance, wallLayerMask))
-        {
-            // If so, stop the movement
-            Playerbody.velocity = new Vector2(0, Playerbody.velocity.y);
-        } else {
-            // Handle horizontal movement
-            Playerbody.velocity = new Vector2(Input.GetAxis("Horizontal") * walkspeed, Playerbody.velocity.y);
-        }
-        // ====================================================================================================
-
         // Flip sprite according to movement
-        if (Playerbody.velocity.x != 0) { Sprite.flipX = Playerbody.velocity.x < 0; }
+        if (Playerbody.velocity.x != 0) { 
+            bodySprite.flipX = Playerbody.velocity.x < 0;
+            sweaterSprite.flipX = Playerbody.velocity.x < 0;
+            hairSprite.flipX = Playerbody.velocity.x < 0;
+        }
 
         // Handle jumping
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isGrounded)
             {
@@ -84,6 +65,7 @@ public class WASDMovement : MonoBehaviour
         }
 
         // Handle dashing
+        /* Kinda buggy for now so fix later
         if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && canDash)
         {
             StartCoroutine(Dash(-1)); // Dash left
@@ -91,7 +73,7 @@ public class WASDMovement : MonoBehaviour
         else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && canDash)
         {
             StartCoroutine(Dash(1)); // Dash right
-        }
+        }*/
     }
 
     private void Jump()

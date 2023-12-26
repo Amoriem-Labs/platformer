@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Car : Enemy
 {
-    public Vector2 force;
+    public Vector2 moveForce;
+    public Vector2 hitForce;
     public float secWaitAfterCollision;
     public float damageAmount;
 
@@ -19,7 +20,7 @@ public class Car : Enemy
             float y_vel = rb.velocity.y;
             rb.velocity = new Vector2(0,y_vel);
         } else {
-            rb.AddForce(force);
+            rb.AddForce(moveForce);
         }
     }
 
@@ -28,8 +29,11 @@ public class Car : Enemy
         int layer = LayerMask.NameToLayer("Player");
         if (collision.gameObject.layer == layer){
             Player.TakeDamage(damageAmount);
-            DisablePlayerCollisions();
-            Invoke("EnablePlayerCollisions", secWaitAfterCollision);
+            if (rb.velocity.x > 0){
+                Player.rb.AddForce(new Vector2(1, 1) * hitForce); // push player to the right if squirrel is moving right
+            } else {
+                Player.rb.AddForce(new Vector2(-1, 1) * hitForce); // push player to the left if squirrel is moving left
+            }
         }
     }
 }

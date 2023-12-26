@@ -10,6 +10,8 @@ TagManager:
   - AttackRangeDetector
   - Book
   - BookRangeDetector
+  - VirtualCamera
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -23,7 +25,7 @@ TagManager:
   - Ground
   - Wall
   - Ceiling
-  - 
+  - Platform
   - 
   - 
   - 
@@ -49,4 +51,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 3462787123
     locked: 0

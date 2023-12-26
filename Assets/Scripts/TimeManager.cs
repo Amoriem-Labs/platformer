@@ -10,7 +10,8 @@ public class TimeManager : MonoBehaviour
     public static int Minute { get; private set; }
     public static int Hour { get; private set; }
     // makes it so that 1seconds real time corresponds to 1 minute game time.
-    private float minuteToRealTime = 1f; 
+    public static float minuteToRealTime = 1f; 
+    public static float originalMinuteToRealTime = 1f;
     private float timer;
 
     void Start()
