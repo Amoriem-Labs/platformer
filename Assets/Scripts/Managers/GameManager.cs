@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public Animator animator;
     public bool levelCompleted = false;
     public TextMeshProUGUI assignmentText;
+    public TextMeshProUGUI coinText;
 
     // IMPORTANT NOTE FOR DEVELOPERS: Do NOT call SceneManager.LoadScene in Awake or Start. This will cause the scene to load twice and make Unity get stuck in an infinite loading loop.
     // You have been warned.
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
             levels = Resources.LoadAll<Level>("Levels/");
             currentLevel = levels[0];
             assignmentText.text = $"0/{currentLevel.numAssignmentsToComplete}";
+            coinText.text = "0";
         }
     }
 

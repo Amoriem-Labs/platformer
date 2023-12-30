@@ -6,27 +6,38 @@ using TMPro;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public int numItems { get; private set; } // This will store the number of collected assignments.
+    public int numAssignments { get; private set; } // This will store the number of collected assignments.
+    public int numCoins { get; private set; } // This will store the number of collected coins.
     public static Action OnItemCollected; // This is the event that will be invoked when an item is collected.
     public GameObject levelCompleteMessage; // This is the message that will be displayed when the level is complete.
 
     void OnEnable()
     {
-        numItems = 0;
+        numAssignments = 0;
+        numCoins = 0;
         levelCompleteMessage.SetActive(false);
         OnItemCollected += UpdateAssignmentText;
+        OnItemCollected += UpdateCoinText;
     }
 
     void OnDisable()
     {
         OnItemCollected -= UpdateAssignmentText;
+        OnItemCollected -= UpdateCoinText;
     }
 
-    public void ItemCollected()
+    public void ItemCollected(GameObject item)
     {
-        numItems++;
+        if (item.name == "Coin")
+        {
+            numCoins++;
+        }
+        else if (item.name == "Assignment")
+        {
+            numAssignments++;
+        }
         OnItemCollected?.Invoke();
-        if (numItems == GameManager.Instance.currentLevel.numAssignmentsToComplete)
+        if (numAssignments == GameManager.Instance.currentLevel.numAssignmentsToComplete)
         {
             GameManager.Instance.levelCompleted = true;
             StartCoroutine(DisplayLevelCompleteMessage());
@@ -35,7 +46,11 @@ public class PlayerInventory : MonoBehaviour
 
     public void UpdateAssignmentText()
     {
-        GameManager.Instance.assignmentText.text = $"{numItems}/{GameManager.Instance.currentLevel.numAssignmentsToComplete}";
+        GameManager.Instance.assignmentText.text = $"{numAssignments}/{GameManager.Instance.currentLevel.numAssignmentsToComplete}";
+    }
+
+    public void UpdateCoinText(){
+        GameManager.Instance.coinText.text = $"{numCoins}";
     }
 
     IEnumerator DisplayLevelCompleteMessage()
@@ -65,12 +80,6 @@ public class PlayerInventory : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
         levelCompleteMessage.SetActive(false);
-    }
-
-    [ContextMenu("Test Display Message")]
-    public void TestDisplayMessage()
-    {
-        StartCoroutine(DisplayLevelCompleteMessage());
     }
 }
 
