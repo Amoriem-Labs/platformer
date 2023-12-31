@@ -22,7 +22,6 @@ public class TimeUI : MonoBehaviour
 
     private void UpdateTime()   
     {
-        Debug.Log("Updating time");
         TimeText.text = $"{TimeManager.Hour:00}:{TimeManager.Minute:00}"; 
     }
 }

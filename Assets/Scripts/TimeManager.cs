@@ -9,15 +9,16 @@ public class TimeManager : MonoBehaviour
     public static Action OnHourChanged;
     public static int Minute { get; private set; }
     public static int Hour { get; private set; }
-    // makes it so that 0.5seconds real time corresponds to 1 minute gametime.
-    private float minuteToRealTime = 0.5f; 
+    // makes it so that 1seconds real time corresponds to 1 minute game time.
+    public static float minuteToRealTime = 1f; 
+    public static float originalMinuteToRealTime = 1f;
     private float timer;
 
     void Start()
     {
-        // start at 9am
+        // start at 00:00:00
         Minute = 0;
-        Hour = 9; 
+        Hour = 0; 
         timer = minuteToRealTime; 
     }
 
@@ -26,13 +27,12 @@ public class TimeManager : MonoBehaviour
     {
         timer -= Time.deltaTime; 
 
-        // adds 1 to Minute every 0.5seconds, once hits 60, adds 1 to Hour instead and resets Minute. 
+        // adds 1 to Minute every 1seconds, once hits 60, adds 1 to Hour instead and resets Minute. 
         if(timer <= 0)
         {
             Minute++; 
             // if OnMinuteChanged does not = null, invoke it
             OnMinuteChanged?.Invoke();
-            Debug.Log("Minute changed!"); 
             
             if(Minute >= 60)
             {
@@ -40,7 +40,6 @@ public class TimeManager : MonoBehaviour
                 // if OnHourChanged does not = null, invoke it
                 Minute = 0; 
                 OnHourChanged?.Invoke();
-                Debug.Log("Hour changed!");
             }
 
             timer = minuteToRealTime; 
