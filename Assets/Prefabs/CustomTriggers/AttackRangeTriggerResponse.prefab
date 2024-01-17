@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3589317522252617159}
   - component: {fileID: 7001988191468948792}
   - component: {fileID: 3960413061857050694}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: AttackRangeTriggerResponse
   m_TagString: AttackRangeDetector
   m_Icon: {fileID: 0}
