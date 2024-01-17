@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelID: 1
   levelNum: 2
-  numAssignmentsToComplete: 5
+  numAssignmentsToComplete: 0
   sceneName: Level 2
