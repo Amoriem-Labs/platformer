@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2689486473300020676}
   - component: {fileID: 2631563484519104391}
   - component: {fileID: 6380356062757558512}
-  m_Layer: 13
+  m_Layer: 3
   m_Name: Scammer
   m_TagString: Enemy
   m_Icon: {fileID: 0}

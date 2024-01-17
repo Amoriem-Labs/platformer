@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 2414762121875082310}
   - component: {fileID: 6549593548116090872}
   - component: {fileID: 5528262937956429047}
-  m_Layer: 13
+  m_Layer: 3
   m_Name: Cop
   m_TagString: Enemy
   m_Icon: {fileID: 0}

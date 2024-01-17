@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2913001654517049657}
   - component: {fileID: 6448996709007091969}
   - component: {fileID: 7986697212518484686}
-  m_Layer: 13
+  m_Layer: 3
   m_Name: Charmer
   m_TagString: Enemy
   m_Icon: {fileID: 0}

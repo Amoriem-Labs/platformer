@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 384032198779121906}
   - component: {fileID: 7782427580208611783}
   - component: {fileID: 1702434108539301355}
-  m_Layer: 13
+  m_Layer: 3
   m_Name: HighSchoolAcquaintance
   m_TagString: Enemy
   m_Icon: {fileID: 0}

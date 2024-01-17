@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 4942309253593130033}
   - component: {fileID: 1235911488617539497}
   - component: {fileID: 1502268350176060764}
-  m_Layer: 13
+  m_Layer: 3
   m_Name: SterlingNakedRunner
   m_TagString: Enemy
   m_Icon: {fileID: 0}

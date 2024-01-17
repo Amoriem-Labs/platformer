@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 5368026743711087196}
   - component: {fileID: 1692809443801359783}
   - component: {fileID: 5802586886473272977}
-  m_Layer: 13
+  m_Layer: 3
   m_Name: ClubLeader
   m_TagString: Enemy
   m_Icon: {fileID: 0}

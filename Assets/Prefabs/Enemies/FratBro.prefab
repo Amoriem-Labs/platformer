@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 734043705102623520}
   - component: {fileID: 4886379950424575802}
   - component: {fileID: 736339685180353166}
-  m_Layer: 13
+  m_Layer: 3
   m_Name: FratBro
   m_TagString: Enemy
   m_Icon: {fileID: 0}
