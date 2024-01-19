@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     void OnTriggerEnter2D (Collider2D collider){
         int playerLayer = LayerMask.NameToLayer("Player");
         int groundLayer = LayerMask.NameToLayer("Ground");
-        int platformLayer = LayerMask.NameToLayer("Platform");
+        int platformLayer = LayerMask.NameToLayer("Platforms");
         if (collider.gameObject.layer == playerLayer){
             Rigidbody2D playerRb = collider.GetComponent<Rigidbody2D>();
             Player.TakeDamage(damageAmount);

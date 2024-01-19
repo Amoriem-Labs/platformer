@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1836200551470461678}
   - component: {fileID: 1517682917422063907}
   - component: {fileID: 4959133076554365364}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: PlayerTriggerResponse
   m_TagString: PlayerDetector
   m_Icon: {fileID: 0}

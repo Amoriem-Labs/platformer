@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1306584475238040411}
   - component: {fileID: 1166659987431799565}
   - component: {fileID: 5902378113998173346}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: OppTriggerResponse
   m_TagString: OppDetector
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 45, y: 25}
+  m_Size: {x: 3.98, y: 6.27}
   m_EdgeRadius: 0
 --- !u!114 &5902378113998173346
 MonoBehaviour:

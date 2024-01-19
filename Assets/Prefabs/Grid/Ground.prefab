@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3365658066088750513}
   - component: {fileID: 6714438574337693406}
   - component: {fileID: 1037854939031310217}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,10 +73,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1963826037
+  m_SortingLayerID: -1620175883
   m_SortingLayer: -1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 957fb188a33262141be4571312f4d754, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 957fb188a33262141be4571312f4d754,
+    type: 3}
   m_Color: {r: 0.092515126, g: 0.092515126, b: 0.254717, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -218,7 +219,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1963826037
+  m_SortingLayerID: -1620175883
   m_SortingLayer: -1
   m_SortingOrder: 2
   m_Sprite: {fileID: -921121430, guid: 604ef9efc3dd6354d997fa462a32cf70, type: 3}

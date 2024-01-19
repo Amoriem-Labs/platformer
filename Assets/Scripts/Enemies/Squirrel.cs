@@ -9,6 +9,7 @@ public class Squirrel : EnemyWithPathfinding
     public float stunDuration; // This is the number of seconds to stun the player for when the squirrel collides with the player.
     public float damageAmount; // This is the amount of damage the squirrel does to the player when the squirrel collides with the player.
 
+    #pragma warning disable 0114
     void Start()
     {
         base.Start();
@@ -27,6 +28,7 @@ public class Squirrel : EnemyWithPathfinding
         boxColliderHeight = GetComponent<BoxCollider2D>().size.y * transform.localScale.y; // Need to multiply by y-scale to get correct scaling relationship
         animator = GetComponent<Animator>();
     }
+    #pragma warning restore 0114
 
     // When squirrel collides with player, pause player movement.
     void OnCollisionEnter2D(Collision2D collision){

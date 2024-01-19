@@ -16,9 +16,20 @@ public class Player : MonoBehaviour
     public static float secWaitAfterCollision = 2.5f; // This is the number of seconds to wait after a collision before re-enabling player collisions.
     public static Vector3 lastGroundedPosition; // This is the last position the player was grounded at.
     public static bool isOnFire = false; // This is whether or not the player is on fire.
+    public float fireDamageAmount = 0.5f; // This is the amount of damage the fire does to the player every cycle.
     private float timeUntilNextFireDamage; // This is the time until the player takes fire damage again.
     public float timeBetweenFireDamage; // This is the time between fire damage.
-    public SpriteRenderer onFireSprite;
+    public GameObject onFireAnimator; // This is the GameObject for the on fire animation when player is on fire.
+    public static bool isPoisoned = false; // This is whether or not the player is on fire.
+    public float poisonDamageAmount = 0.5f; // This is the amount of damage the poison does to the player every cycle.
+    private float timeUntilNextPoisonDamage; // This is the time until the player takes poison damage again.
+    public float timeBetweenPoisonDamage; // This is the time between poison dmamage.
+    public GameObject poisonedAnimator; // This is the GameObject for the poisoned animation when player is poisoned.
+    public LayerMask groundLayer; // This is the ground layer.
+    public LayerMask platformLayer; // This is the platform layer.
+    public LayerMask oneWayPlatformLayer; // This is the one way platform layer.
+    public Transform groundCheck; // This is the ground check object.
+    public float groundCheckRadius = 0.2f; // This is the radius of the ground check.
 
     void Start(){
         textBox.SetActive(false);
@@ -26,7 +37,8 @@ public class Player : MonoBehaviour
         oppTriggerResponse.onTriggerEnter2D = OnOppDetectorTriggerEnter2D;
         oppTriggerResponse.onTriggerExit2D = OnOppDetectorTriggerExit2D;
         shield.enabled = false;
-        onFireSprite.enabled = false;
+        onFireAnimator.SetActive(false);
+        poisonedAnimator.SetActive(false);
         movement = GetComponent<WASDMovement>();
         playerSprite = GetComponent<SpriteRenderer>();
     }
@@ -35,18 +47,31 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && !TextWriter.isWritingText){
             ActivateShield(numSecondsShield);
         }
-        if (movement.isGrounded && rb.velocity.y == 0){
+
+        bool isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, platformLayer) || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, oneWayPlatformLayer);
+        if (isGrounded && rb.velocity.y == 0){
             if (rb.velocity.x > 0) {lastGroundedPosition = transform.position - new Vector3(respawnOffset, 0, 0); }
             if (rb.velocity.x < 0) {lastGroundedPosition = transform.position + new Vector3(respawnOffset, 0, 0); }
         }
+
         if (isOnFire){
             timeUntilNextFireDamage += Time.deltaTime;
             if (timeUntilNextFireDamage >= timeBetweenFireDamage){
-                TakeDamage(0.5f);
+                TakeDamage(fireDamageAmount);
                 timeUntilNextFireDamage = 0;
             }
         } else {
             timeUntilNextFireDamage = 0;
+        }
+        
+        if (isPoisoned){
+            timeUntilNextPoisonDamage += Time.deltaTime;
+            if (timeUntilNextPoisonDamage >= timeBetweenPoisonDamage){
+                TakeDamage(poisonDamageAmount);
+                timeUntilNextPoisonDamage = 0;
+            }
+        } else {
+            timeUntilNextPoisonDamage = 0;
         }
     }
 
@@ -98,13 +123,25 @@ public class Player : MonoBehaviour
 
     #region Set Player on Fire
     public void SetPlayerOnFire(){
-        onFireSprite.enabled = true;
+        onFireAnimator.SetActive(true);
         isOnFire = true;
     }
     
     public void ExtinguishPlayerFire(){
-        onFireSprite.enabled = false;
+        onFireAnimator.SetActive(false);
         isOnFire = false;
+    }
+    #endregion
+
+    #region Poison Player
+    public void Poison(){
+        poisonedAnimator.SetActive(true);
+        isPoisoned = true;
+    }
+    
+    public void CurePoison(){
+        poisonedAnimator.SetActive(false);
+        isPoisoned = false;
     }
     #endregion
 
@@ -144,6 +181,7 @@ public class Player : MonoBehaviour
         if (collider.name == "NextLevelTrigger" && GameManager.Instance.levelCompleted)
         {
             GameManager.Instance.LoadNextLevel();
+            transform.position = new Vector3(-9.11f, -3.74f, 0f);
         }
     }
     #endregion

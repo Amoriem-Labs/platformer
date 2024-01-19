@@ -34,13 +34,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [ContextMenu("LoadNextLevel")]
     public void LoadNextLevel(){
         animator.enabled = false;
         animator.enabled = true;
         levelCompleted = false;
         // Call below functions only when animation is completed
-        //currentLevel = levels[currentLevel.levelID + 1];
-        //SceneManager.LoadScene(currentLevel.sceneName);
+        currentLevel = levels[currentLevel.levelID + 1];
+        SceneManager.LoadScene(currentLevel.sceneName);
     }
 
     [ContextMenu("TestFadeOut")]
