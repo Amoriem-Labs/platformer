@@ -25,6 +25,11 @@ public class Player : MonoBehaviour
     private float timeUntilNextPoisonDamage; // This is the time until the player takes poison damage again.
     public float timeBetweenPoisonDamage; // This is the time between poison dmamage.
     public GameObject poisonedAnimator; // This is the GameObject for the poisoned animation when player is poisoned.
+    public LayerMask groundLayer; // This is the ground layer.
+    public LayerMask platformLayer; // This is the platform layer.
+    public LayerMask oneWayPlatformLayer; // This is the one way platform layer.
+    public Transform groundCheck; // This is the ground check object.
+    public float groundCheckRadius = 0.2f; // This is the radius of the ground check.
 
     void Start(){
         textBox.SetActive(false);
@@ -42,7 +47,9 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && !TextWriter.isWritingText){
             ActivateShield(numSecondsShield);
         }
-        if (movement.isGrounded && rb.velocity.y == 0){
+
+        bool isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, platformLayer) || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, oneWayPlatformLayer);
+        if (isGrounded && rb.velocity.y == 0){
             if (rb.velocity.x > 0) {lastGroundedPosition = transform.position - new Vector3(respawnOffset, 0, 0); }
             if (rb.velocity.x < 0) {lastGroundedPosition = transform.position + new Vector3(respawnOffset, 0, 0); }
         }
@@ -174,6 +181,7 @@ public class Player : MonoBehaviour
         if (collider.name == "NextLevelTrigger" && GameManager.Instance.levelCompleted)
         {
             GameManager.Instance.LoadNextLevel();
+            transform.position = new Vector3(-9.11f, -3.74f, 0f);
         }
     }
     #endregion

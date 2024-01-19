@@ -744,6 +744,17 @@ MonoBehaviour:
   poisonDamageAmount: 0.5
   timeBetweenPoisonDamage: 3
   poisonedAnimator: {fileID: 9065666702794736872}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  platformLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  oneWayPlatformLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  groundCheck: {fileID: 3271391821195693675}
+  groundCheckRadius: 0.2
 --- !u!114 &8798331859922326679
 MonoBehaviour:
   m_ObjectHideFlags: 0
