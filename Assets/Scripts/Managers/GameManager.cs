@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
             animator.enabled = false;
 
             levels = Resources.LoadAll<Level>("Levels/");
-            currentLevel = levels[0];
+            currentLevel = levels[1];
             assignmentText.text = $"0/{currentLevel.numAssignmentsToComplete}";
             coinText.text = "0";
         }
@@ -42,10 +42,5 @@ public class GameManager : MonoBehaviour
         // Call below functions only when animation is completed
         currentLevel = levels[currentLevel.levelID + 1];
         SceneManager.LoadScene(currentLevel.sceneName);
-    }
-
-    [ContextMenu("TestFadeOut")]
-    public void TestFadeOut(){
-        animator.enabled = true;
     }
 }
