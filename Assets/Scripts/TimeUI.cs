@@ -20,6 +20,10 @@ public class TimeUI : MonoBehaviour
         TimeManager.OnHourChanged -= UpdateTime; 
     }
 
+    private void Update()
+    {
+    }
+
     private void UpdateTime()   
     {
         TimeText.text = $"{TimeManager.Hour:00}:{TimeManager.Minute:00}"; 
