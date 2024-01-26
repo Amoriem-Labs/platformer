@@ -9,4 +9,5 @@ public class Level : ScriptableObject
     public int levelNum;
     public int numAssignmentsToComplete;
     public string sceneName;
+    public Vector2 playerSpawnPoint;
 }

@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MoreMountains.Tools;
+using MoreMountains.Feedbacks;
+using MoreMountains.CorgiEngine;
 
 public class Player : MonoBehaviour
 {
@@ -34,12 +37,12 @@ public class Player : MonoBehaviour
     void Start(){
         textBox.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
+        movement = GetComponent<WASDMovement>();
         oppTriggerResponse.onTriggerEnter2D = OnOppDetectorTriggerEnter2D;
         oppTriggerResponse.onTriggerExit2D = OnOppDetectorTriggerExit2D;
         shield.enabled = false;
         onFireAnimator.SetActive(false);
         poisonedAnimator.SetActive(false);
-        movement = GetComponent<WASDMovement>();
         playerSprite = GetComponent<SpriteRenderer>();
     }
 
@@ -152,6 +155,10 @@ public class Player : MonoBehaviour
         int layer = LayerMask.NameToLayer("Opp");
         if (collider.gameObject.layer == layer)
         {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (var enemy in enemies){
+                enemy.GetComponent<Enemy>().DisablePlayerCollisions();
+            }
             Opp opp = collider.gameObject.GetComponent<Opp>();
             if (opp.isThisOppTriggerOn){
                 if (opp.haveTalkedToAlready){
@@ -171,7 +178,10 @@ public class Player : MonoBehaviour
         int layer = LayerMask.NameToLayer("Opp");
         if (collider.gameObject.layer == layer)
         {
-            // Empty method for now. Fill in code later if you want code to be run when an opp leaves a player's hitbox.
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (var enemy in enemies){
+                enemy.GetComponent<Enemy>().EnablePlayerCollisions();
+            }
         }
     }
 
@@ -180,7 +190,7 @@ public class Player : MonoBehaviour
     {
         if (collider.name == "NextLevelTrigger" && GameManager.Instance.levelCompleted)
         {
-            GameManager.Instance.LoadNextLevel();
+            GameManager.Instance.LoadLevel(GameManager.Instance.currentLevel.levelID + 1);
             transform.position = new Vector3(-9.11f, -3.74f, 0f);
         }
     }

@@ -28,11 +28,11 @@ public class PlayerInventory : MonoBehaviour
 
     public void ItemCollected(GameObject item)
     {
-        if (item.name == "Coin")
+        if (item.tag == "Coin")
         {
             numCoins++;
         }
-        else if (item.name == "Assignment")
+        else if (item.tag == "Assignment")
         {
             numAssignments++;
         }
