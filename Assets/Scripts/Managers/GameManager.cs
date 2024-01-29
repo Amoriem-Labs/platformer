@@ -9,12 +9,13 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
 	public static GameManager Instance { get { return _instance; } }
-    public Level currentLevel;
-    public Level[] levels;
+    [HideInInspector] public Level currentLevel;
+    [HideInInspector] public Level[] levels;
     public Animator animator;
     public bool levelCompleted = false;
     public TextMeshProUGUI assignmentText;
     public TextMeshProUGUI coinText;
+    public SleepTimer sleepTimer;
     public SaveData currSaveData;
     private GameObject player;
     public delegate void OnSave();
@@ -40,6 +41,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Update(){
+        if (sleepTimer.currTime <= 0f){
+            ResetLevel();
+        }
+    }
+
     [ContextMenu("LoadNextLevel")]
     public void LoadNextLevel(){
         animator.enabled = false;
@@ -56,6 +63,15 @@ public class GameManager : MonoBehaviour
         levelCompleted = false;
         // Call below functions only when animation is completed
         currentLevel = levels[levelID];
+        SceneManager.LoadScene(currentLevel.sceneName);
+        player.transform.position = currentLevel.playerSpawnPoint;
+    }
+
+    public void ResetLevel(){
+        animator.enabled = false;
+        animator.enabled = true;
+        levelCompleted = false;
+        // Call below functions only when animation is completed
         SceneManager.LoadScene(currentLevel.sceneName);
         player.transform.position = currentLevel.playerSpawnPoint;
     }
