@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SleepTimer : MonoBehaviour
 {
-    public delegate void OnSleepTimerUpdate(float currTime, float maxTime);
+    public delegate void OnSleepTimerUpdate(float timeInTimer, float maxTime);
     public static event OnSleepTimerUpdate onSleepTimerUpdate;
 
     public delegate void OnChangeSleepValue(float changeAmt);
@@ -15,7 +15,8 @@ public class SleepTimer : MonoBehaviour
     public Slider sleepTimer;
 
     public float maxTime;
-    public float currTime;
+    public float timeInTimer;
+    public float timeSpent;
 
     //void Awake()
     //{
@@ -25,7 +26,8 @@ public class SleepTimer : MonoBehaviour
 
     void Start()
     {
-        currTime = maxTime;
+        timeInTimer = maxTime;
+        timeSpent = 0;
         onSleepTimerUpdate += UpdateSlider;
         onChangeSleepValue += ChangeSleepValue;
     }
@@ -38,27 +40,28 @@ public class SleepTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currTime -= Time.deltaTime;
-        onSleepTimerUpdate?.Invoke(currTime, maxTime);
+        timeSpent += Time.deltaTime;
+        timeInTimer -= Time.deltaTime;
+        onSleepTimerUpdate?.Invoke(timeInTimer, maxTime);
     }
 
     private void ChangeSleepValue(float amt)
     {
-        currTime += amt;
-        if (currTime > maxTime)
+        timeInTimer += amt;
+        if (timeInTimer > maxTime)
         {
-            currTime = maxTime;
+            timeInTimer = maxTime;
         }
-        if (currTime < 0)
+        if (timeInTimer < 0)
         {
-            currTime = 0;
+            timeInTimer = 0;
         }
 
-        onSleepTimerUpdate.Invoke(currTime, maxTime);
+        onSleepTimerUpdate.Invoke(timeInTimer, maxTime);
     }
 
-    public void UpdateSlider(float _currTime, float _maxTime)
+    public void UpdateSlider(float _timeInTimer, float _maxTime)
     {
-        sleepTimer.value = _currTime / _maxTime;
+        sleepTimer.value = _timeInTimer / _maxTime;
     }
 }

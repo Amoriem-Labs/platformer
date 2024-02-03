@@ -31,6 +31,7 @@ public class PlayerInventory : MonoBehaviour
         if (item.tag == "Coin")
         {
             numCoins++;
+            LevelScoringManager.numCoinsCollected++;
         }
         else if (item.tag == "Assignment")
         {

@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     }
 
     void Update(){
-        if (sleepTimer.currTime <= 0f){
+        if (sleepTimer.timeInTimer <= 0f){
             ResetLevel();
         }
     }
@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         levelCompleted = false;
         // Call below functions only when animation is completed
         currentLevel = levels[currentLevel.levelID + 1];
+        LevelScoringManager.ResetNumCoinsCollected();
         SceneManager.LoadScene(currentLevel.sceneName);
     }
 
@@ -63,6 +64,8 @@ public class GameManager : MonoBehaviour
         levelCompleted = false;
         // Call below functions only when animation is completed
         currentLevel = levels[levelID];
+        sleepTimer.maxTime = currentLevel.maxTime;
+        LevelScoringManager.ResetNumCoinsCollected();
         SceneManager.LoadScene(currentLevel.sceneName);
         player.transform.position = currentLevel.playerSpawnPoint;
     }
@@ -71,6 +74,7 @@ public class GameManager : MonoBehaviour
         animator.enabled = false;
         animator.enabled = true;
         levelCompleted = false;
+        LevelScoringManager.ResetNumCoinsCollected();
         // Call below functions only when animation is completed
         SceneManager.LoadScene(currentLevel.sceneName);
         player.transform.position = currentLevel.playerSpawnPoint;
