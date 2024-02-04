@@ -33,7 +33,7 @@ public class Collectable : MonoBehaviour
 
             if (playerInventory != null)
             {
-                playerInventory.ItemCollected(this.gameObject); // Call the ItemCollected method in the PlayerInventory script.
+                playerInventory.ItemCollected(); // Call the ItemCollected method in the PlayerInventory script.
                 gameObject.SetActive(false);
             }
         

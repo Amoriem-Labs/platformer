@@ -19,6 +19,7 @@ public class CameraController : MonoBehaviour
 
     void Start(){
         vcam = GetComponent<CinemachineVirtualCamera>();
+        vcam.transform.LookAt(player);
     }
 
     // Perhaps clean this code up later

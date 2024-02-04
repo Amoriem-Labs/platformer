@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5645641836145909393}
   - component: {fileID: 7590520579551210198}
   - component: {fileID: 3487570512671747436}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: BookTriggerResponse
   m_TagString: BookRangeDetector
   m_Icon: {fileID: 0}

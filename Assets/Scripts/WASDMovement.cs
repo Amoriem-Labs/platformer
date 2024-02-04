@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WASDMovement : MonoBehaviour
 {
-    public Rigidbody2D rb;
+    public Rigidbody2D Playerbody;
     public float walkspeed = 8;
     public float jumpspeed = 8;
     public float djumpspeed = 5;
@@ -17,17 +17,12 @@ public class WASDMovement : MonoBehaviour
 
     // Dash variables
     private bool canDash = true;
-    public float dashPower = 100f;
-    public float dashDuration = 0.7f;
-    public float dashCooldown = 0.5f;
+    private float dashPower = 100f;
+    private float dashDuration = 0.7f;
+    private float dashCooldown = 0.5f;
     public float lastDashTime = 0;
     public float dashPressTime = 0.2f;
     private bool isDashing;
-    private float delayBetweenPresses = 0.25f;
-    private bool pressedLeftFirstTime = false;
-    private float lastPressedLeftTime;
-    private bool pressedRightFirstTime = false;
-    private float lastPressedRightTime;
 
     // Double jump variables
     public bool canDoubleJump = true;
@@ -37,31 +32,23 @@ public class WASDMovement : MonoBehaviour
     public SpriteRenderer sweaterSprite;
     public SpriteRenderer hairSprite;
 
-    // Trail renderer variable
-    private TrailRenderer tr;
-
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        tr = GetComponent<TrailRenderer>();
+        Playerbody = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        if (isDashing){
-            return;
-        }
-
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, platformLayer);
 
         // Handle horizontal movement
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * walkspeed, rb.velocity.y);
+        Playerbody.velocity = new Vector2(Input.GetAxis("Horizontal") * walkspeed, Playerbody.velocity.y);
         
         // Flip sprite according to movement
-        if (rb.velocity.x != 0) { 
-            bodySprite.flipX = rb.velocity.x < 0;
-            sweaterSprite.flipX = rb.velocity.x < 0;
-            hairSprite.flipX = rb.velocity.x < 0;
+        if (Playerbody.velocity.x != 0) { 
+            bodySprite.flipX = Playerbody.velocity.x < 0;
+            sweaterSprite.flipX = Playerbody.velocity.x < 0;
+            hairSprite.flipX = Playerbody.velocity.x < 0;
         }
 
         // Handle jumping
@@ -77,71 +64,38 @@ public class WASDMovement : MonoBehaviour
             }
         }
 
-        // Handle dashing left
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        // Handle dashing
+        /* Kinda buggy for now so fix later
+        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && canDash)
         {
-            if (pressedLeftFirstTime) // we've already pressed the button a first time, we check if the 2nd time is fast enough to be considered a double-press
-            {
-                bool isDoublePress = Time.time - lastPressedLeftTime <= delayBetweenPresses;
-                if (isDoublePress && canDash)
-                {
-                    StartCoroutine(Dash(-1)); // Dash left
-                    pressedLeftFirstTime = false;
-                }
-            }
-            else // we've not already pressed the button a first time
-            {
-                pressedLeftFirstTime = true; // we tell this is the first time
-            }
-            lastPressedLeftTime = Time.time;
+            StartCoroutine(Dash(-1)); // Dash left
         }
-
-        // Handle dashing right
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        else if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && canDash)
         {
-            if (pressedRightFirstTime) // we've already pressed the button a first time, we check if the 2nd time is fast enough to be considered a double-press
-            {
-                bool isDoublePress = Time.time - lastPressedRightTime <= delayBetweenPresses;
-                if (isDoublePress && canDash)
-                {
-                    StartCoroutine(Dash(1)); // Dash right
-                    pressedRightFirstTime = false;
-                }
-            }
-            else // we've not already pressed the button a first time
-            {
-                pressedRightFirstTime = true; // we tell this is the first time
-            }
-            lastPressedRightTime = Time.time;
-        }
+            StartCoroutine(Dash(1)); // Dash right
+        }*/
     }
 
     private void Jump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, jumpspeed);
+        Playerbody.velocity = new Vector2(Playerbody.velocity.x, jumpspeed);
         canDoubleJump = true; // Allow double jump after jumping off the ground
     }
 
     private void DoubleJump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, djumpspeed);
+        Playerbody.velocity = new Vector2(Playerbody.velocity.x, djumpspeed);
         canDoubleJump = false; // Disable double jump until we hit the ground again
     }
 
     private IEnumerator Dash(int direction)
     {
         canDash = false;
-        isDashing = true;
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0;
-        rb.velocity = new Vector2(direction * dashPower, 0f);
-        tr.emitting = true;
+        Playerbody.velocity = new Vector2(dashPower * direction, Playerbody.velocity.y);
         yield return new WaitForSeconds(dashDuration);
-        rb.gravityScale = originalGravity;
-        isDashing = false;
-        tr.emitting = false;
+        Playerbody.velocity = new Vector2(0, Playerbody.velocity.y); // Stop dashing
         yield return new WaitForSeconds(dashCooldown);
-        canDash = true;
+        canDash = true; // Reset dash
     }
 }
 

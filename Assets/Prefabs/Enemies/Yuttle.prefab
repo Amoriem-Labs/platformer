@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3044337849090536309}
   - component: {fileID: 4387736466426479554}
   - component: {fileID: 8052942613954326772}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: Yuttle
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ PolygonCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 12288
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9177117265277308365}
-  - component: {fileID: 3227986739542795159}
   - component: {fileID: 1263678058513744458}
   - component: {fileID: 2166022358785912050}
+  - component: {fileID: 3227986739542795159}
   - component: {fileID: 5357640214546662080}
   m_Layer: 0
   m_Name: Fire
@@ -35,21 +35,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3227986739542795159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3827169536077660854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33b340cff3093ea4abb94a641e1f5bf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radiusToSearch: 10
-  secondsUntilFireSpread: 2
-  timePlayerIsOnFire: 15
 --- !u!212 &1263678058513744458
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -123,6 +108,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3227986739542795159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3827169536077660854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33b340cff3093ea4abb94a641e1f5bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radiusToSearch: 10
+  secondsUntilFireSpread: 2
+  timePlayerIsOnFire: 15
 --- !u!61 &5357640214546662080
 BoxCollider2D:
   m_ObjectHideFlags: 0

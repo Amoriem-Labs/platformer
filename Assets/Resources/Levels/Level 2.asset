@@ -14,6 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelID: 1
   levelNum: 2
-  numAssignmentsToComplete: 0
-  sceneName: Level 2_VL
-  playerSpawnPoint: {x: -8, y: -1.5}
+  numAssignmentsToComplete: 5
+  sceneName: Level 2
