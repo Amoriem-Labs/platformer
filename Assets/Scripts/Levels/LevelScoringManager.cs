@@ -48,11 +48,40 @@ public class LevelScoringManager : MonoBehaviour
     }
 
     [ContextMenu("CalculateScore")]
-    public void CalculateScore()
+    public float CalculateScore()
     {
         float time_score = (1 - sleepTimer.timeSpent / sleepTimer.maxTime) * maxPointsForTime * timeWeight;
+        if (time_score < 0){
+            time_score = 0;
+        }
         float coin_score = (numCoinsCollected / numCoinsInLevel) * maxPointsForCoins * coinWeight;
         score = time_score + coin_score;
+        return score;
+    }
+
+    public string GetGrade()
+    {
+        CalculateScore();
+        if (score >= A_threshold)
+        {
+            return "A";
+        }
+        else if (score >= B_threshold)
+        {
+            return "B";
+        }
+        else if (score >= C_threshold)
+        {
+            return "C";
+        }
+        else if (score >= D_threshold)
+        {
+            return "D";
+        }
+        else
+        {
+            return "F";
+        }
     }
 
     public static void ResetNumCoinsCollected(){

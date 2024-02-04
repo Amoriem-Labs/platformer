@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public SleepTimer sleepTimer;
     public SaveData currSaveData;
     private GameObject player;
+    public LevelScoringManager levelScoringManager;
     public delegate void OnSave();
     public static event OnSave onSave;
 
