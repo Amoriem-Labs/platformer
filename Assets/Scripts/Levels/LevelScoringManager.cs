@@ -17,12 +17,12 @@ public class LevelScoringManager : MonoBehaviour
 
     [Tooltip("The maximum number of points a player can get for completing a level in 0 seconds. Player get a percentage of these points linearly proportional to 1 - percentage of time spent relative to sleep timer max time in that level.")]
     public int maxPointsForTime;
-    [Tooltip("A weight for how much the time spent on a level should impact the score.")]
+    [Tooltip("A weight for how much the time spent on a level should impact the score. Should be between 0 and 1.")]
     public float timeWeight;
 
     [Tooltip("The maximum number of points a player can get for collecting all the coins in a level. Player get a percentage of these points based off of how many coins they collected in that level.")]
     public int maxPointsForCoins;
-    [Tooltip("A weight for how much collecting coins in a level should impact the score.")]
+    [Tooltip("A weight for how much collecting coins in a level should impact the score. Should be between 0 and 1.")]
     public float coinWeight;
     public static int numCoinsCollected;
     public static int numCoinsInLevel;
@@ -33,6 +33,18 @@ public class LevelScoringManager : MonoBehaviour
     public void Start()
     {
         numCoinsInLevel = GameObject.FindGameObjectsWithTag("Coin").Length;
+        if (timeWeight > 1){
+            timeWeight = 1;
+        }
+        if (timeWeight < 0){
+            timeWeight = 0;
+        }
+        if (coinWeight > 1){
+            coinWeight = 1;
+        }
+        if (coinWeight < 0){
+            coinWeight = 0;
+        }
     }
 
     [ContextMenu("CalculateScore")]
