@@ -7,6 +7,7 @@ public class Collectable : MonoBehaviour
 {
     public float moveBetweenFrames = 0.02f;
     public float timeBetweenFrames = 0.01f;
+    public int points = 30;
 
     [ContextMenu("Move")]
     void Start(){
@@ -35,6 +36,7 @@ public class Collectable : MonoBehaviour
             {
                 playerInventory.ItemCollected(this.gameObject); // Call the ItemCollected method in the PlayerInventory script.
                 gameObject.SetActive(false);
+                ScoreManager.Instance.AddPoints(points);
             }
         
     }

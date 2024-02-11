@@ -39,6 +39,7 @@ public class Robot : EnemyWithPathfinding
                 Player.rb.AddForce(new Vector2(-1, 1) * force); // push player to the left if squirrel is moving left
             }
             Player.TakeDamage(damageAmount);
+            ScoreManager.Instance.ResetMultiplier();
         }
     }
 }
