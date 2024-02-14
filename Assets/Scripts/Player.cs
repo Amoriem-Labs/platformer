@@ -30,7 +30,6 @@ public class Player : MonoBehaviour
     public GameObject poisonedAnimator; // This is the GameObject for the poisoned animation when player is poisoned.
     public LayerMask groundLayer; // This is the ground layer.
     public LayerMask platformLayer; // This is the platform layer.
-    public LayerMask oneWayPlatformLayer; // This is the one way platform layer.
     public Transform groundCheck; // This is the ground check object.
     public float groundCheckRadius = 0.2f; // This is the radius of the ground check.
 
@@ -51,7 +50,7 @@ public class Player : MonoBehaviour
             ActivateShield(numSecondsShield);
         }
 
-        bool isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, platformLayer) || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, oneWayPlatformLayer);
+        bool isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, platformLayer);
         if (isGrounded && rb.velocity.y == 0){
             if (rb.velocity.x > 0) {lastGroundedPosition = transform.position - new Vector3(respawnOffset, 0, 0); }
             if (rb.velocity.x < 0) {lastGroundedPosition = transform.position + new Vector3(respawnOffset, 0, 0); }
