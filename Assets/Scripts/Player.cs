@@ -162,7 +162,6 @@ public class Player : MonoBehaviour
             if (opp.isThisOppTriggerOn){
                 if (opp.haveTalkedToAlready){
                     TextWriter.timePerCharacter = TextWriter.originalTimePerCharacter / 2;
-                    TimeManager.minuteToRealTime = TimeManager.originalMinuteToRealTime / 2;
                 }
                 TextWriter.ActivateConversation(opp.conversation);
                 opp.haveTalkedToAlready = true;

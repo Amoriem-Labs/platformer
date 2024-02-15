@@ -55,7 +55,6 @@ public class TextWriter : MonoBehaviour
         UnfreezeEnemies();
         Player.EnablePlayerMovement();
         TextWriter.timePerCharacter = TextWriter.originalTimePerCharacter;
-        TimeManager.minuteToRealTime = TimeManager.originalMinuteToRealTime;
     }
 
     // Freezes all enemies on screen
