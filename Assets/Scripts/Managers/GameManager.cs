@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public SleepTimer sleepTimer;
     public SaveData currSaveData;
     private GameObject player;
-    public LevelScoringManager levelScoringManager;
+    public LevelGradingManager levelGradingManager;
     public string levelGradingSceneName;
     public delegate void OnSave();
     public static event OnSave onSave;
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
         levelCompleted = false;
         // Call below functions only when animation is completed
         currentLevel = levels[currentLevel.levelID + 1];
-        levelScoringManager.ResetNumCoinsCollected();
+        levelGradingManager.ResetNumCoinsCollected();
         SceneManager.LoadScene(currentLevel.sceneName);
         player.transform.position = new Vector3(-9.11f, 0f, 0f);
     }
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
         // Call below functions only when animation is completed
         currentLevel = levels[levelID];
         sleepTimer.maxTime = currentLevel.maxTime;
-        levelScoringManager.ResetNumCoinsCollected();
+        levelGradingManager.ResetNumCoinsCollected();
         SceneManager.LoadScene(currentLevel.sceneName);
         player.transform.position = currentLevel.playerSpawnPoint;
     }
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         animator.enabled = false;
         animator.enabled = true;
         levelCompleted = false;
-        levelScoringManager.ResetNumCoinsCollected();
+        levelGradingManager.ResetNumCoinsCollected();
         // Call below functions only when animation is completed
         SceneManager.LoadScene(currentLevel.sceneName);
         player.transform.position = currentLevel.playerSpawnPoint;

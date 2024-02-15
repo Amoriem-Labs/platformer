@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelScoringManager : MonoBehaviour
+public class LevelGradingManager : MonoBehaviour
 {
     [Tooltip("The minimum score required to get an A")]
     public int A_threshold; 

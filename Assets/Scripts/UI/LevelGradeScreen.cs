@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Cinemachine;
 
-public class LevelScoreScreen : MonoBehaviour
+public class LevelGradeScreen : MonoBehaviour
 {
     public GameObject gradeA;
     public GameObject gradeB;
@@ -32,7 +32,7 @@ public class LevelScoreScreen : MonoBehaviour
         UICanvas = GameObject.Find("UICanvas");
         UICanvas.SetActive(false);
         ResetScreen();
-        string grade = GameManager.Instance.levelScoringManager.GetGrade();
+        string grade = GameManager.Instance.levelGradingManager.GetGrade();
         switch (grade){
             case "A":
                 gradeImage = gradeA;
@@ -84,9 +84,9 @@ public class LevelScoreScreen : MonoBehaviour
     }
 
     public void StartCountingUpAnimation(){
-        StartCoroutine(ChangeValue(timeSpentText, GameManager.Instance.levelScoringManager.sleepTimer.timeSpent, timeBetweenValueChanges));
+        StartCoroutine(ChangeValue(timeSpentText, GameManager.Instance.levelGradingManager.sleepTimer.timeSpent, timeBetweenValueChanges));
         //StartCoroutine(ChangeValue(timeSpentText, 100, timeBetweenValueChanges));
-        StartCoroutine(ChangeValue(coinsCollectedText, GameManager.Instance.levelScoringManager.numCoinsCollected, timeBetweenValueChanges));
+        StartCoroutine(ChangeValue(coinsCollectedText, GameManager.Instance.levelGradingManager.numCoinsCollected, timeBetweenValueChanges));
         //StartCoroutine(ChangeValue(coinsCollectedText, 10, timeBetweenValueChanges));
     }
     
