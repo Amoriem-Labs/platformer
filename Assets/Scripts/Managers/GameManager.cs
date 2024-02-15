@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public SleepTimer sleepTimer;
     public SaveData currSaveData;
     private GameObject player;
+    public LevelScoringManager levelScoringManager;
+    public string levelGradingSceneName;
     public delegate void OnSave();
     public static event OnSave onSave;
 
@@ -42,9 +44,15 @@ public class GameManager : MonoBehaviour
     }
 
     void Update(){
-        if (sleepTimer.currTime <= 0f){
+        if (sleepTimer.timeInTimer <= 0f){
             ResetLevel();
         }
+    }
+
+    public void LoadLevelGradingScreen(){
+        animator.enabled = false;
+        animator.enabled = true;
+        SceneManager.LoadScene(levelGradingSceneName);
     }
 
     [ContextMenu("LoadNextLevel")]
@@ -54,7 +62,9 @@ public class GameManager : MonoBehaviour
         levelCompleted = false;
         // Call below functions only when animation is completed
         currentLevel = levels[currentLevel.levelID + 1];
+        levelScoringManager.ResetNumCoinsCollected();
         SceneManager.LoadScene(currentLevel.sceneName);
+        player.transform.position = new Vector3(-9.11f, 0f, 0f);
     }
 
     public void LoadLevel(int levelID){
@@ -63,6 +73,8 @@ public class GameManager : MonoBehaviour
         levelCompleted = false;
         // Call below functions only when animation is completed
         currentLevel = levels[levelID];
+        sleepTimer.maxTime = currentLevel.maxTime;
+        levelScoringManager.ResetNumCoinsCollected();
         SceneManager.LoadScene(currentLevel.sceneName);
         player.transform.position = currentLevel.playerSpawnPoint;
     }
@@ -71,6 +83,7 @@ public class GameManager : MonoBehaviour
         animator.enabled = false;
         animator.enabled = true;
         levelCompleted = false;
+        levelScoringManager.ResetNumCoinsCollected();
         // Call below functions only when animation is completed
         SceneManager.LoadScene(currentLevel.sceneName);
         player.transform.position = currentLevel.playerSpawnPoint;

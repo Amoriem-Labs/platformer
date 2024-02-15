@@ -188,8 +188,7 @@ public class Player : MonoBehaviour
     {
         if (collider.name == "NextLevelTrigger" && GameManager.Instance.levelCompleted)
         {
-            GameManager.Instance.LoadLevel(GameManager.Instance.currentLevel.levelID + 1);
-            transform.position = new Vector3(-9.11f, -3.74f, 0f);
+            GameManager.Instance.LoadLevelGradingScreen();
         }
     }
     #endregion

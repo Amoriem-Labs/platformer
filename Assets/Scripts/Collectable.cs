@@ -29,7 +29,8 @@ public class Collectable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-         // Assuming you have a reference to the PlayerInventory script on your player object.
+        if (other.CompareTag("Player")){
+            // Assuming you have a reference to the PlayerInventory script on your player object.
             PlayerInventory playerInventory = other.GetComponent<PlayerInventory>();
 
             if (playerInventory != null)
@@ -38,6 +39,6 @@ public class Collectable : MonoBehaviour
                 gameObject.SetActive(false);
                 ScoreManager.Instance.AddPoints(points);
             }
-        
+        }
     }
 }
