@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
         currentLevel = levels[currentLevel.levelID + 1];
         levelScoringManager.ResetNumCoinsCollected();
         SceneManager.LoadScene(currentLevel.sceneName);
+        player.transform.position = new Vector3(-9.11f, 0f, 0f);
     }
 
     public void LoadLevel(int levelID){

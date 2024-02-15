@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2952009453814383744}
   - component: {fileID: 5530903082423511781}
-  - component: {fileID: 2763145741878603089}
+  - component: {fileID: 6031517543466747177}
   - component: {fileID: 8839214185784831080}
   m_Layer: 0
   m_Name: Assignment
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2763145741878603089
+--- !u!61 &6031517543466747177
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,7 +129,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.5, y: 3.5}
+  m_Size: {x: 4.62, y: 5.4}
   m_EdgeRadius: 0
 --- !u!114 &8839214185784831080
 MonoBehaviour:

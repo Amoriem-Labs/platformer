@@ -22,12 +22,15 @@ public class LevelScoreScreen : MonoBehaviour
     public int cameraShakeIntensity;
     public CinemachineVirtualCamera vcam;
     public Transform scoreboard;
+    private GameObject UICanvas;
 
     [ContextMenu("StartAnimation")]
     void Start(){
         vcam = GameObject.Find("Virtual Camera").GetComponent<CinemachineVirtualCamera>();
         vcam.LookAt = scoreboard;
         vcam.Follow = scoreboard;
+        UICanvas = GameObject.Find("UICanvas");
+        UICanvas.SetActive(false);
         ResetScreen();
         string grade = GameManager.Instance.levelScoringManager.GetGrade();
         switch (grade){
@@ -47,7 +50,7 @@ public class LevelScoreScreen : MonoBehaviour
                 gradeImage = gradeF;
                 break;
         }
-        StartGradeShakeCameraAnimation();
+        Invoke("StartGradeShakeCameraAnimation", 1.5f);
     }
 
     public void StartGradeShakeCameraAnimation(){
@@ -95,9 +98,12 @@ public class LevelScoreScreen : MonoBehaviour
         nextLevelButton.SetActive(true);
     }
 
+    [ContextMenu("LoadNextLevel")]
     public void LoadNextLevel(){
+        Debug.Log("LoadNextLevel");
         vcam.LookAt = null;
         vcam.Follow = null;
+        UICanvas.SetActive(true);
         GameManager.Instance.LoadLevel(GameManager.Instance.currentLevel.levelID + 1);
     }
     
