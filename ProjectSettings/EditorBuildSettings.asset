@@ -230,4 +230,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 2_VL.unity
     guid: 9990d2cf3cf7dd841a8cdada99f86b74
+  - enabled: 1
+    path: Assets/Scenes/level_grading_scene_VL.unity
+    guid: a8ded00c3f9b4ed49a87820dd9c766ca
+  - enabled: 0
+    path: Assets/Scenes/title_screen_test_VL.unity
+    guid: 40909ca6a63932f4699a75ffe30b203e
   m_configObjects: {}
