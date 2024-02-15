@@ -5871,6 +5871,8 @@ MonoBehaviour:
   timeWeight: 0.6
   maxPointsForCoins: 10
   coinWeight: 1
+  numCoinsCollected: 0
+  numCoinsInLevel: 0
   score: 0
   sleepTimer: {fileID: 1025945204}
 --- !u!4 &1396076782
@@ -10711,7 +10713,8 @@ MonoBehaviour:
   sleepTimer: {fileID: 1025945204}
   currSaveData:
     levelID: 0
-  levelScoringManager: {fileID: 0}
+  levelScoringManager: {fileID: 1396076781}
+  levelGradingSceneName: level_grading_scene_VL
 --- !u!1 &1702537282
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,8 +24,8 @@ public class LevelScoringManager : MonoBehaviour
     public int maxPointsForCoins;
     [Tooltip("A weight for how much collecting coins in a level should impact the score. Should be between 0 and 1.")]
     public float coinWeight;
-    public static int numCoinsCollected;
-    public static int numCoinsInLevel;
+    public int numCoinsCollected;
+    public int numCoinsInLevel;
 
     public float score;
     public SleepTimer sleepTimer;
@@ -84,7 +84,7 @@ public class LevelScoringManager : MonoBehaviour
         }
     }
 
-    public static void ResetNumCoinsCollected(){
+    public void ResetNumCoinsCollected(){
         numCoinsCollected = 0;
     }
 }

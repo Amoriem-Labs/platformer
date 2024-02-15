@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public SaveData currSaveData;
     private GameObject player;
     public LevelScoringManager levelScoringManager;
+    public string levelGradingSceneName;
     public delegate void OnSave();
     public static event OnSave onSave;
 
@@ -48,6 +49,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void LoadLevelGradingScreen(){
+        animator.enabled = false;
+        animator.enabled = true;
+        SceneManager.LoadScene(levelGradingSceneName);
+    }
+
     [ContextMenu("LoadNextLevel")]
     public void LoadNextLevel(){
         animator.enabled = false;
@@ -55,7 +62,7 @@ public class GameManager : MonoBehaviour
         levelCompleted = false;
         // Call below functions only when animation is completed
         currentLevel = levels[currentLevel.levelID + 1];
-        LevelScoringManager.ResetNumCoinsCollected();
+        levelScoringManager.ResetNumCoinsCollected();
         SceneManager.LoadScene(currentLevel.sceneName);
     }
 
@@ -66,7 +73,7 @@ public class GameManager : MonoBehaviour
         // Call below functions only when animation is completed
         currentLevel = levels[levelID];
         sleepTimer.maxTime = currentLevel.maxTime;
-        LevelScoringManager.ResetNumCoinsCollected();
+        levelScoringManager.ResetNumCoinsCollected();
         SceneManager.LoadScene(currentLevel.sceneName);
         player.transform.position = currentLevel.playerSpawnPoint;
     }
@@ -75,7 +82,7 @@ public class GameManager : MonoBehaviour
         animator.enabled = false;
         animator.enabled = true;
         levelCompleted = false;
-        LevelScoringManager.ResetNumCoinsCollected();
+        levelScoringManager.ResetNumCoinsCollected();
         // Call below functions only when animation is completed
         SceneManager.LoadScene(currentLevel.sceneName);
         player.transform.position = currentLevel.playerSpawnPoint;
