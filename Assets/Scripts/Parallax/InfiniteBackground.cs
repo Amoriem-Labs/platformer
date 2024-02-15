@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InfiniteBackground : MonoBehaviour {
-    [SerializeField] public GameObject cameraObj;
+    private GameObject cameraObj;
     float startPositionX;
     float startPositionY;
     [SerializeField] public float parallaxEffectX = 0.3f; // Default parallax effect
     [SerializeField] public float parallaxEffectY = 0.3f; // Default parallax effect
 
     void Start () {
+        cameraObj = GameObject.FindGameObjectWithTag("MainCamera");
         startPositionX = transform.position.x;
         startPositionY = transform.position.y;
     }

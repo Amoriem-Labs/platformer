@@ -49,20 +49,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DisablePlayer(){
-        player.SetActive(false);
-    }
-
     [ContextMenu("RespawnPlayer")]
     public void RespawnPlayer(){
-        player.SetActive(true);
         player.transform.position = new Vector3(-9.11f, 0f, 0f);
     }
 
     public void LoadLevelGradingScreen(){
         animator.enabled = false;
         animator.enabled = true;
-        DisablePlayer();
         SceneManager.LoadScene(levelGradingSceneName);
     }
 
@@ -75,7 +69,7 @@ public class GameManager : MonoBehaviour
         currentLevel = levels[currentLevel.levelID + 1];
         levelGradingManager.ResetNumCoinsCollected();
         SceneManager.LoadScene(currentLevel.sceneName);
-        Invoke("RespawnPlayer", 1f);
+        RespawnPlayer();
     }
 
     public void LoadLevel(int levelID){
