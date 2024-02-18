@@ -600,7 +600,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6653913998c5fb4fa6cd79270c05b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraObj: {fileID: 519420028}
   parallaxEffectX: 0.6
   parallaxEffectY: 0.7
 --- !u!1 &93773521
@@ -914,7 +913,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6653913998c5fb4fa6cd79270c05b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraObj: {fileID: 519420028}
   parallaxEffectX: 0.8
   parallaxEffectY: 0.8
 --- !u!1001 &197606844
@@ -1385,7 +1383,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6653913998c5fb4fa6cd79270c05b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraObj: {fileID: 519420028}
   parallaxEffectX: 0.9
   parallaxEffectY: 0.8
 --- !u!1 &260273398
@@ -1593,7 +1590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6653913998c5fb4fa6cd79270c05b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraObj: {fileID: 519420028}
   parallaxEffectX: 0.5
   parallaxEffectY: 0.8
 --- !u!1 &318800798
@@ -1744,7 +1740,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6653913998c5fb4fa6cd79270c05b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraObj: {fileID: 519420028}
   parallaxEffectX: 0.7
   parallaxEffectY: 0.7
 --- !u!1 &400198379
@@ -1844,7 +1839,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6653913998c5fb4fa6cd79270c05b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraObj: {fileID: 519420028}
   parallaxEffectX: 0.5
   parallaxEffectY: 0.8
 --- !u!1 &410214298
@@ -2588,6 +2582,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 536853006}
   m_CullTransparentMesh: 1
+--- !u!1 &545633545 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5966636668122879590, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1010757084}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &545633548
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545633545}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 21eb3e78be3dfb44fa26a2f14ac71293, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.12399566, y: -0.16532731}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 7.2, y: 7.2}
+    newSize: {x: 7.2, y: 7.2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.345804, y: 5.546719}
+  m_EdgeRadius: 0
+--- !u!114 &545633550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545633545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb9bccc8e39e4b969f358af16582e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  targetDetectionRange: 8
+  points: 30
 --- !u!1 &554908883
 GameObject:
   m_ObjectHideFlags: 0
@@ -3156,7 +3216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6653913998c5fb4fa6cd79270c05b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraObj: {fileID: 519420028}
   parallaxEffectX: 0.6
   parallaxEffectY: 0.7
 --- !u!1 &627054204
@@ -3295,7 +3354,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6653913998c5fb4fa6cd79270c05b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraObj: {fileID: 519420028}
   parallaxEffectX: 0.5
   parallaxEffectY: 0.8
 --- !u!1001 &687715316
@@ -4517,6 +4575,102 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007885219}
   m_CullTransparentMesh: 1
+--- !u!1001 &1010757084
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5777938631476030763, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777938631476030763, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777938631476030763, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777938631476030763, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777938631476030763, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777938631476030763, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777938631476030763, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777938631476030763, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777938631476030763, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777938631476030763, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777938631476030763, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5777938631476030763, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966636668122879590, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      propertyPath: m_Name
+      value: HandsomeDan
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966636668122879590, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966636668122879590, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Companion
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5966636668122879590, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 545633548}
+    - targetCorrespondingSourceObject: {fileID: 5966636668122879590, guid: ce42d60c6a5f24f94a7ca346f3f43a1c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 545633550}
+  m_SourcePrefab: {fileID: 100100000, guid: ce42d60c6a5f24f94a7ca346f3f43a1c, type: 3}
 --- !u!114 &1025945204 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1706141194043724742, guid: 6deb38eae00ca3849a47f0dc6a05c6b2,
@@ -5295,7 +5449,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6653913998c5fb4fa6cd79270c05b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraObj: {fileID: 519420028}
   parallaxEffectX: 0.5
   parallaxEffectY: 0.8
 --- !u!1001 &1210500044
@@ -5623,7 +5776,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6653913998c5fb4fa6cd79270c05b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraObj: {fileID: 519420028}
   parallaxEffectX: 0.38
   parallaxEffectY: 0.8
 --- !u!1001 &1235911410
@@ -5946,7 +6098,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6653913998c5fb4fa6cd79270c05b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraObj: {fileID: 519420028}
   parallaxEffectX: 0.9
   parallaxEffectY: 0.8
 --- !u!1001 &1410252028
@@ -11755,7 +11906,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6653913998c5fb4fa6cd79270c05b07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraObj: {fileID: 519420028}
   parallaxEffectX: 0.5
   parallaxEffectY: 0.8
 --- !u!1 &1794241815
@@ -13608,3 +13758,4 @@ SceneRoots:
   - {fileID: 260273399}
   - {fileID: 627054205}
   - {fileID: 2061298038}
+  - {fileID: 1010757084}

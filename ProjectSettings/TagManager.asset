@@ -18,6 +18,7 @@ TagManager:
   - Book
   - Assignment
   - Coin
+  - Companion
   layers:
   - Default
   - TransparentFX

@@ -8,12 +8,13 @@ public class HandsomeDanController : MonoBehaviour
     public float speed = 10.0f;
     public float targetDetectionRange = 5.0f;
     private GameObject target = null;
-    public int points = 30;
+    public int points = 30; // The number of points the player gets for collecting this item.
+    private static SpriteRenderer handsomeDanSprite; // This is Handsome Dan's sprite renderer.
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        handsomeDanSprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -59,6 +60,15 @@ public class HandsomeDanController : MonoBehaviour
     void MoveTowardsTarget(){
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
+
+        if (target.transform.position.x < transform.position.x)
+        {
+            handsomeDanSprite.flipX = false;
+        }
+        else
+        {
+            handsomeDanSprite.flipX = true;
+        }
 
         if (Vector3.Distance(transform.position, target.transform.position) < 0.001f){
             // Get player inventory
