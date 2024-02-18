@@ -100,7 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveBetweenFrames: 0.02
-  timeBetweenFrames: 0.01
+  points: 30
+  scaleDownPercentPerFrame: 0.007
+  moveUpPerFrame: 0.02
 --- !u!61 &8150577747320354226
 BoxCollider2D:
   m_ObjectHideFlags: 0
