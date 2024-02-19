@@ -6,39 +6,62 @@ using UnityEngine;
 public class Collectable : MonoBehaviour
 {
     public float moveBetweenFrames = 0.02f;
-    public float timeBetweenFrames = 0.01f;
     public int points = 30;
+
+    [Header("Exit Animation")]
+    public float scaleDownPercentPerFrame = .07f;
+    public float moveUpPerFrame = 0.05f;
+
+
+    Collider2D collider;
+    Animator animator;
+    Coroutine moveCoroutine;
+    float scaleDownPerFrame;
 
     [ContextMenu("Move")]
     void Start(){
-        StartCoroutine(Move());
+        moveCoroutine = StartCoroutine(Move());
+        collider = GetComponent<Collider2D>();
+        // Larger objects should scale down at the same rate as smaller objects
+        scaleDownPerFrame = scaleDownPercentPerFrame * transform.localScale.x;
+        print(scaleDownPerFrame);
     }
 
     IEnumerator Move(){
         while (true){
             for (int i = 0; i < 10; i++){
                 transform.position = new Vector3(transform.position.x, transform.position.y + moveBetweenFrames, transform.position.z);
-                yield return new WaitForSeconds(timeBetweenFrames);
+                yield return new WaitForEndOfFrame();
             }
             for (int i = 0; i < 10; i++){
                 transform.position = new Vector3(transform.position.x, transform.position.y - moveBetweenFrames, transform.position.z);
-                yield return new WaitForSeconds(timeBetweenFrames);
+                yield return new WaitForEndOfFrame();
             }
         }
+    }
+
+    IEnumerator AnimateOut()
+    {
+        while (transform.localScale.x > 0)
+        {
+            transform.localScale -= new Vector3(scaleDownPerFrame, scaleDownPerFrame, 0);
+            transform.position += moveUpPerFrame * Vector3.up;
+            yield return new WaitForEndOfFrame();
+        }
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player")){
-            // Assuming you have a reference to the PlayerInventory script on your player object.
             PlayerInventory playerInventory = other.GetComponent<PlayerInventory>();
+            if (playerInventory == null) return;
 
-            if (playerInventory != null)
-            {
-                playerInventory.ItemCollected(this.gameObject); // Call the ItemCollected method in the PlayerInventory script.
-                gameObject.SetActive(false);
-                ScoreManager.Instance.AddPoints(points);
-            }
+            collider.enabled = false;
+            playerInventory.ItemCollected(this.gameObject);
+            ScoreManager.Instance.AddPoints(points);
+            StopCoroutine(moveCoroutine);
+            StartCoroutine(AnimateOut());
         }
     }
 }
