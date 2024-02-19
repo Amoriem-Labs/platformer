@@ -6,6 +6,7 @@ using TMPro;
 
 public class PlayerInventory : MonoBehaviour
 {
+    public InventoryItem[] inventoryItems; // This will store the items that the player has collected.
     public int numAssignments { get; private set; } // This will store the number of collected assignments.
     public int numCoins { get; private set; } // This will store the number of collected coins.
     public static Action OnItemCollected; // This is the event that will be invoked when an item is collected.
