@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI coinText;
     public SleepTimer sleepTimer;
     public SaveData currSaveData;
-    private GameObject player;
+    [HideInInspector] public GameObject player;
     public LevelGradingManager levelGradingManager;
     public string levelGradingSceneName;
     public delegate void OnSave();

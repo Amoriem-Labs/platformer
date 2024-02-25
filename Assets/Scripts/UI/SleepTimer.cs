@@ -13,6 +13,10 @@ public class SleepTimer : MonoBehaviour
     public static void CallChangeSleepValue(float amt) { onChangeSleepValue?.Invoke(amt); }
 
     public Slider sleepTimer;
+    public GameObject vignette;
+    public GameObject sleepDemon;
+    public float timeLeftToActivateVignette;
+    public float timeLeftToActivateSleepDemon;
 
     public float maxTime;
     public float timeInTimer;
@@ -28,12 +32,16 @@ public class SleepTimer : MonoBehaviour
     {
         timeInTimer = maxTime;
         timeSpent = 0;
+        vignette.SetActive(false);
+        sleepDemon.SetActive(false);
         onSleepTimerUpdate += UpdateSlider;
+        onSleepTimerUpdate += CheckIfCanActivateSleepDebuffs;
         onChangeSleepValue += ChangeSleepValue;
     }
     void OnDestroy()
     {
         onSleepTimerUpdate -= UpdateSlider;
+        onSleepTimerUpdate -= CheckIfCanActivateSleepDebuffs;
         onChangeSleepValue -= ChangeSleepValue;
     }
 
@@ -63,5 +71,29 @@ public class SleepTimer : MonoBehaviour
     public void UpdateSlider(float _timeInTimer, float _maxTime)
     {
         sleepTimer.value = _timeInTimer / _maxTime;
+    }
+
+    public void CheckIfCanActivateSleepDebuffs(float _timeInTimer, float _maxTime)
+    {
+        if (_timeInTimer <= timeLeftToActivateVignette)
+        {
+            if (vignette.activeSelf == false)
+            {
+                vignette.SetActive(true);
+            }
+        } else {
+            vignette.SetActive(false);
+        }
+        if (_timeInTimer <= timeLeftToActivateSleepDemon)
+        {
+            if (sleepDemon.activeSelf == false)
+            {
+                sleepDemon.SetActive(true);
+                Vector3 playerPos = GameManager.Instance.player.transform.position;
+                sleepDemon.transform.position = new Vector3(playerPos.x - 15, playerPos.y, playerPos.z);
+            }
+        } else {
+            sleepDemon.SetActive(false);
+        }
     }
 }
