@@ -27,6 +27,17 @@ public class PlayerInventory : MonoBehaviour
         OnItemCollected -= UpdateCoinText;
     }
 
+    public void ItemBought(GameObject item){
+        inventoryItems.Add(item.GetComponent<InventoryItem>());
+        // Insert code to display item in UI.
+    }
+
+    public void ItemUsed(Consumable item){
+        inventoryItems.Remove(item);
+        // Insert code to remove item from UI.
+        item.Use();
+    }
+
     public void ItemCollected(GameObject item)
     {
         if (item.tag == "Coin")
