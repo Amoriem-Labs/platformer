@@ -83,7 +83,6 @@ public class GameManager : MonoBehaviour
         // Call below functions only when fade out/in animation is completed
         SceneManager.LoadScene(currentLevel.sceneName); // Load in the scene
         player.transform.position = currentLevel.playerSpawnPoint; // Reset player position
-        cameraController.vcam.transform.position = currentLevel.playerSpawnPoint; // Reset camera position
     }
     #endregion
 
