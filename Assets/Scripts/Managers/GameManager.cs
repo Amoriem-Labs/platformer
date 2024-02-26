@@ -11,14 +11,14 @@ public class GameManager : MonoBehaviour
 	public static GameManager Instance { get { return _instance; } }
     [HideInInspector] public Level currentLevel;
     [HideInInspector] public Level[] levels;
-    public Animator animator;
+    public Animator fadeAnim;
     public bool levelCompleted = false;
     public TextMeshProUGUI assignmentText;
     public TextMeshProUGUI coinText;
     public SleepTimer sleepTimer;
     public SaveData currSaveData;
     [HideInInspector] public GameObject player;
-    public LevelGradingManager levelGradingManager;
+    private PlayerInventory playerInventory;
     public string levelGradingSceneName;
     public delegate void OnSave();
     public static event OnSave onSave;
@@ -34,7 +34,8 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(_instance);
 
             player = GameObject.FindGameObjectWithTag("Player");
-            animator.enabled = false;
+            playerInventory = player.GetComponent<PlayerInventory>();
+            fadeAnim.enabled = false;
 
             levels = Resources.LoadAll<Level>("Levels/");
             currentLevel = levels[0];
@@ -45,54 +46,46 @@ public class GameManager : MonoBehaviour
 
     void Update(){
         if (sleepTimer.timeInTimer <= 0f){
-            ResetLevel();
+            ResetLevel(true);
         }
     }
 
-    [ContextMenu("RespawnPlayer")]
-    public void RespawnPlayer(){
-        player.transform.position = new Vector3(-9.11f, 0f, 0f);
-    }
-
     public void LoadLevelGradingScreen(){
-        animator.enabled = false;
-        animator.enabled = true;
+        fadeAnim.enabled = false;
+        fadeAnim.enabled = true;
         SceneManager.LoadScene(levelGradingSceneName);
     }
 
     [ContextMenu("LoadNextLevel")]
+    // Function purely for debugging purposes, only ever called from Inspector
     public void LoadNextLevel(){
-        animator.enabled = false;
-        animator.enabled = true;
-        levelCompleted = false;
-        // Call below functions only when animation is completed
-        currentLevel = levels[currentLevel.levelID + 1];
-        levelGradingManager.ResetNumCoinsCollected();
-        SceneManager.LoadScene(currentLevel.sceneName);
-        RespawnPlayer();
+        LoadLevel(currentLevel.levelID + 1);
     }
 
     public void LoadLevel(int levelID){
-        animator.enabled = false;
-        animator.enabled = true;
-        levelCompleted = false;
-        // Call below functions only when animation is completed
         currentLevel = levels[levelID];
-        sleepTimer.maxTime = currentLevel.maxTime;
-        assignmentText.text = $"0/{currentLevel.numAssignmentsToComplete}";
-        levelGradingManager.ResetNumCoinsCollected();
-        SceneManager.LoadScene(currentLevel.sceneName);
-        player.transform.position = currentLevel.playerSpawnPoint;
+        ResetLevel(false);
     }
 
-    public void ResetLevel(){
-        animator.enabled = false;
-        animator.enabled = true;
-        levelCompleted = false;
-        levelGradingManager.ResetNumCoinsCollected();
-        // Call below functions only when animation is completed
-        SceneManager.LoadScene(currentLevel.sceneName);
-        player.transform.position = currentLevel.playerSpawnPoint;
+    // Function to reset the level, and has two uses: if the player died or if the player completed the level
+    public void ResetLevel(bool playerDied){
+        AudioManager.Instance.StopMusic(); // Stop music
+        fadeAnim.enabled = false; // Reset fade out/in animation
+        fadeAnim.enabled = true;
+        levelCompleted = false; // Reset level completion status
+        LevelGradingManager.Instance.ResetNumCoinsCollected(); // Reset number of coins collected used in scoring system
+        if (playerDied){
+            playerInventory.numCoins -= LevelGradingManager.Instance.numCoinsCollected; // Remove coins collected from player inventory if resetting level because player died, otherwise keep number of coins in inventory because player has moved onto another level
+            coinText.text = $"{playerInventory.numCoins}";
+        } else {
+            sleepTimer.maxTime = currentLevel.maxTime; // Changing sleep timer max time for new level for case #2: when player has completed the previous level
+        }
+        AudioManager.Instance.StartMusic(); // Restart music
+        sleepTimer.ResetTimer(); // Reset sleep timer
+        assignmentText.text = $"0/{currentLevel.numAssignmentsToComplete}"; // Reset number of assignments completed
+        // Call below functions only when fade out/in animation is completed
+        SceneManager.LoadScene(currentLevel.sceneName); // Load in the scene
+        player.transform.position = currentLevel.playerSpawnPoint; // Reset player position
     }
 
     #region Save methods.

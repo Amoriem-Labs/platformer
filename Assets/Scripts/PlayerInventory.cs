@@ -6,8 +6,8 @@ using TMPro;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public int numAssignments { get; private set; } // This will store the number of collected assignments.
-    public int numCoins { get; private set; } // This will store the number of collected coins.
+    public int numAssignments; // This will store the number of collected assignments.
+    public int numCoins; // This will store the number of collected coins.
     public static Action OnItemCollected; // This is the event that will be invoked when an item is collected.
     public GameObject levelCompleteMessage; // This is the message that will be displayed when the level is complete.
 
@@ -31,7 +31,7 @@ public class PlayerInventory : MonoBehaviour
         if (item.tag == "Coin")
         {
             numCoins++;
-            GameManager.Instance.levelGradingManager.numCoinsCollected++;
+            LevelGradingManager.Instance.numCoinsCollected++;
         }
         else if (item.tag == "Assignment")
         {

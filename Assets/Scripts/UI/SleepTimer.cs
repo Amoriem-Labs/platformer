@@ -30,19 +30,24 @@ public class SleepTimer : MonoBehaviour
 
     void Start()
     {
-        timeInTimer = maxTime;
-        timeSpent = 0;
+        ResetTimer();
         vignette.SetActive(false);
         sleepDemon.SetActive(false);
         onSleepTimerUpdate += UpdateSlider;
         onSleepTimerUpdate += CheckIfCanActivateSleepDebuffs;
         onChangeSleepValue += ChangeSleepValue;
     }
+    
     void OnDestroy()
     {
         onSleepTimerUpdate -= UpdateSlider;
         onSleepTimerUpdate -= CheckIfCanActivateSleepDebuffs;
         onChangeSleepValue -= ChangeSleepValue;
+    }
+
+    public void ResetTimer(){
+        timeInTimer = maxTime;
+        timeSpent = 0;
     }
 
     // Update is called once per frame

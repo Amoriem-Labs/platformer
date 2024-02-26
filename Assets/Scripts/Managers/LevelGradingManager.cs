@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class LevelGradingManager : MonoBehaviour
 {
+    private static LevelGradingManager _instance;
+	public static LevelGradingManager Instance { get { return _instance; } }
+
     [Tooltip("The minimum score required to get an A")]
     public int A_threshold; 
     [Tooltip("The minimum score required to get an B")]
@@ -29,6 +32,16 @@ public class LevelGradingManager : MonoBehaviour
 
     public float score;
     public SleepTimer sleepTimer;
+
+    void Awake() {
+        if (_instance != null && _instance != this) {
+            Destroy(this.gameObject);
+        }
+        else {
+            _instance = this;
+            DontDestroyOnLoad(_instance);
+        }
+    }
 
     public void Start()
     {
