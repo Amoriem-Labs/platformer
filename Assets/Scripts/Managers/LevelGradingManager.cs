@@ -27,9 +27,6 @@ public class LevelGradingManager : MonoBehaviour
     public int maxPointsForCoins;
     [Tooltip("A weight for how much collecting coins in a level should impact the score. Should be between 0 and 1.")]
     public float coinWeight;
-    public int numCoinsCollected;
-    public int numCoinsInLevel;
-
     public float score;
     public SleepTimer sleepTimer;
 
@@ -45,7 +42,6 @@ public class LevelGradingManager : MonoBehaviour
 
     public void Start()
     {
-        numCoinsInLevel = GameObject.FindGameObjectsWithTag("Coin").Length;
         if (timeWeight > 1){
             timeWeight = 1;
         }
@@ -67,7 +63,7 @@ public class LevelGradingManager : MonoBehaviour
         if (time_score < 0){
             time_score = 0;
         }
-        float coin_score = (numCoinsCollected / numCoinsInLevel) * maxPointsForCoins * coinWeight;
+        float coin_score = (CoinManager.Instance.numCoinsCollectedInLevel / CoinManager.Instance.numCoinsInLevel) * maxPointsForCoins * coinWeight;
         score = time_score + coin_score;
         return score;
     }
@@ -95,9 +91,5 @@ public class LevelGradingManager : MonoBehaviour
         {
             return "F";
         }
-    }
-
-    public void ResetNumCoinsCollected(){
-        numCoinsCollected = 0;
     }
 }

@@ -40,6 +40,8 @@ namespace MoreMountains.CorgiEngine
 		/// the switch used to turn sfx on or off
 		[Tooltip("the switch used to turn sfx on or off")]
 		public MMSwitch SfxSwitch;
+		[Tooltip("THIS IS CODE THAT WAS ADDED BY AMORIEM")]
+		public GameObject PersistentObjects; // THIS IS CODE THAT WAS ADDED BY AMORIEM
 
 		/// <summary>
 		/// Initialization
@@ -48,6 +50,7 @@ namespace MoreMountains.CorgiEngine
 		{	
 			GUIManager.Instance.SetHUDActive (false);
 			MMFadeOutEvent.Trigger(FadeInDuration, Tween);
+			PersistentObjects.SetActive(false); // THIS IS CODE THAT WAS ADDED BY AMORIEM
 
 			if (AutoSkipDelay > 1f)
 			{
@@ -104,7 +107,9 @@ namespace MoreMountains.CorgiEngine
 		protected virtual IEnumerator LoadFirstLevel()
 		{
 			yield return new WaitForSeconds (FadeOutDuration);
-			MMSceneLoadingManager.LoadScene (NextLevel, LoadingSceneName);
+			SceneManager.LoadScene(NextLevel);
+			PersistentObjects.SetActive(true); // THIS IS CODE THAT WAS ADDED BY AMORIEM
+			//MMSceneLoadingManager.LoadScene (NextLevel, LoadingSceneName);
 		}
 	}
 }

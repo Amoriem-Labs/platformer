@@ -13,13 +13,11 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Level[] levels;
     public Animator fadeAnim;
     public bool levelCompleted = false;
-    public TextMeshProUGUI assignmentText;
-    public TextMeshProUGUI coinText;
     public SleepTimer sleepTimer;
     public SaveData currSaveData;
     [HideInInspector] public GameObject player;
-    private PlayerInventory playerInventory;
     public string levelGradingSceneName;
+    public CameraController cameraController;
     public delegate void OnSave();
     public static event OnSave onSave;
 
@@ -34,13 +32,10 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(_instance);
 
             player = GameObject.FindGameObjectWithTag("Player");
-            playerInventory = player.GetComponent<PlayerInventory>();
             fadeAnim.enabled = false;
 
             levels = Resources.LoadAll<Level>("Levels/");
             currentLevel = levels[0];
-            assignmentText.text = $"0/{currentLevel.numAssignmentsToComplete}";
-            coinText.text = "0";
         }
     }
 
@@ -50,6 +45,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    #region Level Related Functions
     public void LoadLevelGradingScreen(){
         fadeAnim.enabled = false;
         fadeAnim.enabled = true;
@@ -73,20 +69,23 @@ public class GameManager : MonoBehaviour
         fadeAnim.enabled = false; // Reset fade out/in animation
         fadeAnim.enabled = true;
         levelCompleted = false; // Reset level completion status
-        LevelGradingManager.Instance.ResetNumCoinsCollected(); // Reset number of coins collected used in scoring system
         if (playerDied){
-            playerInventory.numCoins -= LevelGradingManager.Instance.numCoinsCollected; // Remove coins collected from player inventory if resetting level because player died, otherwise keep number of coins in inventory because player has moved onto another level
-            coinText.text = $"{playerInventory.numCoins}";
+            CoinManager.Instance.numCoinsPlayerHas -= CoinManager.Instance.numCoinsCollectedInLevel; // Remove coins collected from player inventory if resetting level because player died, otherwise keep number of coins in inventory because player has moved onto another level
         } else {
             sleepTimer.maxTime = currentLevel.maxTime; // Changing sleep timer max time for new level for case #2: when player has completed the previous level
         }
         AudioManager.Instance.StartMusic(); // Restart music
         sleepTimer.ResetTimer(); // Reset sleep timer
-        assignmentText.text = $"0/{currentLevel.numAssignmentsToComplete}"; // Reset number of assignments completed
+        CoinManager.Instance.ResetNumCoinsCollectedInLevel(); // Reset number of coins collected used in scoring system
+        CoinManager.Instance.UpdateCoinText(); // Update coin text
+        AssignmentManager.Instance.ResetAssignmentsToZero(); // Reset number of assignments completed
+        AssignmentManager.Instance.UpdateAssignmentText(); // Update assignment text
         // Call below functions only when fade out/in animation is completed
         SceneManager.LoadScene(currentLevel.sceneName); // Load in the scene
         player.transform.position = currentLevel.playerSpawnPoint; // Reset player position
+        cameraController.vcam.transform.position = currentLevel.playerSpawnPoint; // Reset camera position
     }
+    #endregion
 
     #region Save methods.
     // Saves begin from index 0.
@@ -110,8 +109,8 @@ public class GameManager : MonoBehaviour
         {
             // If no saves on file, the below lines of code are called
             // Load in the scene
-            assignmentText.text = $"0/{currentLevel.numAssignmentsToComplete}";
-            coinText.text = "0";
+            AssignmentManager.Instance.assignmentText.text = $"0/{currentLevel.numAssignmentsToComplete}";
+            CoinManager.Instance.coinText.text = "0";
             LoadLevel(0);
         }
     }

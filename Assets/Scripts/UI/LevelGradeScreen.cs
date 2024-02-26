@@ -85,9 +85,7 @@ public class LevelGradeScreen : MonoBehaviour
 
     public void StartCountingUpAnimation(){
         StartCoroutine(ChangeValue(timeSpentText, LevelGradingManager.Instance.sleepTimer.timeSpent, timeBetweenValueChanges));
-        //StartCoroutine(ChangeValue(timeSpentText, 100, timeBetweenValueChanges));
-        StartCoroutine(ChangeValue(coinsCollectedText, LevelGradingManager.Instance.numCoinsCollected, timeBetweenValueChanges));
-        //StartCoroutine(ChangeValue(coinsCollectedText, 10, timeBetweenValueChanges));
+        StartCoroutine(ChangeValue(coinsCollectedText, CoinManager.Instance.numCoinsCollectedInLevel, timeBetweenValueChanges));
     }
     
     IEnumerator ChangeValue(TextMeshProUGUI text, float finalValue, float timeBetweenValueChanges){

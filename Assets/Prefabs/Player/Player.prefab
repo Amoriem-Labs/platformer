@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 2440351390553578892}
   - component: {fileID: 6364109315175717596}
   - component: {fileID: 4738615931383125482}
-  - component: {fileID: 8798331859922326679}
   - component: {fileID: 3624508777581357261}
   - component: {fileID: 6248396067147168880}
   m_Layer: 9
@@ -233,19 +232,6 @@ MonoBehaviour:
     m_Bits: 256
   groundCheck: {fileID: 3271391821195693675}
   groundCheckRadius: 0.2
---- !u!114 &8798331859922326679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3335616851834503463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e3042b02039e49d78d47df44d6da06f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelCompleteMessage: {fileID: 0}
 --- !u!114 &3624508777581357261
 MonoBehaviour:
   m_ObjectHideFlags: 0

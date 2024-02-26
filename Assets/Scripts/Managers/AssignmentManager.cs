@@ -1,43 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 using TMPro;
 
-public class PlayerInventory : MonoBehaviour
+public class AssignmentManager : MonoBehaviour
 {
+    private static AssignmentManager _instance;
+	public static AssignmentManager Instance { get { return _instance; } }
     public int numAssignments; // This will store the number of collected assignments.
-    public int numCoins; // This will store the number of collected coins.
-    public static Action OnItemCollected; // This is the event that will be invoked when an item is collected.
     public GameObject levelCompleteMessage; // This is the message that will be displayed when the level is complete.
+    public TextMeshProUGUI assignmentText; // This is the text that will be displayed in the UI to show the number of assignments the player has.
 
-    void OnEnable()
-    {
-        numAssignments = 0;
-        numCoins = 0;
-        levelCompleteMessage.SetActive(false);
-        OnItemCollected += UpdateAssignmentText;
-        OnItemCollected += UpdateCoinText;
+    void Awake() {
+        if (_instance != null && _instance != this) {
+            Destroy(this.gameObject);
+        }
+        else {
+            _instance = this;
+            DontDestroyOnLoad(_instance);
+
+            numAssignments = 0;
+            levelCompleteMessage.SetActive(false);
+        }
     }
 
-    void OnDisable()
-    {
-        OnItemCollected -= UpdateAssignmentText;
-        OnItemCollected -= UpdateCoinText;
-    }
-
-    public void ItemCollected(GameObject item)
-    {
-        if (item.tag == "Coin")
-        {
-            numCoins++;
-            LevelGradingManager.Instance.numCoinsCollected++;
-        }
-        else if (item.tag == "Assignment")
-        {
-            numAssignments++;
-        }
-        OnItemCollected?.Invoke();
+    public void AddAssignment(){
+        numAssignments++;
+        UpdateAssignmentText();
         if (numAssignments == GameManager.Instance.currentLevel.numAssignmentsToComplete)
         {
             GameManager.Instance.levelCompleted = true;
@@ -45,13 +34,13 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    public void UpdateAssignmentText()
-    {
-        GameManager.Instance.assignmentText.text = $"{numAssignments}/{GameManager.Instance.currentLevel.numAssignmentsToComplete}";
+    public void ResetAssignmentsToZero(){
+        numAssignments = 0;
     }
 
-    public void UpdateCoinText(){
-        GameManager.Instance.coinText.text = $"{numCoins}";
+    public void UpdateAssignmentText()
+    {
+        assignmentText.text = $"{numAssignments}/{GameManager.Instance.currentLevel.numAssignmentsToComplete}";
     }
 
     IEnumerator DisplayLevelCompleteMessage()
@@ -83,4 +72,3 @@ public class PlayerInventory : MonoBehaviour
         levelCompleteMessage.SetActive(false);
     }
 }
-

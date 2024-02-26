@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 
 public class Collectable : MonoBehaviour
@@ -24,7 +23,6 @@ public class Collectable : MonoBehaviour
         collider = GetComponent<Collider2D>();
         // Larger objects should scale down at the same rate as smaller objects
         scaleDownPerFrame = scaleDownPercentPerFrame * transform.localScale.x;
-        print(scaleDownPerFrame);
     }
 
     IEnumerator Move(){
@@ -54,11 +52,12 @@ public class Collectable : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player")){
-            PlayerInventory playerInventory = other.GetComponent<PlayerInventory>();
-            if (playerInventory == null) return;
-
+            if (this.tag == "Coin"){
+                CoinManager.Instance.AddCoin();
+            } else if (this.tag == "Assignment"){
+                AssignmentManager.Instance.AddAssignment();
+            }
             collider.enabled = false;
-            playerInventory.ItemCollected(this.gameObject);
             ScoreManager.Instance.AddPoints(points);
             StopCoroutine(moveCoroutine);
             StartCoroutine(AnimateOut());
