@@ -36,6 +36,7 @@ namespace MoreMountains.MMInterface
 		/// <summary>
 		/// On Init, we grab our animator and store it for future use
 		/// </summary>
+		[ContextMenu("Initialization")]
 		protected virtual void Initialization()
 		{
 			_animator = GetComponent<Animator> ();
@@ -61,7 +62,7 @@ namespace MoreMountains.MMInterface
 			{
 				return;
 			}
-
+			_animator = GetComponent<Animator> ();
 			MMFadeEvent.Trigger(FaderOpenDuration, FaderOpacity, Tween, ID);
 			_animator.SetTrigger ("Open");
 			CurrentlyOpen = true;

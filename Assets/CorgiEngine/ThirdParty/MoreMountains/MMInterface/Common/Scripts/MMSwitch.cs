@@ -41,6 +41,8 @@ namespace MoreMountains.MMInterface
 
 		public virtual void InitializeState()
 		{
+			_animator = GetComponent<Animator> ();
+			/*
 			if (CurrentSwitchState == SwitchStates.Left)
 			{
 				_animator.Play ("RollLeft");
@@ -48,7 +50,7 @@ namespace MoreMountains.MMInterface
 			else
 			{
 				_animator.Play ("RollRight");
-			}
+			}*/
 		}
 
 		/// <summary>
