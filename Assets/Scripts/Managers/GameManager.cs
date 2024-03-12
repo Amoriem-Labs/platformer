@@ -40,6 +40,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Update(){
+        if (SleepManager.Instance.timeInTimer <= 0f){
+            ResetLevel();
+        }
+    }
+
+    #region Load level methods.
+    [ContextMenu("RespawnPlayer")]
+    public void RespawnPlayer(){
+        player.transform.position = new Vector3(-9.11f, 0f, 0f);
+    }
+
+    public void LoadLevelGradingScreen(){
+        animator.enabled = false;
+        animator.enabled = true;
+        SceneManager.LoadScene(levelGradingSceneName);
+    }
+
     [ContextMenu("LoadNextLevel")]
     public void LoadNextLevel(){
         animator.enabled = false;
@@ -59,6 +77,17 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(currentLevel.sceneName);
         player.transform.position = currentLevel.playerSpawnPoint;
     }
+
+    public void ResetLevel(){
+        animator.enabled = false;
+        animator.enabled = true;
+        levelCompleted = false;
+        levelGradingManager.ResetNumCoinsCollected();
+        // Call below functions only when animation is completed
+        SceneManager.LoadScene(currentLevel.sceneName);
+        player.transform.position = currentLevel.playerSpawnPoint;
+    }
+    #endregion
 
     #region Save methods.
     // Saves begin from index 0.
@@ -104,6 +133,10 @@ public class GameManager : MonoBehaviour
 
         // write the current save data to the saveIndex save
         SaveUtil.WriteFile(ref newSave, saveIndex);
+    }
+
+    public void DeleteSave(int saveIndex){
+        SaveUtil.DeleteSaveFile(saveIndex);
     }
 
     // Test function to create a new save file
