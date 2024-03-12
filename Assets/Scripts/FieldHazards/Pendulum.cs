@@ -7,24 +7,28 @@ public class Pendulum : MonoBehaviour
     public float energySap; // This is the amount of energy the hazard saps of the player.
     public bool walkableThroughAble; // This is whether or not the player can walk through the hazard without needing to respawn.
     public float rotation_rate;
+    public Vector3 rotation_dir = new Vector3(0, 0, 1);
+    private float rotation_z;
+    private bool movingRight = true;
+    private bool movingLeft = false;
 
-    void Start(){
-        StartCoroutine("Rotate");
-    }
-
-    IEnumerator Rotate(){
-        while (true){
-            float z_rot = transform.rotation.z;
-            if (z_rot > -35f && z_rot < 35f){
-                Vector3 vec = new Vector3(0, 0, z_rot += rotation_rate);
-                Quaternion q = Quaternion.Euler(vec);
-                transform.rotation = q;
-                // idk how quaternion rotations work
-                yield return new WaitForSeconds(0.05f);
-            } else {
-                rotation_rate *= -1;
-            }
+    void Update(){
+        if(transform.eulerAngles.z <= 180f)
+        {
+            rotation_z = transform.eulerAngles.z;
+        } else {
+            rotation_z = transform.eulerAngles.z - 360f;
         }
+        if (rotation_z < -35f) {
+            movingRight = true;
+            movingLeft = false;
+        }
+        if (rotation_z > 35f) {
+            movingRight = false;
+            movingLeft = true;
+        }
+        if (movingRight) {transform.Rotate(rotation_rate * rotation_dir * Time.deltaTime); }
+        if (movingLeft) {transform.Rotate(rotation_rate * rotation_dir*-1 * Time.deltaTime); }
     }
 
     void OnTriggerEnter2D (Collider2D collider){
