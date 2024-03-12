@@ -28,7 +28,6 @@ public class LevelGradingManager : MonoBehaviour
     public int numCoinsInLevel;
 
     public float score;
-    public SleepTimer sleepTimer;
 
     public void Start()
     {
@@ -50,7 +49,7 @@ public class LevelGradingManager : MonoBehaviour
     [ContextMenu("CalculateScore")]
     public float CalculateScore()
     {
-        float time_score = (1 - sleepTimer.timeSpent / sleepTimer.maxTime) * maxPointsForTime * timeWeight;
+        float time_score = (1 - SleepManager.Instance.timeSpent / SleepManager.Instance.maxTime) * maxPointsForTime * timeWeight;
         if (time_score < 0){
             time_score = 0;
         }

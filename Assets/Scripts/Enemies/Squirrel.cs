@@ -7,7 +7,7 @@ public class Squirrel : EnemyWithPathfinding
     public Vector2 hitForce;
     private Animator animator;
     public float stunDuration; // This is the number of seconds to stun the player for when the squirrel collides with the player.
-    public float damageAmount; // This is the amount of damage the squirrel does to the player when the squirrel collides with the player.
+    public float energySap; // This is the amount of damage the squirrel does to the player when the squirrel collides with the player.
 
     #pragma warning disable 0114
     void Start()
@@ -40,7 +40,7 @@ public class Squirrel : EnemyWithPathfinding
             } else {
                 Player.rb.AddForce(new Vector2(-1, 1) * hitForce); // push player to the left if squirrel is moving left
             }
-            Player.TakeDamage(damageAmount);
+            Player.DecreaseEnergy(energySap);
             isFrozen = true;
             animator.enabled = false;
             Invoke("EnablePlayerAndSquirrelMovement", stunDuration);

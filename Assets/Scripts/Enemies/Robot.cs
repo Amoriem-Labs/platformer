@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Robot : EnemyWithPathfinding
 {
     public Vector2 force;
-    public float damageAmount;
+    public float energySap;
 
     #pragma warning disable 0114
     // Start is called before the first frame update
@@ -38,7 +38,7 @@ public class Robot : EnemyWithPathfinding
             } else {
                 Player.rb.AddForce(new Vector2(-1, 1) * force); // push player to the left if squirrel is moving left
             }
-            Player.TakeDamage(damageAmount);
+            Player.DecreaseEnergy(energySap);
             ScoreManager.Instance.ResetMultiplier();
         }
     }

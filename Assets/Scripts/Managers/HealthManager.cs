@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
+    // DEPRECATED SCRIPT: NO LONGER USING HEALTH SYSTEM
+    /*
     private static HealthManager _instance;
     public static HealthManager Instance { get { return _instance;} }
     public GameObject heartPrefab;
@@ -97,5 +99,5 @@ public class HealthManager : MonoBehaviour
         for (int i = (int)System.Math.Ceiling(currentNumHearts); i < totalNumHearts; i++){
             heartObjs[i].GetComponent<Image>().sprite = emptyHeart;
         }
-    }
+    }*/
 }

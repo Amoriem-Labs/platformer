@@ -1492,7 +1492,6 @@ MonoBehaviour:
   numCoinsCollected: 0
   numCoinsInLevel: 0
   score: 0
-  sleepTimer: {fileID: 1025945204}
 --- !u!1 &291951326
 GameObject:
   m_ObjectHideFlags: 0
@@ -2659,41 +2658,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 3}
   m_EdgeRadius: 0
---- !u!1 &562336218
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 562336219}
-  m_Layer: 5
-  m_Name: HeartBar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &562336219
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562336218}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 838641090}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &562915880
 GameObject:
   m_ObjectHideFlags: 0
@@ -3974,7 +3938,6 @@ RectTransform:
   - {fileID: 1309980638}
   - {fileID: 1865153669}
   - {fileID: 1960131243}
-  - {fileID: 562336219}
   - {fileID: 569594280}
   - {fileID: 1640642433}
   m_Father: {fileID: 260273399}
@@ -4509,18 +4472,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007885219}
   m_CullTransparentMesh: 1
---- !u!114 &1025945204 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1706141194043724742, guid: 6deb38eae00ca3849a47f0dc6a05c6b2,
-    type: 3}
-  m_PrefabInstance: {fileID: 687715316}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51340b709e75b3a4ca99b9e4b5752444, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1065929376
 GameObject:
   m_ObjectHideFlags: 0
@@ -5836,7 +5787,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 97, y: -207}
+  m_AnchoredPosition: {x: 97, y: -74}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1376003356
@@ -11254,7 +11205,6 @@ MonoBehaviour:
   levelCompleted: 0
   assignmentText: {fileID: 1913370659}
   coinText: {fileID: 203324831}
-  sleepTimer: {fileID: 1025945204}
   currSaveData:
     levelID: 0
   levelGradingManager: {fileID: 286050257}
@@ -12337,7 +12287,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 97, y: -334}
+  m_AnchoredPosition: {x: 97, y: -201}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1865611629
@@ -12384,17 +12334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81a267b4342493a46b338dc157cc67a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heartPrefab: {fileID: 3708242244139508506, guid: f0a6586bf12723447a6504a28488ce5e,
-    type: 3}
-  heartBarParent: {fileID: 562336219}
-  totalNumHearts: 7
-  currentNumHearts: 0
-  fullHeart: {fileID: -2035891226, guid: e5fc46671bd8ff44b93263c85fb1edb4, type: 3}
-  halfHeart: {fileID: -1668258515, guid: e5fc46671bd8ff44b93263c85fb1edb4, type: 3}
-  emptyHeart: {fileID: 1481151343, guid: e5fc46671bd8ff44b93263c85fb1edb4, type: 3}
-  worldCoordFirstHeart: {x: -1.8, y: 1.8}
-  distanceBetweenHearts: {x: 1.3, y: 0}
-  heartObjs: []
 --- !u!1 &1893118921
 GameObject:
   m_ObjectHideFlags: 0
@@ -12640,7 +12579,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 97, y: -461}
+  m_AnchoredPosition: {x: 97, y: -328}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1960131244
@@ -13400,7 +13339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4d350cb29b1e14d93cace3b9689ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 1
+  energySap: 0
   walkableThroughAble: 0
 --- !u!4 &2650196495195701160 stripped
 Transform:

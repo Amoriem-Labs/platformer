@@ -5,7 +5,7 @@ using UnityEngine;
 public class SleepDemon : Enemy
 {
     public Vector2 hitForce;
-    public float damageAmount;
+    public float energySap;
     public float speed;
     private GameObject player;
     private Animator anim;
@@ -27,7 +27,7 @@ public class SleepDemon : Enemy
         int layer = LayerMask.NameToLayer("Player");
         if (collision.gameObject.layer == layer){
             anim.Play("Attack");
-            Player.TakeDamage(damageAmount);
+            Player.DecreaseEnergy(energySap);
             if (rb.velocity.x > 0){
                 Player.rb.AddForce(new Vector2(1, 1) * hitForce); // push player to the right if enemy is moving right
             } else {

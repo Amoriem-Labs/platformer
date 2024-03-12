@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SleepTimer : MonoBehaviour
+public class SleepManager : MonoBehaviour
 {
+    private static SleepManager _instance;
+	public static SleepManager Instance { get { return _instance; } }
+
     public delegate void OnSleepTimerUpdate(float timeInTimer, float maxTime);
     public static event OnSleepTimerUpdate onSleepTimerUpdate;
 
@@ -18,11 +21,15 @@ public class SleepTimer : MonoBehaviour
     public float timeInTimer;
     public float timeSpent;
 
-    //void Awake()
-    //{
-    //    sleepTimer = gameObject.GetComponent<Slider>();
-        
-    //}
+    void Awake() {
+        if (_instance != null && _instance != this) {
+            Destroy(this.gameObject);
+        }
+        else {
+            _instance = this;
+            DontDestroyOnLoad(_instance);
+        }
+    }
 
     void Start()
     {
@@ -63,5 +70,9 @@ public class SleepTimer : MonoBehaviour
     public void UpdateSlider(float _timeInTimer, float _maxTime)
     {
         sleepTimer.value = _timeInTimer / _maxTime;
+    }
+
+    public void DecreaseEnergy(float energyAmount){
+        timeInTimer -= energyAmount;
     }
 }

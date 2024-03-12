@@ -10,7 +10,7 @@ public class Drone : EnemyWithPathfinding
     public GameObject bookPrefab; // This is the book GameObject that the drone will throw.
     public float bookThrowSpeed; // This is the speed at which the drone will throw the book.
     public float timeBetweenBookThrows; // This is the time between each book throw.
-    public float damageAmount;
+    public float energySap;
     private float timeUntilNextBookThrow; // This is the time until the next book throw.
 
     // Start is called before the first frame update
@@ -75,7 +75,7 @@ public class Drone : EnemyWithPathfinding
     void OnCollisionEnter2D(Collision2D collision){
         int layer = LayerMask.NameToLayer("Player");
         if (collision.gameObject.layer == layer){
-            Player.TakeDamage(damageAmount);
+            Player.DecreaseEnergy(energySap);
             if (rb.velocity.x > 0){
                 Player.rb.AddForce(new Vector2(1, 1) * hitForce); // push player to the right if squirrel is moving right
             } else {

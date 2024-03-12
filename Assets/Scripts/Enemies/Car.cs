@@ -7,7 +7,7 @@ public class Car : Enemy
     public Vector2 moveForce;
     public Vector2 hitForce;
     public float secWaitAfterCollision;
-    public float damageAmount;
+    public float energySap;
 
     void Start(){
         rb = GetComponent<Rigidbody2D>();
@@ -28,7 +28,7 @@ public class Car : Enemy
     void OnCollisionEnter2D(Collision2D collision){
         int layer = LayerMask.NameToLayer("Player");
         if (collision.gameObject.layer == layer){
-            Player.TakeDamage(damageAmount);
+            Player.DecreaseEnergy(energySap);
             if (rb.velocity.x > 0){
                 Player.rb.AddForce(new Vector2(1, 1) * hitForce); // push player to the right if squirrel is moving right
             } else {

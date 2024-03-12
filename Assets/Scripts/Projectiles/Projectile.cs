@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float damageAmount;
+    public float energySap;
     public float knockBack;
 
     void OnTriggerEnter2D (Collider2D collider){
@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
         int platformLayer = LayerMask.NameToLayer("Platforms");
         if (collider.gameObject.layer == playerLayer){
             Rigidbody2D playerRb = collider.GetComponent<Rigidbody2D>();
-            Player.TakeDamage(damageAmount);
+            Player.DecreaseEnergy(energySap);
             // Knock back player based on which side of the player the projectile is on.
             if (collider.transform.position.x < transform.position.x){
                 playerRb.AddForce(new Vector2(-10, 5) * knockBack);

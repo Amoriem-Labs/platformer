@@ -9,7 +9,7 @@ public class Tome : EnemyWithPathfinding
     public Vector2 dashForce;
     public float timeBetweenDashes;
     public TriggerResponse attackRangeTriggerResponse; // Once the player walks into this attack range radius, the enemy will start dashing towards player.
-    public float damageAmount;
+    public float energySap;
 
     // Start is called before the first frame update
     void Start()
@@ -65,7 +65,7 @@ public class Tome : EnemyWithPathfinding
             } else {
                 Player.rb.AddForce(new Vector2(-1, 1) * hitForce); // push player to the left if squirrel is moving left
             }
-            Player.TakeDamage(damageAmount);
+            Player.DecreaseEnergy(energySap);
         }
     }
 }

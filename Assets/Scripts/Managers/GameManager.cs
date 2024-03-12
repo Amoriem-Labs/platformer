@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     public bool levelCompleted = false;
     public TextMeshProUGUI assignmentText;
     public TextMeshProUGUI coinText;
-    public SleepTimer sleepTimer;
     public SaveData currSaveData;
     private GameObject player;
     public LevelGradingManager levelGradingManager;
@@ -44,7 +43,7 @@ public class GameManager : MonoBehaviour
     }
 
     void Update(){
-        if (sleepTimer.timeInTimer <= 0f){
+        if (SleepManager.Instance.timeInTimer <= 0f){
             ResetLevel();
         }
     }
@@ -78,7 +77,7 @@ public class GameManager : MonoBehaviour
         levelCompleted = false;
         // Call below functions only when animation is completed
         currentLevel = levels[levelID];
-        sleepTimer.maxTime = currentLevel.maxTime;
+        SleepManager.Instance.maxTime = currentLevel.maxTime;
         assignmentText.text = $"0/{currentLevel.numAssignmentsToComplete}";
         levelGradingManager.ResetNumCoinsCollected();
         SceneManager.LoadScene(currentLevel.sceneName);
