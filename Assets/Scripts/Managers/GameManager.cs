@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 
@@ -18,6 +19,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public GameObject player;
     public string levelGradingSceneName;
     public CameraController cameraController;
+    public Slider musicVolumeSlider;
+    public Slider sfxVolumeSlider;
+    public GameObject settingsPopup;
     public delegate void OnSave();
     public static event OnSave onSave;
 
@@ -42,6 +46,15 @@ public class GameManager : MonoBehaviour
     void Update(){
         if (sleepTimer.timeInTimer <= 0f){
             ResetLevel(true);
+        }
+        // Somehow get button press instead of button taps
+        if (Input.GetKey(KeyCode.Escape)){
+            Debug.Log("Registering Escape");
+            if (!settingsPopup.activeSelf){
+                settingsPopup.SetActive(true);
+            } else {
+                settingsPopup.SetActive(false);
+            }
         }
     }
 
@@ -100,6 +113,10 @@ public class GameManager : MonoBehaviour
         {
             // Read in the level from the save data
             currentLevel = levels[currSaveData.levelID];
+            musicVolumeSlider.value = currSaveData.musicVolume;
+            sfxVolumeSlider.value = currSaveData.sfxVolume;
+            CoinManager.Instance.numCoinsPlayerHas = currSaveData.numCoins;
+            CoinManager.Instance.UpdateCoinText();
             LoadLevel(currentLevel.levelID);
 
             // Method to instantiate player and set player position should be within LoadLevel
@@ -127,9 +144,15 @@ public class GameManager : MonoBehaviour
 
         // deal with levels
         newSave.levelID = currentLevel.levelID;
+        newSave.musicVolume = musicVolumeSlider.value;
+        newSave.sfxVolume = sfxVolumeSlider.value;
 
         // write the current save data to the saveIndex save
         SaveUtil.WriteFile(ref newSave, saveIndex);
+    }
+
+    public void DeleteSave(){
+        // Delete save file
     }
 
     // Test function to create a new save file

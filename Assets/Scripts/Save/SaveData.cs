@@ -9,4 +9,7 @@ using UnityEngine;
 public class SaveData
 {
     public int levelID; // index of which level the player last saved
+    public float musicVolume; // volume of music soundtracks in game
+    public float sfxVolume; // volume of sfx (sound effects) in game
+    public int numCoins; // number of coins in player inventory
 }
