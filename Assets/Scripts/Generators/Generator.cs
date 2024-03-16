@@ -11,7 +11,7 @@ public class Generator : MonoBehaviour
     public GameObject objectPrefab; // prefab for object
 
     void Update(){
-        if (isSpawning){ 
+        if (isSpawning && !GameManager.Instance.isGamePaused){ 
             timeUntilNextSpawn += Time.deltaTime;
             if (timeUntilNextSpawn >= timeBetweenSpawns){
                 SpawnObject();

@@ -48,71 +48,73 @@ public class WASDMovement : MonoBehaviour
 
     private void Update()
     {
-        if (isDashing){
-            return;
-        }
-
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, platformLayer);
-
-        // Handle horizontal movement
-        rb.velocity = new Vector2(Input.GetAxis("Horizontal") * walkspeed, rb.velocity.y);
-        
-        // Flip sprite according to movement
-        if (rb.velocity.x != 0) { 
-            bodySprite.flipX = rb.velocity.x < 0;
-            sweaterSprite.flipX = rb.velocity.x < 0;
-            hairSprite.flipX = rb.velocity.x < 0;
-        }
-
-        // Handle jumping
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (isGrounded)
-            {
-                Jump();
+        if (!GameManager.Instance.isGamePaused){
+            if (isDashing){
+                return;
             }
-            else if (canDoubleJump)
-            {
-                DoubleJump();
-            }
-        }
 
-        // Handle dashing left
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            if (pressedLeftFirstTime) // we've already pressed the button a first time, we check if the 2nd time is fast enough to be considered a double-press
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, platformLayer);
+
+            // Handle horizontal movement
+            rb.velocity = new Vector2(Input.GetAxis("Horizontal") * walkspeed, rb.velocity.y);
+            
+            // Flip sprite according to movement
+            if (rb.velocity.x != 0) { 
+                bodySprite.flipX = rb.velocity.x < 0;
+                sweaterSprite.flipX = rb.velocity.x < 0;
+                hairSprite.flipX = rb.velocity.x < 0;
+            }
+
+            // Handle jumping
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                bool isDoublePress = Time.time - lastPressedLeftTime <= delayBetweenPresses;
-                if (isDoublePress && canDash)
+                if (isGrounded)
                 {
-                    StartCoroutine(Dash(-1)); // Dash left
-                    pressedLeftFirstTime = false;
+                    Jump();
+                }
+                else if (canDoubleJump)
+                {
+                    DoubleJump();
                 }
             }
-            else // we've not already pressed the button a first time
-            {
-                pressedLeftFirstTime = true; // we tell this is the first time
-            }
-            lastPressedLeftTime = Time.time;
-        }
 
-        // Handle dashing right
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if (pressedRightFirstTime) // we've already pressed the button a first time, we check if the 2nd time is fast enough to be considered a double-press
+            // Handle dashing left
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                bool isDoublePress = Time.time - lastPressedRightTime <= delayBetweenPresses;
-                if (isDoublePress && canDash)
+                if (pressedLeftFirstTime) // we've already pressed the button a first time, we check if the 2nd time is fast enough to be considered a double-press
                 {
-                    StartCoroutine(Dash(1)); // Dash right
-                    pressedRightFirstTime = false;
+                    bool isDoublePress = Time.time - lastPressedLeftTime <= delayBetweenPresses;
+                    if (isDoublePress && canDash)
+                    {
+                        StartCoroutine(Dash(-1)); // Dash left
+                        pressedLeftFirstTime = false;
+                    }
                 }
+                else // we've not already pressed the button a first time
+                {
+                    pressedLeftFirstTime = true; // we tell this is the first time
+                }
+                lastPressedLeftTime = Time.time;
             }
-            else // we've not already pressed the button a first time
+
+            // Handle dashing right
+            else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
             {
-                pressedRightFirstTime = true; // we tell this is the first time
+                if (pressedRightFirstTime) // we've already pressed the button a first time, we check if the 2nd time is fast enough to be considered a double-press
+                {
+                    bool isDoublePress = Time.time - lastPressedRightTime <= delayBetweenPresses;
+                    if (isDoublePress && canDash)
+                    {
+                        StartCoroutine(Dash(1)); // Dash right
+                        pressedRightFirstTime = false;
+                    }
+                }
+                else // we've not already pressed the button a first time
+                {
+                    pressedRightFirstTime = true; // we tell this is the first time
+                }
+                lastPressedRightTime = Time.time;
             }
-            lastPressedRightTime = Time.time;
         }
     }
 

@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public Slider musicVolumeSlider;
     public Slider sfxVolumeSlider;
     public GameObject settingsPopup;
+    public bool isGamePaused;
     public delegate void OnSave();
     public static event OnSave onSave;
 
@@ -40,21 +41,45 @@ public class GameManager : MonoBehaviour
 
             levels = Resources.LoadAll<Level>("Levels/");
             currentLevel = levels[0];
+            isGamePaused = false;
         }
     }
 
     void Update(){
-        if (sleepTimer.timeInTimer <= 0f){
-            ResetLevel(true);
+        if (!isGamePaused){
+            if (sleepTimer.timeInTimer <= 0f){
+                ResetLevel(true);
+            }
         }
         // Somehow get button press instead of button taps
-        if (Input.GetKey(KeyCode.Escape)){
-            Debug.Log("Registering Escape");
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != levelGradingSceneName){
             if (!settingsPopup.activeSelf){
-                settingsPopup.SetActive(true);
+                PauseGame();
             } else {
-                settingsPopup.SetActive(false);
+                ResumeGame();
             }
+        }
+    }
+
+    public void PauseGame(){
+        isGamePaused = true;
+        Time.timeScale = 0f;
+        settingsPopup.SetActive(true);
+        AudioManager.Instance.PauseMusic();
+        Animator[] animators = (Animator[])GameObject.FindObjectsOfType(typeof(Animator));
+        foreach (Animator anim in animators){
+            anim.speed = 0;
+        }
+    }
+
+    public void ResumeGame(){
+        isGamePaused = false;
+        Time.timeScale = 1.0f;
+        settingsPopup.SetActive(false);
+        AudioManager.Instance.StartMusic();
+        Animator[] animators = (Animator[])GameObject.FindObjectsOfType(typeof(Animator));
+        foreach (Animator anim in animators){
+            anim.speed = 1;
         }
     }
 

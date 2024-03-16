@@ -20,7 +20,9 @@ public class SleepDemon : Enemy
     // Sleep demon can bypass all obstacles and cannot be frozen.
     void FixedUpdate()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed);
+        if (!GameManager.Instance.isGamePaused){
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision){

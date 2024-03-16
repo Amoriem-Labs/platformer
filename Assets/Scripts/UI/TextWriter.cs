@@ -75,7 +75,7 @@ public class TextWriter : MonoBehaviour
 
     void Update()
     {
-        if (isWritingText){
+        if (isWritingText && !GameManager.Instance.isGamePaused){
             dialogueSprite.sprite = conversation.sprites[textsToWriteIndex];
             if (dialogueSprite.sprite == playerSprite){
                 nameText.text = "Player";

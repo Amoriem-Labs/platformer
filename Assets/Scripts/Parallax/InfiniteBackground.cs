@@ -16,12 +16,14 @@ public class InfiniteBackground : MonoBehaviour {
     }
 
     void FixedUpdate () {  
-        // Calculate the distance with the camera position in the X axis (horizontal) multiplied by the parallax effect Y variable.
-        float distanceX = (cameraObj.transform.position.x * parallaxEffectX);
-        // Calculate the distance with the camera position in the Y axis (vertical) multiplied by the parallax effect X variable.
-        float distanceY = (cameraObj.transform.position.y * parallaxEffectY);
+        if (!GameManager.Instance.isGamePaused){
+            // Calculate the distance with the camera position in the X axis (horizontal) multiplied by the parallax effect Y variable.
+            float distanceX = (cameraObj.transform.position.x * parallaxEffectX);
+            // Calculate the distance with the camera position in the Y axis (vertical) multiplied by the parallax effect X variable.
+            float distanceY = (cameraObj.transform.position.y * parallaxEffectY);
 
-        // Change the position of the current background gameObject
-        transform.position = new Vector3 (startPositionX + distanceX, startPositionY + distanceY, transform.position.z);
+            // Change the position of the current background gameObject
+            transform.position = new Vector3 (startPositionX + distanceX, startPositionY + distanceY, transform.position.z);
+        }
     }
 }

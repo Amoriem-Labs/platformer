@@ -53,9 +53,11 @@ public class SleepTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeSpent += Time.deltaTime;
-        timeInTimer -= Time.deltaTime;
-        onSleepTimerUpdate?.Invoke(timeInTimer, maxTime);
+        if (!GameManager.Instance.isGamePaused){
+            timeSpent += Time.deltaTime;
+            timeInTimer -= Time.deltaTime;
+            onSleepTimerUpdate?.Invoke(timeInTimer, maxTime);
+        }
     }
 
     private void ChangeSleepValue(float amt)

@@ -17,7 +17,6 @@ public class Collectable : MonoBehaviour
     Coroutine moveCoroutine;
     float scaleDownPerFrame;
 
-    [ContextMenu("Move")]
     void Start(){
         moveCoroutine = StartCoroutine(Move());
         collider = GetComponent<Collider2D>();
@@ -27,13 +26,17 @@ public class Collectable : MonoBehaviour
 
     IEnumerator Move(){
         while (true){
-            for (int i = 0; i < 10; i++){
-                transform.position = new Vector3(transform.position.x, transform.position.y + moveBetweenFrames, transform.position.z);
-                yield return new WaitForEndOfFrame();
-            }
-            for (int i = 0; i < 10; i++){
-                transform.position = new Vector3(transform.position.x, transform.position.y - moveBetweenFrames, transform.position.z);
-                yield return new WaitForEndOfFrame();
+            if (!GameManager.Instance.isGamePaused){
+                for (int i = 0; i < 10; i++){
+                    transform.position = new Vector3(transform.position.x, transform.position.y + moveBetweenFrames, transform.position.z);
+                    yield return new WaitForEndOfFrame();
+                }
+                for (int i = 0; i < 10; i++){
+                    transform.position = new Vector3(transform.position.x, transform.position.y - moveBetweenFrames, transform.position.z);
+                    yield return new WaitForEndOfFrame();
+                }
+            } else {
+                yield return null;
             }
         }
     }
@@ -42,9 +45,13 @@ public class Collectable : MonoBehaviour
     {
         while (transform.localScale.x > 0)
         {
-            transform.localScale -= new Vector3(scaleDownPerFrame, scaleDownPerFrame, 0);
-            transform.position += moveUpPerFrame * Vector3.up;
-            yield return new WaitForEndOfFrame();
+            if (!GameManager.Instance.isGamePaused){
+                transform.localScale -= new Vector3(scaleDownPerFrame, scaleDownPerFrame, 0);
+                transform.position += moveUpPerFrame * Vector3.up;
+                yield return new WaitForEndOfFrame();
+            } else {
+                yield return null;
+            }
         }
         gameObject.SetActive(false);
     }

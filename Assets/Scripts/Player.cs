@@ -46,34 +46,36 @@ public class Player : MonoBehaviour
     }
 
     void Update(){
-        if (Input.GetKeyDown(KeyCode.E) && !TextWriter.isWritingText){
-            ActivateShield(numSecondsShield);
-        }
+        if (!GameManager.Instance.isGamePaused){
+            if (Input.GetKeyDown(KeyCode.E) && !TextWriter.isWritingText){
+                ActivateShield(numSecondsShield);
+            }
 
-        bool isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, platformLayer);
-        if (isGrounded && rb.velocity.y == 0){
-            if (rb.velocity.x > 0) {lastGroundedPosition = transform.position - new Vector3(respawnOffset, 0, 0); }
-            if (rb.velocity.x < 0) {lastGroundedPosition = transform.position + new Vector3(respawnOffset, 0, 0); }
-        }
+            bool isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, platformLayer);
+            if (isGrounded && rb.velocity.y == 0){
+                if (rb.velocity.x > 0) {lastGroundedPosition = transform.position - new Vector3(respawnOffset, 0, 0); }
+                if (rb.velocity.x < 0) {lastGroundedPosition = transform.position + new Vector3(respawnOffset, 0, 0); }
+            }
 
-        if (isOnFire){
-            timeUntilNextFireDamage += Time.deltaTime;
-            if (timeUntilNextFireDamage >= timeBetweenFireDamage){
-                TakeDamage(fireDamageAmount);
+            if (isOnFire){
+                timeUntilNextFireDamage += Time.deltaTime;
+                if (timeUntilNextFireDamage >= timeBetweenFireDamage){
+                    TakeDamage(fireDamageAmount);
+                    timeUntilNextFireDamage = 0;
+                }
+            } else {
                 timeUntilNextFireDamage = 0;
             }
-        } else {
-            timeUntilNextFireDamage = 0;
-        }
-        
-        if (isPoisoned){
-            timeUntilNextPoisonDamage += Time.deltaTime;
-            if (timeUntilNextPoisonDamage >= timeBetweenPoisonDamage){
-                TakeDamage(poisonDamageAmount);
+            
+            if (isPoisoned){
+                timeUntilNextPoisonDamage += Time.deltaTime;
+                if (timeUntilNextPoisonDamage >= timeBetweenPoisonDamage){
+                    TakeDamage(poisonDamageAmount);
+                    timeUntilNextPoisonDamage = 0;
+                }
+            } else {
                 timeUntilNextPoisonDamage = 0;
             }
-        } else {
-            timeUntilNextPoisonDamage = 0;
         }
     }
 
@@ -97,14 +99,6 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Freezing enemies.
-    // Freezes all enemies on screen for numSecondsFreeze seconds. Remove this function in final production later. This function is purely for testing purposes.
-    [ContextMenu("Freeze Enemies")]
-    public void TestFreezeEnemies(){
-        if (!TextWriter.isWritingText){
-            FreezeEnemies(numSecondsFreeze);
-        }
-    }
-
     // Freezes all enemies on screen for X seconds.
     public void FreezeEnemies(float seconds){
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -151,34 +145,38 @@ public class Player : MonoBehaviour
     // When an opp runs into the player, trigger a conversation that prevents the player from moving until the conversation is over.
     private void OnOppDetectorTriggerEnter2D(Collider2D collider)
     {
-        int layer = LayerMask.NameToLayer("Opp");
-        if (collider.gameObject.layer == layer)
-        {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (var enemy in enemies){
-                enemy.GetComponent<Enemy>().DisablePlayerCollisions();
-            }
-            Opp opp = collider.gameObject.GetComponent<Opp>();
-            if (opp.isThisOppTriggerOn){
-                if (opp.haveTalkedToAlready){
-                    TextWriter.timePerCharacter = TextWriter.originalTimePerCharacter / 2;
+        if (!GameManager.Instance.isGamePaused){
+            int layer = LayerMask.NameToLayer("Opp");
+            if (collider.gameObject.layer == layer)
+            {
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                foreach (var enemy in enemies){
+                    enemy.GetComponent<Enemy>().DisablePlayerCollisions();
                 }
-                TextWriter.ActivateConversation(opp.conversation);
-                opp.haveTalkedToAlready = true;
-                DisablePlayerMovement();
-                rb.velocity = Vector2.zero;
+                Opp opp = collider.gameObject.GetComponent<Opp>();
+                if (opp.isThisOppTriggerOn){
+                    if (opp.haveTalkedToAlready){
+                        TextWriter.timePerCharacter = TextWriter.originalTimePerCharacter / 2;
+                    }
+                    TextWriter.ActivateConversation(opp.conversation);
+                    opp.haveTalkedToAlready = true;
+                    DisablePlayerMovement();
+                    rb.velocity = Vector2.zero;
+                }
             }
         }
     }
 
     private void OnOppDetectorTriggerExit2D(Collider2D collider)
     {
-        int layer = LayerMask.NameToLayer("Opp");
-        if (collider.gameObject.layer == layer)
-        {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (var enemy in enemies){
-                enemy.GetComponent<Enemy>().EnablePlayerCollisions();
+        if (!GameManager.Instance.isGamePaused){
+            int layer = LayerMask.NameToLayer("Opp");
+            if (collider.gameObject.layer == layer)
+            {
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                foreach (var enemy in enemies){
+                    enemy.GetComponent<Enemy>().EnablePlayerCollisions();
+                }
             }
         }
     }
@@ -186,9 +184,11 @@ public class Player : MonoBehaviour
     // If player enters next level trigger, load next level.
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.name == "NextLevelTrigger" && GameManager.Instance.levelCompleted)
-        {
-            GameManager.Instance.LoadLevelGradingScreen();
+        if (!GameManager.Instance.isGamePaused){
+            if (collider.name == "NextLevelTrigger" && GameManager.Instance.levelCompleted)
+            {
+                GameManager.Instance.LoadLevelGradingScreen();
+            }
         }
     }
     #endregion

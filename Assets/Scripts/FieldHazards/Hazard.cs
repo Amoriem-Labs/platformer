@@ -8,13 +8,15 @@ public class Hazard : MonoBehaviour
     public bool walkableThroughAble; // This is whether or not the player can walk through the hazard without needing to respawn.
 
     void OnTriggerEnter2D (Collider2D collider){
-        int playerLayer = LayerMask.NameToLayer("Player");
-        if (collider.gameObject.layer == playerLayer){
-            Player.TakeDamage(damageAmount);
-            // play player damaged animation and sound effect
-            if (!walkableThroughAble){
-                collider.gameObject.transform.position = Player.lastGroundedPosition;
-                // for weed fumes, player should turn green temporarily
+        if (!GameManager.Instance.isGamePaused){
+            int playerLayer = LayerMask.NameToLayer("Player");
+            if (collider.gameObject.layer == playerLayer){
+                Player.TakeDamage(damageAmount);
+                // play player damaged animation and sound effect
+                if (!walkableThroughAble){
+                    collider.gameObject.transform.position = Player.lastGroundedPosition;
+                    // for weed fumes, player should turn green temporarily
+                }
             }
         }
     }

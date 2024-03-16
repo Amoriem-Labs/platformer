@@ -12,14 +12,14 @@ public class ChemicalSpill : MonoBehaviour
     }
 
     public void OnTriggerEnter2D(Collider2D collider){
-        if (collider.gameObject.layer == playerLayer){
+        if (collider.gameObject.layer == playerLayer && !GameManager.Instance.isGamePaused){
             Player player = collider.gameObject.GetComponent<Player>();
             player.Poison();
         }
     }
 
     public void OnTriggerExit2D(Collider2D collider){
-        if (collider.gameObject.layer == playerLayer){
+        if (collider.gameObject.layer == playerLayer && !GameManager.Instance.isGamePaused){
             Player player = collider.gameObject.GetComponent<Player>();
             player.Invoke("CurePoison", timePlayerIsPoisoned);
         }

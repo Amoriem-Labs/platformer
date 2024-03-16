@@ -20,14 +20,14 @@ public class Fire : MonoBehaviour
     }
 
     public void OnTriggerEnter2D(Collider2D collider){
-        if (collider.gameObject.layer == playerLayer){
+        if (collider.gameObject.layer == playerLayer && !GameManager.Instance.isGamePaused){
             Player player = collider.gameObject.GetComponent<Player>();
             player.SetPlayerOnFire();
         }
     }
 
     public void OnTriggerExit2D(Collider2D collider){
-        if (collider.gameObject.layer == playerLayer){
+        if (collider.gameObject.layer == playerLayer && !GameManager.Instance.isGamePaused){
             Player player = collider.gameObject.GetComponent<Player>();
             player.Invoke("ExtinguishPlayerFire", timePlayerIsOnFire);
         }
@@ -38,10 +38,12 @@ public class Fire : MonoBehaviour
     // 2) iterate over this process for all tiles within this radius.
     // * if there is no tile within this radius that is not on fire, then do nothing.
     void Update(){
-        timeUntilFireSpread += Time.deltaTime;
-        if (timeUntilFireSpread >= secondsUntilFireSpread){
-            SpreadFire();
-            timeUntilFireSpread = 0;
+        if (!GameManager.Instance.isGamePaused){
+            timeUntilFireSpread += Time.deltaTime;
+            if (timeUntilFireSpread >= secondsUntilFireSpread){
+                SpreadFire();
+                timeUntilFireSpread = 0;
+            }
         }
     }
 
