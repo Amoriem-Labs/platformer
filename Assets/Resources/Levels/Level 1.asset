@@ -15,6 +15,6 @@ MonoBehaviour:
   levelID: 0
   levelNum: 1
   numAssignmentsToComplete: 3
-  maxTime: 60
+  maxTime: 120
   sceneName: Level 1_VL
   playerSpawnPoint: {x: -8, y: -1.5}

@@ -34,42 +34,42 @@ public class CameraController : MonoBehaviour
             
             if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)){
                 if (IsAbleToLookUpOrDown()){ 
-                    desiredPosition = new Vector3(positionBeforeHittingWall.x, positionBeforeHittingWall.y - y_offset - lookDownOffset, positionBeforeHittingWall.z); 
+                    desiredPosition = new Vector3(positionBeforeHittingWall.x, positionBeforeHittingWall.y - y_offset - lookDownOffset, -10); 
                 } else {
-                    desiredPosition = new Vector3(positionBeforeHittingWall.x, positionBeforeHittingWall.y + y_offset, positionBeforeHittingWall.z);
+                    desiredPosition = new Vector3(positionBeforeHittingWall.x, positionBeforeHittingWall.y + y_offset, -10);
                 }
             }
             else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){ 
                 if (IsAbleToLookUpOrDown()){
-                    desiredPosition = new Vector3(positionBeforeHittingWall.x, positionBeforeHittingWall.y + y_offset + lookUpOffset, positionBeforeHittingWall.z); 
+                    desiredPosition = new Vector3(positionBeforeHittingWall.x, positionBeforeHittingWall.y + y_offset + lookUpOffset, -10); 
                 } else {
-                    desiredPosition = new Vector3(positionBeforeHittingWall.x, positionBeforeHittingWall.y + y_offset, positionBeforeHittingWall.z);
+                    desiredPosition = new Vector3(positionBeforeHittingWall.x, positionBeforeHittingWall.y + y_offset, -10);
                 }
             }
             else { 
                 timeSinceDownOrUpHeldDown = 0;
-                desiredPosition = new Vector3(positionBeforeHittingWall.x, player.position.y + y_offset, positionBeforeHittingWall.z); 
+                desiredPosition = new Vector3(positionBeforeHittingWall.x, player.position.y + y_offset, -10); 
             }
         }
         else // If player doesn't hit a wall
         {
             if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)){
                 if (IsAbleToLookUpOrDown()){
-                    desiredPosition = new Vector3(player.position.x, player.position.y - y_offset - lookDownOffset, transform.position.z);
+                    desiredPosition = new Vector3(player.position.x, player.position.y - y_offset - lookDownOffset, -10);
                 } else {
-                    desiredPosition = new Vector3(player.position.x, player.position.y + y_offset, transform.position.z);
+                    desiredPosition = new Vector3(player.position.x, player.position.y + y_offset, -10);
                 }
             } else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
                 if (IsAbleToLookUpOrDown()){
-                    desiredPosition = new Vector3(player.position.x, player.position.y + y_offset + lookUpOffset, transform.position.z);
+                    desiredPosition = new Vector3(player.position.x, player.position.y + y_offset + lookUpOffset, -10);
                 } else {
-                    desiredPosition = new Vector3(player.position.x, player.position.y + y_offset, transform.position.z);
+                    desiredPosition = new Vector3(player.position.x, player.position.y + y_offset, -10);
                 }
             } else {
                 timeSinceDownOrUpHeldDown = 0;
                 desiredPosition = player.position + new Vector3(0, y_offset, -10);
             }
-            positionBeforeHittingWall = new Vector3(player.position.x, player.position.y, transform.position.z);
+            positionBeforeHittingWall = new Vector3(player.position.x, player.position.y, -10);
         }
         smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, lookDownOrUpSmoothSpeed * Time.deltaTime);
         vcam.transform.position = smoothedPosition;

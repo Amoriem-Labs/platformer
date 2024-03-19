@@ -10,21 +10,31 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
 	public static GameManager Instance { get { return _instance; } }
-    [HideInInspector] public Level currentLevel;
-    [HideInInspector] public Level[] levels;
+
+    [Header("Level-related Variables")]
+    public Level currentLevel;
+    public Level[] levels;
     public Animator fadeAnim;
     public bool levelCompleted = false;
-    public SleepTimer sleepTimer;
+    
+    [Header("Pause Menu Related Variables")]
+    public GameObject settingsPopup;
+    public GameObject audioPopup;
+    public GameObject mainMenuPopup;
+    public bool isGamePaused;
+
+    [Header("Save-related Variables")]
     public SaveData currSaveData;
+    public delegate void OnSave();
+    public static event OnSave onSave;
+    public Slider musicVolumeSlider;
+    public Slider sfxVolumeSlider;
+
+    [Header("Miscellaneous Variables")]
+    public SleepTimer sleepTimer;
     [HideInInspector] public GameObject player;
     public string levelGradingSceneName;
     public CameraController cameraController;
-    public Slider musicVolumeSlider;
-    public Slider sfxVolumeSlider;
-    public GameObject settingsPopup;
-    public bool isGamePaused;
-    public delegate void OnSave();
-    public static event OnSave onSave;
 
     // IMPORTANT NOTE FOR DEVELOPERS: Do NOT call SceneManager.LoadScene in Awake or Start. This will cause the scene to load twice and make Unity get stuck in an infinite loading loop.
     // You have been warned.
@@ -39,7 +49,7 @@ public class GameManager : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
             fadeAnim.enabled = false;
 
-            levels = Resources.LoadAll<Level>("Levels/");
+            levels = Resources.LoadAll<Level>("Levels");
             currentLevel = levels[0];
             isGamePaused = false;
         }
@@ -51,12 +61,18 @@ public class GameManager : MonoBehaviour
                 ResetLevel(true);
             }
         }
-        // Somehow get button press instead of button taps
+        // When pressing Escape in Return to Main Menu and Audio Settings popups, always return to Settings Popup
         if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != levelGradingSceneName){
-            if (!settingsPopup.activeSelf){
+            if (!isGamePaused){
                 PauseGame();
             } else {
-                ResumeGame();
+                if (settingsPopup.activeSelf){
+                    ResumeGame();
+                } else {
+                    settingsPopup.SetActive(true);
+                    audioPopup.SetActive(false);
+                    mainMenuPopup.SetActive(false);
+                }
             }
         }
     }
@@ -87,6 +103,7 @@ public class GameManager : MonoBehaviour
     public void LoadLevelGradingScreen(){
         fadeAnim.enabled = false;
         fadeAnim.enabled = true;
+        WriteToSave(0);
         SceneManager.LoadScene(levelGradingSceneName);
     }
 
@@ -136,7 +153,9 @@ public class GameManager : MonoBehaviour
         // Here is where I load in the save data.
         if(currSaveData != null)
         {
+            Debug.Log("Save file being loaded...");
             // Read in the level from the save data
+            Debug.Log(levels.Length);
             currentLevel = levels[currSaveData.levelID];
             musicVolumeSlider.value = currSaveData.musicVolume;
             sfxVolumeSlider.value = currSaveData.sfxVolume;
@@ -148,11 +167,12 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("Save file does not exist, creating new game...");
             // If no saves on file, the below lines of code are called
             // Load in the scene
+            LoadLevel(0);
             AssignmentManager.Instance.assignmentText.text = $"0/{currentLevel.numAssignmentsToComplete}";
             CoinManager.Instance.coinText.text = "0";
-            LoadLevel(0);
         }
     }
 
@@ -176,8 +196,8 @@ public class GameManager : MonoBehaviour
         SaveUtil.WriteFile(ref newSave, saveIndex);
     }
 
-    public void DeleteSave(){
-        // Delete save file
+    public void DeleteSave(int saveIndex){
+        SaveUtil.DeleteSaveFile(saveIndex);
     }
 
     // Test function to create a new save file
