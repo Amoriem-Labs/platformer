@@ -55,28 +55,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Update(){
-        if (!isGamePaused){
-            if (sleepTimer.timeInTimer <= 0f){
-                ResetLevel(true);
-            }
-        }
-        // When pressing Escape in Return to Main Menu and Audio Settings popups, always return to Settings Popup
-        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != levelGradingSceneName){
-            if (!isGamePaused){
-                PauseGame();
-            } else {
-                if (settingsPopup.activeSelf){
-                    ResumeGame();
-                } else {
-                    settingsPopup.SetActive(true);
-                    audioPopup.SetActive(false);
-                    mainMenuPopup.SetActive(false);
-                }
-            }
-        }
-    }
-
     public void PauseGame(){
         isGamePaused = true;
         Time.timeScale = 0f;

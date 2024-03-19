@@ -8,7 +8,8 @@ public class AudioManager : MonoBehaviour
     private static AudioManager _instance;
 	public static AudioManager Instance { get { return _instance; } }
     public AudioSource audioSource;
-    public float skipToThisTimeInSoundtrack;
+    [Tooltip("The time in the Science Hill soundtrack to skip to when the game starts. This variable is needed because the first few seconds of the soundtrack doesn't contain audio.")]
+    public float soundtrackBeginTime;
     public Sprite[] audioIcons;
     public Slider musicSlider;
     public Slider sfxSlider;
@@ -27,7 +28,7 @@ public class AudioManager : MonoBehaviour
     
     void Start()
     {
-        audioSource.time = skipToThisTimeInSoundtrack;
+        audioSource.time = soundtrackBeginTime;
         audioSource.Play();
         musicIcon.sprite = audioIcons[1];
         sfxIcon.sprite = audioIcons[1];
