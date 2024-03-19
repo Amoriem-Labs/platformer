@@ -148,26 +148,27 @@ public class Player : MonoBehaviour
     // When an opp runs into the player, trigger a conversation that prevents the player from moving until the conversation is over.
     private void OnOppDetectorTriggerEnter2D(Collider2D collider)
     {
-        if (!GameManager.Instance.isGamePaused){
-            int layer = LayerMask.NameToLayer("Opp");
-            if (collider.gameObject.layer == layer)
-            {
-                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-                foreach (var enemy in enemies){
-                    enemy.GetComponent<Enemy>().DisablePlayerCollisions();
-                }
-                Opp opp = collider.gameObject.GetComponent<Opp>();
-                if (opp.foundPlayer){
-                    if (opp.haveTalkedToAlready){
-                        TextWriter.timePerCharacter = TextWriter.originalTimePerCharacter / 2;
-                    }
-                    TextWriter.ActivateConversation(opp.conversation);
-                    opp.haveTalkedToAlready = true;
-                    DisablePlayerMovement();
-                    rb.velocity = Vector2.zero;
-                }
-            }
-        }
+        // EY TODO
+        //if (!GameManager.Instance.isGamePaused){
+        //    int layer = LayerMask.NameToLayer("Opp");
+        //    if (collider.gameObject.layer == layer)
+        //    {
+        //        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //        foreach (var enemy in enemies){
+        //            enemy.GetComponent<Enemy>().DisablePlayerCollisions();
+        //        }
+        //        Opp opp = collider.gameObject.GetComponent<Opp>();
+        //        if (opp.foundPlayer){
+        //            if (opp.haveTalkedToAlready){
+        //                TextWriter.timePerCharacter = TextWriter.originalTimePerCharacter / 2;
+        //            }
+        //            TextWriter.ActivateConversation(opp.conversation);
+        //            opp.haveTalkedToAlready = true;
+        //            DisablePlayerMovement();
+        //            rb.velocity = Vector2.zero;
+        //        }
+        //    }
+        //}
     }
 
     private void OnOppDetectorTriggerExit2D(Collider2D collider)

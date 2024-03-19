@@ -8,6 +8,20 @@ public class Enemy : MonoBehaviour
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Collider2D thisCollider;
 
+    protected void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+
+        // Find the first collider that's not a trigger
+        var colliders = GetComponents<Collider2D>();
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.isTrigger) continue;
+            thisCollider = collider;
+            break;
+        }
+    }
+
     // Disables THIS enemy's collisions with player
     [ContextMenu("Disable Player Collisions")]
     public void DisablePlayerCollisions(){
