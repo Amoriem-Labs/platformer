@@ -18,3 +18,4 @@ MonoBehaviour:
   maxTime: 120
   sceneName: Level 2_VL
   playerSpawnPoint: {x: -8, y: -1.5}
+  nameOfSoundtrack: Science Hill

@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         isGamePaused = true;
         Time.timeScale = 0f;
         settingsPopup.SetActive(true);
-        AudioManager.Instance.PauseMusic();
+        AudioManager.Instance.PauseSound();
         Animator[] animators = (Animator[])GameObject.FindObjectsOfType(typeof(Animator));
         foreach (Animator anim in animators){
             anim.speed = 0;
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         isGamePaused = false;
         Time.timeScale = 1.0f;
         settingsPopup.SetActive(false);
-        AudioManager.Instance.StartMusic();
+        AudioManager.Instance.ResumeSound();
         Animator[] animators = (Animator[])GameObject.FindObjectsOfType(typeof(Animator));
         foreach (Animator anim in animators){
             anim.speed = 1;
@@ -83,6 +83,14 @@ public class GameManager : MonoBehaviour
         fadeAnim.enabled = true;
         WriteToSave(0);
         SceneManager.LoadScene(levelGradingSceneName);
+    }
+
+    public void StartGame(){
+        currentLevel = levels[0];
+        AudioManager.Instance.GetSoundtrack(currentLevel.nameOfSoundtrack)..time = soundtrackBeginTime;
+        AudioManager.Instance.GetSoundtrack(currentLevel.nameOfSoundtrack).Play();
+        SceneManager.LoadScene(currentLevel.sceneName); // Load in the scene
+        player.transform.position = currentLevel.playerSpawnPoint; // Reset player position
     }
 
     [ContextMenu("LoadNextLevel")]
@@ -98,7 +106,7 @@ public class GameManager : MonoBehaviour
 
     // Function to reset the level, and has two uses: if the player died or if the player completed the level
     public void ResetLevel(bool playerDied){
-        AudioManager.Instance.StopMusic(); // Stop music
+        AudioManager.Instance.StopSound(); // Stop music
         fadeAnim.enabled = false; // Reset fade out/in animation
         fadeAnim.enabled = true;
         levelCompleted = false; // Reset level completion status
@@ -107,7 +115,7 @@ public class GameManager : MonoBehaviour
         } else {
             sleepTimer.maxTime = currentLevel.maxTime; // Changing sleep timer max time for new level for case #2: when player has completed the previous level
         }
-        AudioManager.Instance.StartMusic(); // Restart music
+        AudioManager.Instance.GetSoundtrack(currentLevel.nameOfSoundtrack).Play(); // Restart music
         sleepTimer.ResetTimer(); // Reset sleep timer
         CoinManager.Instance.ResetNumCoinsCollectedInLevel(); // Reset number of coins collected used in scoring system
         CoinManager.Instance.UpdateCoinText(); // Update coin text
@@ -133,7 +141,6 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Save file being loaded...");
             // Read in the level from the save data
-            Debug.Log(levels.Length);
             currentLevel = levels[currSaveData.levelID];
             musicVolumeSlider.value = currSaveData.musicVolume;
             sfxVolumeSlider.value = currSaveData.sfxVolume;
@@ -148,7 +155,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Save file does not exist, creating new game...");
             // If no saves on file, the below lines of code are called
             // Load in the scene
-            LoadLevel(0);
+            StartGame();
             AssignmentManager.Instance.assignmentText.text = $"0/{currentLevel.numAssignmentsToComplete}";
             CoinManager.Instance.coinText.text = "0";
         }

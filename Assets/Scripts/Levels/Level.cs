@@ -11,4 +11,6 @@ public class Level : ScriptableObject
     public int maxTime;
     public string sceneName;
     public Vector2 playerSpawnPoint;
+    [Tooltip("The name of the soundtrack to play in this level. This name must match the name of the soundtrack in the AudioManager.")]
+    public string nameOfSoundtrack;
 }
