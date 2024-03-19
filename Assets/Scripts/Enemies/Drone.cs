@@ -34,21 +34,22 @@ public class Drone : EnemyWithPathfinding
         boxColliderHeight = GetComponent<BoxCollider2D>().size.y * transform.localScale.y; // Need to multiply by y-scale to get correct scaling relationship
     }
 
-    public override void Update()
-    {
-        if (isFrozen){
-            agent.enabled = false;
-        } else if (isAttacking) {
-            agent.enabled = false;
-            timeUntilNextBookThrow += Time.deltaTime;
-            if (timeUntilNextBookThrow >= timeBetweenBookThrows){
-                AttackPlayer();
-                timeUntilNextBookThrow = 0;
-            }
-        } else {
-            ResumePathfinding();
-        }
-    }
+    // EY TODO
+    //public override void Update()
+    //{
+    //    if (isFrozen){
+    //        agent.enabled = false;
+    //    } else if (isAttacking) {
+    //        agent.enabled = false;
+    //        timeUntilNextBookThrow += Time.deltaTime;
+    //        if (timeUntilNextBookThrow >= timeBetweenBookThrows){
+    //            AttackPlayer();
+    //            timeUntilNextBookThrow = 0;
+    //        }
+    //    } else {
+    //        ResumePathfinding();
+    //    }
+    //}
 
     public void AttackPlayer(){
         GameObject bookObj = Instantiate(bookPrefab, transform.position, Quaternion.identity);

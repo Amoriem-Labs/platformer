@@ -7,6 +7,8 @@ using MoreMountains.CorgiEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance { get; private set; }
+
     public GameObject textBox; // This is a reference to the text box that will be triggered when the opp runs into the player.
     public static Rigidbody2D rb;
     public TriggerResponse oppTriggerResponse; // This is a TriggerResponse script that creates a custom collider between only the player and opps.
@@ -34,6 +36,7 @@ public class Player : MonoBehaviour
     public float groundCheckRadius = 0.2f; // This is the radius of the ground check.
 
     void Start(){
+        Instance = this;
         textBox.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
         movement = GetComponent<WASDMovement>();
@@ -154,7 +157,7 @@ public class Player : MonoBehaviour
                     enemy.GetComponent<Enemy>().DisablePlayerCollisions();
                 }
                 Opp opp = collider.gameObject.GetComponent<Opp>();
-                if (opp.isThisOppTriggerOn){
+                if (opp.foundPlayer){
                     if (opp.haveTalkedToAlready){
                         TextWriter.timePerCharacter = TextWriter.originalTimePerCharacter / 2;
                     }
