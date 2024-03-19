@@ -47,7 +47,10 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(_instance);
 
             player = GameObject.FindGameObjectWithTag("Player");
-            fadeAnim.enabled = false;
+            if (fadeAnim != null)
+            {
+                fadeAnim.enabled = false;
+            }
 
             levels = Resources.LoadAll<Level>("Levels");
             currentLevel = levels[0];
@@ -56,11 +59,11 @@ public class GameManager : MonoBehaviour
     }
 
     void Update(){
-        if (!isGamePaused){
-            if (sleepTimer.timeInTimer <= 0f){
-                ResetLevel(true);
-            }
-        }
+        //if (!isGamePaused){
+        //    if (sleepTimer.timeInTimer <= 0f){
+        //        ResetLevel(true);
+        //    }
+        //}
         // When pressing Escape in Return to Main Menu and Audio Settings popups, always return to Settings Popup
         if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name != levelGradingSceneName){
             if (!isGamePaused){
