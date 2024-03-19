@@ -17,6 +17,14 @@ public class CameraController : MonoBehaviour
     private float timeSinceDownOrUpHeldDown = 0; // The time the player has pressed the down or up arrow keys
     public Vector3 positionBeforeHittingWall;
 
+    void Awake()
+    {
+        if (!player)
+        {
+            player = GameObject.Find("player").transform;
+        }
+    }
+
     void Start(){
         vcam = GetComponent<CinemachineVirtualCamera>();
         vcam.transform.LookAt(player);

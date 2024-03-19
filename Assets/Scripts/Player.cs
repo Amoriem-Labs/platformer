@@ -21,7 +21,10 @@ public class Player : MonoBehaviour
     public SpriteRenderer onFireSprite;
 
     void Start(){
-        textBox.SetActive(false);
+        if (textBox)
+        {
+            textBox.SetActive(false);
+        }
         rb = GetComponent<Rigidbody2D>();
         oppTriggerResponse.onTriggerEnter2D = OnOppDetectorTriggerEnter2D;
         oppTriggerResponse.onTriggerExit2D = OnOppDetectorTriggerExit2D;
