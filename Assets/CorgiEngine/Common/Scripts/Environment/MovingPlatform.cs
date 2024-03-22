@@ -4,6 +4,7 @@ using MoreMountains.Tools;
 using MoreMountains.Feedbacks;
 using UnityEngine.Events;
 
+// I MODIFIED THIS FILE SO THAT MM SCRIPT DOESN'T DEPEND ON PLAYER HAVING A CORGICONTROLLER COMPONENT
 namespace MoreMountains.CorgiEngine
 {
 	/// <summary>
@@ -60,10 +61,11 @@ namespace MoreMountains.CorgiEngine
 		public UnityEvent OnCharacterExit;
 
 		protected Collider2D _collider2D;
+		private Collider2D otherCollider;
 		protected float _platformTopY;
 		protected const float _toleranceY = 0.05f;
 		protected bool _scriptActivatedAuthorization = false;
-		protected CorgiController _corgiControllerLastFrame;
+		protected Collider2D _colliderLastFrame;
 
 		/// <summary>
 		/// Flag inits, initial movement determination, and object positioning
@@ -88,9 +90,9 @@ namespace MoreMountains.CorgiEngine
 		{
 			base.Update();
 
-			if (_collidingController != _corgiControllerLastFrame)
+			if (otherCollider != _colliderLastFrame)
 			{
-				if (_collidingController != null)
+				if (otherCollider != null)
 				{
 					OnCharacterEnter?.Invoke();
 				}
@@ -100,9 +102,10 @@ namespace MoreMountains.CorgiEngine
 				}
 			}
 
-			_corgiControllerLastFrame = _collidingController;
+			_colliderLastFrame = otherCollider;
 		}
 
+		// My own method
 		/// <summary>
 		/// Gets a value indicating whether this instance can move.
 		/// </summary>
@@ -118,25 +121,24 @@ namespace MoreMountains.CorgiEngine
 						return false;
 					}
 
-					if (_collidingController == null)
+					if (otherCollider == null)
 					{
 						return false;
 					}
-
 					// if we're colliding with a character, we check that's it's actually above the platform's top
 					_platformTopY = (_collider2D != null) ? _collider2D.bounds.max.y : this.transform.position.y;
-					if (_collidingController.ColliderBottomPosition.y < _platformTopY - _toleranceY)
+					if (otherCollider.bounds.min.y < _platformTopY - _toleranceY)
 					{
 						return false;
 					}
                     
-					if (OnlyMovesWhenPlayerIsColliding && _collidingController.tag != "Player")
+					if (OnlyMovesWhenPlayerIsColliding && otherCollider.tag != "Player")
 					{
 						return false;
 					}
 				}
 
-				if (OnlyMovesWhenPlayerIsColliding && _collidingController == null)
+				if (OnlyMovesWhenPlayerIsColliding && otherCollider == null)
 				{
 					return false;
 				}
@@ -156,7 +158,6 @@ namespace MoreMountains.CorgiEngine
 			Physics2D.SyncTransforms();
 		}
 
-		protected CorgiController _collidingController = null;
 		protected bool _collidingWithPlayer;
 
 		/// <summary>
@@ -242,20 +243,16 @@ namespace MoreMountains.CorgiEngine
 			EndReachedFeedback?.PlayFeedbacks(this.transform.position);
 		}
 
-		/// <summary>
-		/// When entering collision with something, we check if it's a player, and in that case we set our flag accordingly
-		/// </summary>
-		/// <param name="collider">Collider.</param>
-		public virtual void OnTriggerEnter2D(Collider2D collider)
+		// My own methods
+		public virtual void OnCollisionEnter2D(Collision2D collision)
 		{
-			CorgiController controller=collider.GetComponent<CorgiController>();
-			if (controller==null)
-			{
+			if (collision.collider.name == "Player"){
+				otherCollider = collision.collider;
+			}
+			if (otherCollider==null)
 				return;
-			}				
 
 			_collidingWithPlayer = true;	
-			_collidingController = controller;
 
 			if (StartMovingWhenPlayerIsColliding)
 			{
@@ -263,18 +260,12 @@ namespace MoreMountains.CorgiEngine
 			}
 		}
 
-		/// <summary>
-		/// When exiting collision with something, we check if it's a player, and in that case we set our flag accordingly
-		/// </summary>
-		/// <param name="collider">Collider.</param>
-		public virtual void OnTriggerExit2D(Collider2D collider)
+		public virtual void OnCollisionExit2D(Collision2D collision)
 		{
-			CorgiController controller=collider.GetComponent<CorgiController>();
-			if (controller==null)
-				return;
+			if (collision.collider.tag == "Player")
+				otherCollider = null;
 
 			_collidingWithPlayer=false;		
-			_collidingController = null;	
 		}
 
 		/// <summary>
@@ -283,6 +274,14 @@ namespace MoreMountains.CorgiEngine
 		/// <param name="checkpoint">Checkpoint.</param>
 		/// <param name="player">Player.</param>
 		public virtual void OnPlayerRespawn (CheckPoint checkpoint, Character player)
+		{
+			if (ResetPositionWhenPlayerRespawns)
+			{
+				Initialization ();	
+			}
+		}
+
+		public virtual void OnPlayerRespawn ()
 		{
 			if (ResetPositionWhenPlayerRespawns)
 			{

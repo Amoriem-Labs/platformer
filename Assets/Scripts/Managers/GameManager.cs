@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Linq;
+using MoreMountains.CorgiEngine;
 
 public class GameManager : MonoBehaviour
 {
@@ -92,6 +93,8 @@ public class GameManager : MonoBehaviour
         // Call below functions only when animation is completed
         SceneManager.LoadScene(currentLevel.sceneName);
         player.transform.position = currentLevel.playerSpawnPoint;
+        MovingPlatform movingPlatform = GameObject.FindObjectOfType<MovingPlatform>();
+        if (movingPlatform != null) movingPlatform.OnPlayerRespawn();
     }
 
     #region Save methods.
