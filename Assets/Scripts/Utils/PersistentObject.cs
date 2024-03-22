@@ -10,7 +10,7 @@ public class PersistentObject : MonoBehaviour
     private static PersistentObject _instance;
 	public static PersistentObject Instance { get { return _instance; } }
 
-    void Awake() {
+    void Start() {
         if (_instance != null && _instance != this) {
             Destroy(this.gameObject);
         }

@@ -54,6 +54,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void StartGame(){
+        currentLevel = levels[0];
+        AudioManager.Instance.GetSoundtrack(currentLevel.nameOfSoundtrack).time = AudioManager.Instance.soundtrackBeginTime;
+        AudioManager.Instance.GetSoundtrack(currentLevel.nameOfSoundtrack).Play();
+        SceneManager.LoadScene(currentLevel.sceneName); // Load in the scene
+        player.transform.position = currentLevel.playerSpawnPoint; // Reset player position
+    }
+
     public void PauseGame(){
         isGamePaused = true;
         Time.timeScale = 0f;
@@ -82,14 +90,6 @@ public class GameManager : MonoBehaviour
         fadeAnim.enabled = true;
         WriteToSave(0);
         SceneManager.LoadScene(levelGradingSceneName);
-    }
-
-    public void StartGame(){
-        currentLevel = levels[0];
-        AudioManager.Instance.GetSoundtrack(currentLevel.nameOfSoundtrack).time = AudioManager.Instance.soundtrackBeginTime;
-        AudioManager.Instance.GetSoundtrack(currentLevel.nameOfSoundtrack).Play();
-        SceneManager.LoadScene(currentLevel.sceneName); // Load in the scene
-        player.transform.position = currentLevel.playerSpawnPoint; // Reset player position
     }
 
     [ContextMenu("LoadNextLevel")]
@@ -178,10 +178,6 @@ public class GameManager : MonoBehaviour
 
         // write the current save data to the saveIndex save
         SaveUtil.WriteFile(ref newSave, saveIndex);
-    }
-
-    public void DeleteSave(int saveIndex){
-        SaveUtil.DeleteSaveFile(saveIndex);
     }
 
     // Test function to create a new save file
