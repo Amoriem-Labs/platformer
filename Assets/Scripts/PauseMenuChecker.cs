@@ -7,7 +7,7 @@ public class PauseMenuChecker : MonoBehaviour
 {
     void Update(){
         if (!GameManager.Instance.isGamePaused){
-            if (GameManager.Instance.sleepTimer.timeInTimer <= 0f){
+            if (SleepManager.Instance.timeInTimer <= 0f){
                 GameManager.Instance.ResetLevel(true);
             }
         }

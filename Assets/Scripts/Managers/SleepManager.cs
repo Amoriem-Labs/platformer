@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SleepTimer : MonoBehaviour
+public class SleepManager : MonoBehaviour
 {
+    private static SleepManager _instance;
+	public static SleepManager Instance { get { return _instance; } }
     public delegate void OnSleepTimerUpdate(float timeInTimer, float maxTime);
     public static event OnSleepTimerUpdate onSleepTimerUpdate;
 
@@ -18,15 +20,20 @@ public class SleepTimer : MonoBehaviour
     public float timeLeftToActivateVignette;
     public float timeLeftToActivateSleepDemon;
 
-    public float maxTime;
+    public float maxTime; // the original time for the sleep timer for a level
+    public float upgradesToMaxTime; // any additions to the sleep timer purchased from the shop
     public float timeInTimer;
     public float timeSpent;
 
-    //void Awake()
-    //{
-    //    sleepTimer = gameObject.GetComponent<Slider>();
-        
-    //}
+    void Awake() {
+        if (_instance != null && _instance != this) {
+            Destroy(this.gameObject);
+        }
+        else {
+            _instance = this;
+            DontDestroyOnLoad(_instance);
+        }
+    }
 
     void Start()
     {
@@ -46,7 +53,7 @@ public class SleepTimer : MonoBehaviour
     }
 
     public void ResetTimer(){
-        timeInTimer = maxTime;
+        timeInTimer = maxTime + upgradesToMaxTime;
         timeSpent = 0;
     }
 

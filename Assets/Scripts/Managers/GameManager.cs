@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
     public Slider sfxVolumeSlider;
 
     [Header("Miscellaneous Variables")]
-    public SleepTimer sleepTimer;
     [HideInInspector] public GameObject player;
     public string levelGradingSceneName;
     public CameraController cameraController;
@@ -87,7 +86,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame(){
         currentLevel = levels[0];
-        AudioManager.Instance.GetSoundtrack(currentLevel.nameOfSoundtrack)..time = soundtrackBeginTime;
+        AudioManager.Instance.GetSoundtrack(currentLevel.nameOfSoundtrack).time = AudioManager.Instance.soundtrackBeginTime;
         AudioManager.Instance.GetSoundtrack(currentLevel.nameOfSoundtrack).Play();
         SceneManager.LoadScene(currentLevel.sceneName); // Load in the scene
         player.transform.position = currentLevel.playerSpawnPoint; // Reset player position
@@ -113,10 +112,10 @@ public class GameManager : MonoBehaviour
         if (playerDied){
             CoinManager.Instance.numCoinsPlayerHas -= CoinManager.Instance.numCoinsCollectedInLevel; // Remove coins collected from player inventory if resetting level because player died, otherwise keep number of coins in inventory because player has moved onto another level
         } else {
-            sleepTimer.maxTime = currentLevel.maxTime; // Changing sleep timer max time for new level for case #2: when player has completed the previous level
+            SleepManager.Instance.maxTime = currentLevel.maxTime; // Changing sleep timer max time for new level for case #2: when player has completed the previous level
         }
         AudioManager.Instance.GetSoundtrack(currentLevel.nameOfSoundtrack).Play(); // Restart music
-        sleepTimer.ResetTimer(); // Reset sleep timer
+        SleepManager.Instance.ResetTimer(); // Reset sleep timer
         CoinManager.Instance.ResetNumCoinsCollectedInLevel(); // Reset number of coins collected used in scoring system
         CoinManager.Instance.UpdateCoinText(); // Update coin text
         AssignmentManager.Instance.ResetAssignmentsToZero(); // Reset number of assignments completed

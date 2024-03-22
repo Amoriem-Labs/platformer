@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 229080011}
   - component: {fileID: 229080010}
   m_Layer: 0
-  m_Name: UIControllerScript
+  m_Name: LevelGradeScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -543,6 +543,16 @@ MonoBehaviour:
   cameraShakeIntensity: 10
   vcam: {fileID: 604333414}
   scoreboard: {fileID: 1607660305}
+  A_threshold: 0
+  B_threshold: 0
+  C_threshold: 0
+  D_threshold: 0
+  F_threshold: 0
+  maxPointsForTime: 0
+  timeWeight: 0
+  maxPointsForCoins: 0
+  coinWeight: 0
+  score: 0
 --- !u!4 &229080011
 Transform:
   m_ObjectHideFlags: 0

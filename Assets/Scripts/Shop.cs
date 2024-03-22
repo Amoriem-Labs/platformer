@@ -16,24 +16,10 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
-   
     public Transform ShopPanel;
     public AudioSource success;
     public AudioSource fail;
-    public int numCoins; //drag and drop the numCoins game object into this variable slot
     private int[] itemsCost = {15, 0, 0, 0, 0, 0, 0, 0, 0, 0}; //array with cost of each item
-    public float sleepTimer; //item 0: increase sleepTimer by 10
-
-    
-
-
-    void Start()
-    {
-      ShopPanel.gameObject.SetActive(true);
-      numCoins = 100;
-      sleepTimer = 0;
-        
-    }
 
     void Update()
     {
@@ -44,10 +30,10 @@ public class Shop : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha0)) {
-            if (numCoins >= itemsCost[0]) {
-                numCoins -= itemsCost[0];
+            if (CoinManager.Instance.numCoinsPlayerHas >= itemsCost[0]) {
+                CoinManager.Instance.numCoinsPlayerHas -= itemsCost[0];
                 success.Play();
-                sleepTimer += 10;
+                SleepManager.Instance.maxTime += 10;
             }
             else {
                 fail.Play();
@@ -55,8 +41,8 @@ public class Shop : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) { 
-            if (numCoins >= itemsCost[1]) {
-                numCoins -= itemsCost[1];
+            if (CoinManager.Instance.numCoinsPlayerHas >= itemsCost[1]) {
+                CoinManager.Instance.numCoinsPlayerHas -= itemsCost[1];
                 success.Play();
                 //what the player is buying
             }
@@ -66,8 +52,8 @@ public class Shop : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2)) { 
-            if (numCoins >= itemsCost[2]) {
-                numCoins -= itemsCost[2];
+            if (CoinManager.Instance.numCoinsPlayerHas >= itemsCost[2]) {
+                CoinManager.Instance.numCoinsPlayerHas -= itemsCost[2];
                 success.Play();
                 //what the player is buying
             }
@@ -77,8 +63,8 @@ public class Shop : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3)) { 
-            if (numCoins >= itemsCost[3]) {
-                numCoins -= itemsCost[3];
+            if (CoinManager.Instance.numCoinsPlayerHas >= itemsCost[3]) {
+                CoinManager.Instance.numCoinsPlayerHas -= itemsCost[3];
                 success.Play();
                 //what the player is buying
             }
@@ -88,8 +74,8 @@ public class Shop : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha4)) { 
-            if (numCoins >= itemsCost[4]) {
-                numCoins -= itemsCost[4];
+            if (CoinManager.Instance.numCoinsPlayerHas >= itemsCost[4]) {
+                CoinManager.Instance.numCoinsPlayerHas -= itemsCost[4];
                 success.Play();
                 //what the player is buying
             }
@@ -99,8 +85,8 @@ public class Shop : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha5)) { 
-            if (numCoins >= itemsCost[5]) {
-                numCoins -= itemsCost[5];
+            if (CoinManager.Instance.numCoinsPlayerHas >= itemsCost[5]) {
+                CoinManager.Instance.numCoinsPlayerHas -= itemsCost[5];
                 success.Play();
                 //what the player is buying
             }
@@ -110,8 +96,8 @@ public class Shop : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha6)) { 
-            if (numCoins >= itemsCost[6]) {
-                numCoins -= itemsCost[6];
+            if (CoinManager.Instance.numCoinsPlayerHas >= itemsCost[6]) {
+                CoinManager.Instance.numCoinsPlayerHas -= itemsCost[6];
                 success.Play();
                 //what the player is buying
             }
@@ -121,8 +107,8 @@ public class Shop : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha7)) { 
-            if (numCoins >= itemsCost[7]) {
-                numCoins -= itemsCost[7];
+            if (CoinManager.Instance.numCoinsPlayerHas >= itemsCost[7]) {
+                CoinManager.Instance.numCoinsPlayerHas -= itemsCost[7];
                 success.Play();
                 //what the player is buying
             }
@@ -132,8 +118,8 @@ public class Shop : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha8)) { 
-            if (numCoins >= itemsCost[8]) {
-                numCoins -= itemsCost[8];
+            if (CoinManager.Instance.numCoinsPlayerHas >= itemsCost[8]) {
+                CoinManager.Instance.numCoinsPlayerHas -= itemsCost[8];
                 success.Play();
                 //what the player is buying
             }
@@ -143,8 +129,8 @@ public class Shop : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha9)) { 
-            if (numCoins >= itemsCost[9]) {
-                numCoins -= itemsCost[9];
+            if (CoinManager.Instance.numCoinsPlayerHas >= itemsCost[9]) {
+                CoinManager.Instance.numCoinsPlayerHas -= itemsCost[9];
                 success.Play();
                 //what the player is buying
             }

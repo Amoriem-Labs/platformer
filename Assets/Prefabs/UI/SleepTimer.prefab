@@ -230,7 +230,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8577332071944478318}
-  - component: {fileID: 1706141194043724742}
   m_Layer: 5
   m_Name: SleepTimer
   m_TagString: Untagged
@@ -258,21 +257,6 @@ RectTransform:
   m_AnchoredPosition: {x: -880.61084, y: 258.01}
   m_SizeDelta: {x: 77.7484, y: 477.96}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1706141194043724742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5739481645567528901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51340b709e75b3a4ca99b9e4b5752444, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sleepTimer: {fileID: 6308234458085299900}
-  maxTime: 10
-  currTime: 0
 --- !u!1 &6804104805902116394
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,7 +293,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8.989502, y: 0}
+  m_AnchoredPosition: {x: 3.2552032, y: 0}
   m_SizeDelta: {x: 31, y: -31.089996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6308234458085299900
