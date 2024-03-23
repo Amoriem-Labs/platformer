@@ -10,8 +10,7 @@ public class WASDMovement : MonoBehaviour
     public float djumpspeed = 5;
 
     public bool isGrounded;
-    public LayerMask groundLayer; 
-    public LayerMask platformLayer;
+    public List<LayerMask> jumpableLayers; // Layers that the player can jump off of
     public Transform groundCheck; 
     public float groundCheckRadius = 0.2f;
 
@@ -52,7 +51,10 @@ public class WASDMovement : MonoBehaviour
             return;
         }
 
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, platformLayer);
+        foreach (LayerMask layer in jumpableLayers)
+        {
+            isGrounded = isGrounded || Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, layer);
+        }
 
         // Handle horizontal movement
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * walkspeed, rb.velocity.y);

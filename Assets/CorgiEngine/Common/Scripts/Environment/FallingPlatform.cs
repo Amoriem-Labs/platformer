@@ -23,13 +23,15 @@ namespace MoreMountains.CorgiEngine
 		/// if this is true, the platform will only fall if the colliding character is above the platform 
 		[Tooltip("if this is true, the platform will only fall if the colliding character is above the platform")]		
 		public bool RequiresCharacterAbove = true;
+		[Tooltip("The y position below which the platform dies.")]
+		public float yDeath;
 
 		// private stuff
 		protected Animator _animator;
 		protected bool _shaking=false;
 		protected Vector2 _newPosition;
-		protected Bounds _bounds;
 		protected Collider2D _collider2D;
+		private Collider2D otherCollider;
 		protected Vector3 _initialPosition;
 		protected float _timer;
 		protected float _platformTopY;
@@ -52,7 +54,6 @@ namespace MoreMountains.CorgiEngine
 			_animator = this.gameObject.GetComponent<Animator>();
 			_collider2D = this.gameObject.GetComponent<Collider2D> ();
 			_autoRespawn = this.gameObject.GetComponent<AutoRespawn> ();
-			_bounds = LevelManager.Instance.LevelBounds;
 			_initialPosition = this.transform.position;
 			_timer = TimeBeforeFall;
 		}
@@ -70,12 +71,9 @@ namespace MoreMountains.CorgiEngine
 				_newPosition = new Vector2(0, -FallSpeed * Time.deltaTime);
 				                           
 				transform.Translate(_newPosition,Space.World);
-				
-				if (transform.position.y < _bounds.min.y)
-				{
-					DisableFallingPlatform ();
-				}
 			}
+
+			if (transform.position.y < yDeath) DisableFallingPlatform();
 		}
 
 		/// <summary>
@@ -106,15 +104,17 @@ namespace MoreMountains.CorgiEngine
 				_animator.SetBool("Shaking", _shaking);	
 			}
 		}
-		
+
 		/// <summary>
 		/// Triggered when a CorgiController touches the platform
 		/// </summary>
 		/// <param name="controller">The corgi controller that collides with the platform.</param>		
-		public virtual void OnTriggerStay2D(Collider2D collider)
+		public virtual void OnCollisionStay2D(Collision2D collision)
 		{
-			CorgiController controller = collider.GetComponent<CorgiController>();
-			if (controller == null)
+			if (collision.collider.name == "Player"){
+				otherCollider = collision.collider;
+			}
+			if (otherCollider==null)
 				return;
 			
 			if (TimeBeforeFall>0)
@@ -124,7 +124,7 @@ namespace MoreMountains.CorgiEngine
 				if (RequiresCharacterAbove)
 				{
 					_platformTopY = (_collider2D != null) ? _collider2D.bounds.max.y : this.transform.position.y;
-					if (controller.ColliderBottomPosition.y >= _platformTopY - Tolerance)
+					if (otherCollider.bounds.min.y >= _platformTopY - Tolerance)
 					{
 						canShake = true;
 					}	
@@ -145,17 +145,13 @@ namespace MoreMountains.CorgiEngine
 				_shaking = false;
 			}
 		}
-		/// <summary>
-		/// Triggered when a CorgiController exits the platform
-		/// </summary>
-		/// <param name="controller">The corgi controller that collides with the platform.</param>
-		protected virtual void OnTriggerExit2D(Collider2D collider)
+
+		public virtual void OnCollisionExit2D(Collision2D collision)
 		{
-			CorgiController controller=collider.GetComponent<CorgiController>();
-			if (controller==null)
-				return;
-			
-			_shaking=false;
+			if (collision.collider.tag == "Player")
+				otherCollider = null;
+
+			_shaking=false;	
 		}
 
 		protected virtual void OnRevive()

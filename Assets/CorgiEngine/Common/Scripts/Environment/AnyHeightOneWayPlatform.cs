@@ -78,13 +78,16 @@ namespace MoreMountains.CorgiEngine
 		/// <summary>
 		/// Stores the target player character
 		/// </summary>
+		[ContextMenu("AssignPlayerTransform")]
 		public virtual void GrabTargetPlayer()
 		{
-			_playerTransform = LevelManager.Instance.Players[PlayerID].transform;
+			//_playerTransform = LevelManager.Instance.Players[PlayerID].transform; // Commented out because I will add my own code that doesn't rely on playerIDs
+			_playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+			Debug.Log("Player transform assigned to " + _playerTransform.name);
 			if (AutoAdaptOffsetBasedOnPlayerHeight)
 			{
-				Offset.y -= _playerTransform.gameObject.GetComponent<CorgiController>().Height() / 2 +
-				            _playerTransform.gameObject.GetComponent<CorgiController>().ColliderOffset.y ;
+				Offset.y -= _playerTransform.gameObject.GetComponent<BoxCollider2D>().size.y / 2 +
+				            _playerTransform.gameObject.GetComponent<BoxCollider2D>().offset.y ;
 			}
 		}
 
